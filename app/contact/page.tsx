@@ -90,10 +90,10 @@ export default function Contact() {
                 <a href="mailto:tinotendanyash@gmail.com" className="flex items-center group">
                   <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mr-4 group-hover:bg-[#4C8BFF] transition-colors">
                     <Mail className="w-6 h-6 text-[#4C8BFF] group-hover:text-white transition-colors" />
-                  </div>
+                  </div> 
                   <div>
                     <p className="text-sm text-slate-500 font-medium mb-1">Email</p>
-                    <p className="text-lg text-slate-900 font-semibold">tinotendanyash@gmail.com</p>
+                    <p className="text-lg text-slate-900 font-semibold">admin@LeoTheTechGuy.com</p>
                   </div>
                 </a>
                 
@@ -103,7 +103,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-500 font-medium mb-1">Location</p>
-                    <p className="text-lg text-slate-900 font-semibold">Warsaw, Poland</p>
+                    <p className="text-lg text-slate-900 font-semibold">Binary</p>
                   </div>
                 </div>
               </div>
