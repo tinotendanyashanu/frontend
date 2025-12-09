@@ -18,7 +18,7 @@ const Footer = () => {
               I create intelligent, scalable tools for innovators and teams ready to grow. Bridging the gap between imagination and engineering.
             </p>
             <div className="pt-2">
-              <span className="text-xs text-slate-400">© 2024 LeoTheTechGuy. All rights reserved.</span>
+              <span className="text-xs text-slate-400">© 2025 LeoTheTechGuy. All rights reserved.</span>
             </div>
           </div>
 
@@ -36,14 +36,14 @@ const Footer = () => {
           <div className="flex flex-col space-y-4">
             <h3 className="text-sm font-semibold text-slate-900 tracking-tight mb-1">Get in Touch</h3>
             
-            <a href="mailto:tinotendanyash@gmail.com" className="flex items-center text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors group">
+            <a href="mailto:admin@LeoTheTechGuy.com" className="flex items-center text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors group">
               <Mail className="w-4 h-4 mr-2 text-slate-400 group-hover:text-[#4C8BFF] transition-colors stroke-width-1.5" />
-              tinotendanyash@gmail.com
+              admin@LeoTheTechGuy.com
             </a>
             
             <div className="flex items-center text-sm text-slate-500">
               <MapPin className="w-4 h-4 mr-2 text-slate-400 stroke-width-1.5" />
-              Warsaw, Poland
+              Binary 1010
             </div>
 
             <div className="flex space-x-4 pt-2">

@@ -69,7 +69,7 @@ export default function Contact() {
                 </div>
                 <h2 className="text-3xl font-bold text-slate-900 mb-4">Message Sent!</h2>
                 <p className="text-lg text-slate-600 mb-8">
-                  Thanks for reaching out. I'll get back to you shortly. <br/>
+                  Thanks for reaching out. I&apos;ll get back to you shortly. <br/>
                   In the meantime, check out my content!
                 </p>
                 

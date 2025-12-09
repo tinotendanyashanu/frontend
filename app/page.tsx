@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import PhysicsZone from '@/components/PhysicsZone';
 import { ArrowRight, Code2, BrainCircuit, ShieldCheck, Lightbulb, Volume2, VolumeX } from 'lucide-react';
 import Link from 'next/link';
 
@@ -134,11 +136,11 @@ export default function Home() {
           <p className="text-center text-sm font-semibold text-slate-500 mb-8 uppercase tracking-wider">Trusted by innovators and teams</p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
              {/* Placeholders for logos */}
-             <div className="text-xl font-bold text-slate-400">ACME Corp</div>
+             <div className="text-xl font-bold text-slate-400">PreciAgro</div>
              <div className="text-xl font-bold text-slate-400">TechFlow</div>
              <div className="text-xl font-bold text-slate-400">InnovateX</div>
              <div className="text-xl font-bold text-slate-400">FutureScale</div>
-             <div className="text-xl font-bold text-slate-400">DataMind</div>
+             <div className="text-xl font-bold text-slate-400">DigitalGeeks</div>
           </div>
         </div>
       </section>
@@ -221,21 +223,63 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Featured Projects Teaser */}
-      <section className="relative z-10 py-24 bg-slate-900 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/background/bg-particles.json')] opacity-20"></div>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-8">
-            I’ve built AI systems, event platforms, blockchain remittance tools, CRMs, and automation systems from scratch.
-          </h2>
-          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
-            Every project starts with curiosity and ends with something real.
-          </p>
-          <Link href="/portfolio" className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-slate-900 bg-white rounded-lg hover:bg-slate-100 transition-all duration-200">
-            Explore My Portfolio
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
+      <section className="relative z-10 py-32 bg-slate-50 overflow-hidden">
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+            
+            {/* Text Content */}
+            <div className="w-full lg:w-1/2 relative z-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-sm font-medium text-blue-600 mb-8 shadow-sm">
+                <Code2 className="w-4 h-4" />
+                <span>Selected Works</span>
+              </div>
+              
+              <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight text-slate-900">
+                Engineering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4C8BFF] to-[#10B981]">future of tech.</span>
+              </h2>
+              
+              <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl">
+                It&apos;s not just about code. It&apos;s about the physics of interaction, the logic of AI, and the beauty of a well-crafted system. Explore how I turn complex problems into elegant solutions.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Link href="/portfolio" className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#4C8BFF] text-white font-semibold hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1">
+                  View Portfolio
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link href="/services" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition-all duration-300">
+                  My Services
+                </Link>
+              </div>
+            </div>
+
+            {/* Visual - Project Preview */}
+            <div className="w-full lg:w-1/2 h-[500px] relative rounded-3xl overflow-hidden border border-slate-200 bg-slate-900 shadow-2xl shadow-slate-200 group">
+               <Image 
+                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" 
+                 alt="Project Dashboard" 
+                 fill 
+                 className="object-cover transition-transform duration-700 group-hover:scale-105"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+               
+               {/* Overlay Text or Badge */}
+               <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10">
+                  <div className="flex items-center justify-between">
+                    <div>
+                        <h3 className="text-white font-bold text-lg mb-1">Enterprise Dashboard</h3>
+                        <p className="text-slate-300 text-sm">Next.js • TypeScript • Tailwind</p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm group-hover:bg-white/30 transition-colors">
+                        <ArrowRight className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+               </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -263,9 +307,13 @@ export default function Home() {
             </form>
           </div>
           <div className="w-full lg:w-1/2 flex justify-center">
-            {/* Placeholder for Lead Magnet Image */}
-            <div className="w-64 h-80 bg-white shadow-2xl rounded-lg border border-slate-100 flex items-center justify-center transform rotate-3 hover:rotate-0 transition-transform duration-500">
-              <span className="text-slate-400 font-medium">PDF Mockup</span>
+            <div className="relative w-64 h-80 shadow-2xl rounded-lg transform rotate-3 hover:rotate-0 transition-transform duration-500 overflow-hidden">
+              <Image 
+                src="/images/PDF Mockup.png" 
+                alt="AI Checklist PDF" 
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
@@ -276,9 +324,12 @@ export default function Home() {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="w-full lg:w-1/2">
             <div className="aspect-square rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center overflow-hidden relative">
-               {/* Placeholder for an image or graphic */}
-               <span className="text-slate-400 font-medium z-10">Leo&apos;s Portrait</span>
-               {/* <Image src="/images/about/leo-portrait.jpg" alt="Leo" fill className="object-cover" /> */}
+               <Image 
+                 src="/images/Leo's Portrait.png" 
+                 alt="Leo The Tech Guy" 
+                 fill 
+                 className="object-cover" 
+               />
             </div>
           </div>
           <div className="w-full lg:w-1/2">

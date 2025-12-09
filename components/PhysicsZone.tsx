@@ -15,7 +15,11 @@ interface PhysicsBody {
   isDragging: boolean;
 }
 
-const PhysicsZone = () => {
+interface PhysicsZoneProps {
+  className?: string;
+}
+
+const PhysicsZone = ({ className = "fixed inset-0 w-full h-full overflow-hidden pointer-events-auto z-0" }: PhysicsZoneProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const requestRef = useRef<number>(0);
@@ -34,6 +38,10 @@ const PhysicsZone = () => {
     const container = containerRef.current;
     if (!container) return;
 
+    const getDimensions = () => {
+      return { width: container.offsetWidth, height: container.offsetHeight };
+    };
+
     // Physics Configuration
     const physics = {
       friction: 0.995,
@@ -44,12 +52,13 @@ const PhysicsZone = () => {
     };
 
     // Initialize bodies
+    const { width, height } = getDimensions();
     const bodies = itemsRef.current.filter(Boolean).map((el) => {
       if (!el) return null;
       
       // Random start position
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
+      const x = Math.random() * (width - 100);
+      const y = Math.random() * (height - 100);
       
       // Random velocity
       const vx = (Math.random() - 0.5) * 4;
@@ -76,11 +85,12 @@ const PhysicsZone = () => {
 
     // Resize Listener
     const handleResize = () => {
+      const { width, height } = getDimensions();
       bodiesRef.current.forEach(body => {
         body.width = body.el.offsetWidth;
         body.height = body.el.offsetHeight;
-        if (body.x > window.innerWidth) body.x = window.innerWidth - body.width;
-        if (body.y > window.innerHeight) body.y = window.innerHeight - body.height;
+        if (body.x > width) body.x = width - body.width;
+        if (body.y > height) body.y = height - body.height;
       });
     };
 
@@ -113,9 +123,10 @@ const PhysicsZone = () => {
     const animate = () => {
       if (!shouldAnimate) return;
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const { x: mouseX, y: mouseY } = mouseRef.current;
+      const { width, height } = getDimensions();
+      const rect = container.getBoundingClientRect();
+      const mouseX = mouseRef.current.x - rect.left;
+      const mouseY = mouseRef.current.y - rect.top;
 
       bodiesRef.current.forEach(body => {
         if (body.isDragging) {
@@ -209,7 +220,7 @@ const PhysicsZone = () => {
   if (!shouldAnimate) return null;
 
   return (
-    <div ref={containerRef} id="gravity-zone" className="fixed inset-0 w-full h-full overflow-hidden pointer-events-auto z-0">
+    <div ref={containerRef} id="gravity-zone" className={className}>
       {/* Item 1: React */}
       <div ref={el => { itemsRef.current[0] = el }} className="physics-item">
         <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-200 text-slate-600 animate-float" style={{ animationDelay: '0s' }}>
