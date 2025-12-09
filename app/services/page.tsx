@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { BrainCircuit, Code2, ShieldCheck, Lightbulb, ArrowRight, CheckCircle2, Zap, ChevronRight, Sparkles } from 'lucide-react';
+import { BrainCircuit, Code2, ShieldCheck, Lightbulb, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 // Simple hook for intersection observer animations
@@ -19,12 +20,13 @@ function useOnScreen(options: IntersectionObserverInit) {
       }
     }, options);
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, [ref, options]);
 
@@ -136,15 +138,15 @@ export default function Services() {
   return (
     <main className="min-h-screen bg-white selection:bg-blue-500/30">
       <Navbar />
-      
       {/* Hero Section - Dark to match Home Page Hero */}
       <section className="relative pt-40 pb-20 lg:pt-52 lg:pb-32 px-6 lg:px-8 overflow-hidden bg-slate-900">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img 
+          <Image 
             src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" 
             alt="Tech Background" 
-            className="w-full h-full object-cover opacity-30"
+            fill
+            className="object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-linear-to-b from-slate-900/90 via-slate-900/80 to-slate-900" />
         </div>
@@ -196,15 +198,15 @@ export default function Services() {
         {services.map((service, index) => (
           <div key={index} className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
             
-            {/* Visual Side */}
             <div className="w-full lg:w-1/2 relative group">
               <FadeIn delay={200}>
                 <div className="relative rounded-3xl overflow-hidden aspect-4/3 shadow-2xl shadow-slate-200 border border-slate-100">
                   <div className={`absolute inset-0 bg-linear-to-br ${service.bg} opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-10`} />
-                  <img 
+                  <Image 
                     src={service.image} 
                     alt={service.title} 
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                    fill
+                    className="object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   {/* Floating Icon Card */}
                   <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/90 backdrop-blur-xl border border-slate-200/50 rounded-2xl z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 shadow-lg">

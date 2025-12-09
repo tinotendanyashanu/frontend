@@ -15,7 +15,6 @@ interface MongooseCache {
 
 // Declare a global variable to cache the connection across hot reloads in development
 declare global {
-  // eslint-disable-next-line no-var
   var mongoose: MongooseCache;
 }
 
