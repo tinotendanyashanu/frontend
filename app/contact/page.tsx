@@ -4,7 +4,7 @@ import React, { useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Mail, MapPin, Linkedin, Github, MessageCircle, Send, Loader2, CheckCircle, AlertCircle, Youtube } from 'lucide-react';
+import { Mail, MapPin, Twitter, Instagram, Facebook, Send, Loader2, CheckCircle, AlertCircle, Youtube } from 'lucide-react';
 import { submitContactForm, ContactState } from '../actions';
 
 const initialState: ContactState = {
@@ -78,13 +78,13 @@ export default function Contact() {
                     <Youtube className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
                     Subscribe on YouTube
                   </a>
-                  <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full px-6 py-4 bg-[#0077B5] text-white rounded-xl font-semibold hover:bg-[#006396] transition-all shadow-lg shadow-blue-500/20 group transform hover:-translate-y-1">
-                    <Linkedin className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
-                    Connect on LinkedIn
+                  <a href="https://x.com/LeoTheTechGuy" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full px-6 py-4 bg-black text-white rounded-xl font-semibold hover:bg-slate-900 transition-all shadow-lg shadow-black/20 group transform hover:-translate-y-1">
+                    <Twitter className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+                    Follow on X
                   </a>
-                   <a href="#" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full px-6 py-4 bg-[#24292e] text-white rounded-xl font-semibold hover:bg-[#1b1f23] transition-all shadow-lg shadow-gray-500/20 group transform hover:-translate-y-1">
-                    <Github className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
-                    Follow on GitHub
+                  <a href="https://instagram.com/Leothetechguy" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full px-6 py-4 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-white rounded-xl font-semibold hover:from-orange-600 hover:via-pink-600 hover:to-purple-700 transition-all shadow-lg shadow-pink-500/20 group transform hover:-translate-y-1">
+                    <Instagram className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+                    Follow on Instagram
                   </a>
                 </div>
               </div>
@@ -100,6 +100,8 @@ export default function Contact() {
                 )}
 
                 <form action={formAction} className="space-y-6">
+                  {/* Honeypot field for basic bot protection */}
+                  <input type="text" name="company" className="hidden" tabIndex={-1} aria-hidden="true" autoComplete="off" />
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
@@ -183,14 +185,14 @@ export default function Contact() {
             <div>
               <h3 className="text-lg font-bold text-slate-900 mb-6">Socials</h3>
               <div className="flex gap-4">
-                <a href="#" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-[#0077B5] hover:border-[#0077B5] hover:text-white text-slate-400 transition-all duration-300">
-                  <Linkedin className="w-6 h-6" />
+                <a href="https://x.com/LeoTheTechGuy" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-black hover:border-black hover:text-white text-slate-400 transition-all duration-300" aria-label="Follow on X">
+                  <Twitter className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-black hover:border-black hover:text-white text-slate-400 transition-all duration-300">
-                  <Github className="w-6 h-6" />
+                <a href="https://instagram.com/Leothetechguy" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-gradient-to-r hover:from-orange-500 hover:via-pink-500 hover:to-purple-600 hover:text-white text-slate-400 transition-all duration-300" aria-label="Follow on Instagram">
+                  <Instagram className="w-6 h-6" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] hover:text-white text-slate-400 transition-all duration-300">
-                  <MessageCircle className="w-6 h-6" />
+                <a href="https://facebook.com/Leothetechguy" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white text-slate-400 transition-all duration-300" aria-label="Follow on Facebook">
+                  <Facebook className="w-6 h-6" />
                 </a>
               </div>
             </div>

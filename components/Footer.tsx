@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, Linkedin, Github, MessageCircle } from 'lucide-react';
+import { Mail, MapPin, Twitter, Instagram, Facebook } from 'lucide-react';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -47,14 +47,14 @@ const Footer = () => {
             </div>
 
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-slate-400 hover:text-[#0077B5] transition-colors" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5 stroke-width-1.5" />
+              <a href="https://x.com/LeoTheTechGuy" className="text-slate-400 hover:text-black transition-colors" aria-label="X">
+                <Twitter className="w-5 h-5 stroke-width-1.5" />
               </a>
-              <a href="#" className="text-slate-400 hover:text-black transition-colors" aria-label="GitHub">
-                <Github className="w-5 h-5 stroke-width-1.5" />
+              <a href="https://instagram.com/Leothetechguy" className="text-slate-400 hover:text-[#E4405F] transition-colors" aria-label="Instagram">
+                <Instagram className="w-5 h-5 stroke-width-1.5" />
               </a>
-              <a href="#" className="text-slate-400 hover:text-[#25D366] transition-colors" aria-label="WhatsApp">
-                <MessageCircle className="w-5 h-5 stroke-width-1.5" />
+              <a href="https://facebook.com/Leothetechguy" className="text-slate-400 hover:text-[#1877F2] transition-colors" aria-label="Facebook">
+                <Facebook className="w-5 h-5 stroke-width-1.5" />
               </a>
             </div>
           </div>

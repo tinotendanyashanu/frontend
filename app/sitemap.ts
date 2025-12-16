@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://leothetechguy.com'; // Replace with your actual domain
+  const baseUrl = 'https://leothetechguy.com';
 
   return [
     {

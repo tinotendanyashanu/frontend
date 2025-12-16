@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://leothetechguy.com/sitemap.xml', // Replace with your actual domain
+    sitemap: 'https://leothetechguy.com/sitemap.xml',
   };
 }
