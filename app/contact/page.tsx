@@ -101,7 +101,7 @@ export default function Contact() {
 
                 <form action={formAction} className="space-y-6">
                   {/* Honeypot field for basic bot protection */}
-                  <input type="text" name="company" className="hidden" tabIndex={-1} aria-hidden="true" autoComplete="off" />
+                  <input type="hidden" name="company" autoComplete="off" />
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>

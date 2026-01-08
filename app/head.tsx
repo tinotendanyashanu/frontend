@@ -1,6 +1,6 @@
 export default function Head() {
   const title = "Leo The Tech Guy | AI, Software Engineering, Cybersecurity";
-  const description = "Full-stack applications, AI systems, and secure platforms built by Leo The Tech Guy. Book a project, explore the portfolio, or learn how I deliver high-impact technology.";
+  const description = "LeoTheTechGuy is a technologist driven by one core principle: technology must work in the real world. Focused on understanding problems deeply and building systems designed to last.";
   const url = "https://leothetechguy.com";
   const image = `${url}/images/og-cover.svg`;
 

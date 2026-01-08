@@ -5,21 +5,22 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LeoTheTechGuy | Creative Technologist",
-  description: "Full-stack applications and AI systems that feel alive.",
+  title: "LeoTheTechGuy | AI, Cybersecurity & Software Engineering",
+  description: "LeoTheTechGuy is a technologist driven by one core principle: technology must work in the real world. Focused on understanding problems deeply and building systems designed to last.",
+  keywords: ["LeoTheTechGuy", "Tinotenda Nyashanu", "AI Developer", "Cybersecurity Expert", "Software Engineer", "Tech Consultant", "Artificial Intelligence", "Next.js Developer", "Zimbabwe Tech", "Harare", "Full Stack Developer", "Creative Technologist"],
   metadataBase: new URL("https://leothetechguy.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Leo The Tech Guy | AI, Software, Cybersecurity",
-    description: "Full-stack applications, AI systems, and secure platforms built by Leo The Tech Guy.",
+    description: "LeoTheTechGuy is a technologist driven by one core principle: technology must work in the real world. Focused on understanding problems deeply and building systems designed to last.",
     url: "https://leothetechguy.com",
     siteName: "Leo The Tech Guy",
     type: "website",
     images: [
       {
-        url: "/images/og-cover.svg",
+        url: "/images/linkimage.png",
         width: 1200,
         height: 630,
         alt: "Leo The Tech Guy",
@@ -29,12 +30,34 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Leo The Tech Guy | AI, Software, Cybersecurity",
-    description: "Full-stack applications, AI systems, and secure platforms built by Leo The Tech Guy.",
-    images: ["/images/og-cover.svg"],
+    description: "LeoTheTechGuy is a technologist driven by one core principle: technology must work in the real world. Focused on understanding problems deeply and building systems designed to last.",
+    images: ["/images/linkimage.png"],
+    creator: "@LeoTheTechGuy",
   },
   icons: {
     icon: "/favicon.svg",
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "LeoTheTechGuy",
+  "alternateName": "Tinotenda Nyashanu",
+  "url": "https://leothetechguy.com",
+  "image": "https://leothetechguy.com/images/linkimage.png",
+  "sameAs": [
+    "https://instagram.com/leothetechguy",
+    "https://x.com/LeoTheTechGuy",
+    "https://www.youtube.com/@LeoTheTechGuy"
+  ],
+  "jobTitle": "Creative Technologist",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "LeoTheTechGuy"
+  },
+  "knowsAbout": ["Artificial Intelligence", "Cybersecurity", "Software Engineering", "Full Stack Development", "Automation"],
+  "description": "LeoTheTechGuy is a technologist driven by one core principle: technology must work in the real world. Rather than chasing trends or titles, he focuses on understanding problems deeply and building systems designed to last."
 };
 
 export default function RootLayout({
@@ -45,6 +68,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-zinc-50 text-slate-800 relative overflow-x-hidden selection:bg-indigo-100 selection:text-indigo-900`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>

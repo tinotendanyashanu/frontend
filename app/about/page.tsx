@@ -109,13 +109,14 @@ export default function About() {
             >
               <h2 className="text-3xl font-bold text-slate-900 mb-6">The Story So Far</h2>
               <p className="text-slate-600 leading-relaxed">
-                I’m a tech geek at heart. I build software, explore AI, dive into cybersecurity, experiment with gadgets, and break things on purpose just to fix them again.
+                LeoTheTechGuy is a technologist driven by one core principle: technology must work in the real world.
+                Rather than chasing trends or titles, he focuses on understanding problems deeply and building systems designed to last. His work is rooted in execution turning ideas into reliable, scalable digital solutions.
               </p>
               <p className="text-slate-600 leading-relaxed mt-6">
-                I’m not trying to be perfect or pretend to be something I’m not. I learn, create, fail, fix, build, and share. It’s always been that way. My journey started with a simple curiosity about how things work, and it has evolved into a career of building complex systems that help businesses thrive.
+                From early concepts to production-ready platforms, LeoTheTechGuy approaches every project with intention, precision, and a long-term mindset. The goal is never just to build something impressive, but something that performs under real conditions and continues to deliver value as it grows.
               </p>
               <p className="text-slate-600 leading-relaxed mt-6">
-                I build startups, solve problems I believe technology can fix, and try to make things that help people. Whether it&apos;s automating a tedious task or building a full-scale platform, the goal is always impact.
+                He represents a new generation of builders adaptable, disciplined, and not limited by tools, technologies, or trends. Just continuous learning, thoughtful engineering, and results that speak for themselves.
               </p>
             </motion.div>
 

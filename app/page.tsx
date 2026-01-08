@@ -91,6 +91,8 @@ export default function Home() {
         {/* Mute Toggle */}
         <button 
           onClick={() => setIsMuted(!isMuted)}
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+          suppressHydrationWarning
           className="absolute top-32 right-8 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
         >
           {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
@@ -102,7 +104,7 @@ export default function Home() {
               Hey, I’m <span className="text-[#10B981]">Leo The Tech Guy.</span>
             </h1>
             <p className="text-xl lg:text-2xl text-slate-100 leading-relaxed mb-10 font-normal max-w-2xl">
-              I’m just a normal guy obsessed with technology. I build software, explore AI, test gadgets, break things, fix them, and share the journey with you.
+              I am a technologist driven by one core principle: technology must work in the real world. Rather than chasing trends or titles, I focus on understanding problems deeply and building systems designed to last.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -148,13 +150,14 @@ export default function Home() {
       <section className="relative z-10 py-20 bg-slate-50/90 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <p className="text-2xl lg:text-3xl text-slate-800 leading-relaxed font-light">
-            I’m a tech geek at heart. I dive into <span className="font-semibold text-[#10B981]">AI</span>, <span className="font-semibold text-[#4C8BFF]">software engineering</span>, <span className="font-semibold text-emerald-500">cybersecurity</span>, automation, and anything that sparks curiosity. I also build startups and tackle problems I believe technology can solve. If you’re into building, learning, and creating cool things, welcome.
+            I represent a new generation of builders adaptable, disciplined, and not limited by tools, technologies, or trends. Just continuous learning, thoughtful engineering, and results that speak for themselves.
           </p>
         </div>
       </section>
 
       {/* Services Preview */}
-      <section className="relative z-10 py-24 px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="relative z-10 py-24 px-6 lg:px-8 max-w-7xl mx-auto" suppressHydrationWarning>
+        <h2 className="sr-only">Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
@@ -165,7 +168,7 @@ export default function Home() {
             {
               title: "Software Development",
               desc: "Clean, modern, scalable applications built with care.",
-              icon: <Code2 className="w-8 h-8 text-[#4C8BFF]" />
+              icon: <Code2 className="w-8 h-8 text-blue-600" />
             },
             {
               title: "Cybersecurity",
@@ -182,7 +185,7 @@ export default function Home() {
               <div className="mb-4 p-3 bg-slate-50 rounded-xl w-max group-hover:bg-blue-50 transition-colors">{service.icon}</div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
               <p className="text-slate-600 leading-relaxed mb-4">{service.desc}</p>
-              <Link href="/services" className="text-sm font-medium text-[#4C8BFF] hover:text-blue-700 inline-flex items-center">
+              <Link href="/services" className="text-sm font-medium text-blue-600 hover:text-blue-700 inline-flex items-center">
                 Learn more <ArrowRight className="ml-1 w-3 h-3" />
               </Link>
             </div>
@@ -236,7 +239,7 @@ export default function Home() {
               </div>
               
               <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight text-slate-900">
-                Engineering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4C8BFF] to-[#10B981]">future of tech.</span>
+                Engineering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-[#10B981]">future of tech.</span>
               </h2>
               
               <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl">
@@ -244,7 +247,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Link href="/portfolio" className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#4C8BFF] text-white font-semibold hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1">
+                <Link href="/portfolio" className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-1">
                   View Portfolio
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -284,7 +287,7 @@ export default function Home() {
 
       {/* Lead Magnet */}
       <section className="relative z-10 py-24 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="bg-gradient-to-br from-[#4C8BFF]/10 to-[#10B981]/10 rounded-3xl p-8 lg:p-16 flex flex-col lg:flex-row items-center gap-12 border border-blue-100">
+        <div className="bg-gradient-to-br from-blue-600/10 to-[#10B981]/10 rounded-3xl p-8 lg:p-16 flex flex-col lg:flex-row items-center gap-12 border border-blue-100">
           <div className="w-full lg:w-1/2">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Validate your AI idea before building.</h2>
             <p className="text-lg text-slate-600 mb-8">
@@ -299,8 +302,8 @@ export default function Home() {
               ))}
             </ul>
             <form className="flex flex-col sm:flex-row gap-4">
-              <input type="email" placeholder="Enter your email" className="flex-grow px-4 py-3 rounded-lg border border-slate-200 focus:border-[#4C8BFF] focus:ring-2 focus:ring-[#4C8BFF]/20 outline-none" />
-              <button className="px-6 py-3 bg-[#4C8BFF] text-white font-medium rounded-lg hover:bg-blue-600 transition-colors whitespace-nowrap">
+              <input type="email" placeholder="Enter your email" className="flex-grow px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
+              <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">
                 Get the Checklist
               </button>
             </form>
@@ -338,7 +341,7 @@ export default function Home() {
             <p className="text-lg text-slate-600 leading-relaxed mb-8">
               I learn, experiment, build, break, fix, and share. I use technology to solve problems and help people turn ideas into real products.
             </p>
-            <Link href="/about" className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-[#4C8BFF] bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200">
+            <Link href="/about" className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200">
               About Me
               <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
@@ -347,11 +350,11 @@ export default function Home() {
       </section>
 
       {/* Footer Call-to-Action */}
-      <section className="relative z-10 py-24 bg-[#4C8BFF] text-white text-center">
+      <section className="relative z-10 py-24 bg-blue-600 text-white text-center">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">Ready to build something?</h2>
           <p className="text-xl text-blue-100 mb-10">Let’s create something meaningful.</p>
-          <Link href="/contact" className="inline-flex justify-center items-center px-10 py-5 text-lg font-bold text-[#4C8BFF] bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+          <Link href="/contact" className="inline-flex justify-center items-center px-10 py-5 text-lg font-bold text-blue-600 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
             Work With Me
             <ArrowRight className="ml-2 w-6 h-6" />
           </Link>
