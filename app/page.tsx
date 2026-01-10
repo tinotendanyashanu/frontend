@@ -16,6 +16,8 @@ const HERO_VIDEOS = [
 export default function Home() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set());
+  const [isHeroReady, setIsHeroReady] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
@@ -59,6 +61,17 @@ export default function Home() {
     }
   };
 
+  const handleVideoReady = (index: number) => {
+    setLoadedVideos(prev => {
+      const next = new Set(prev);
+      next.add(index);
+      return next;
+    });
+    if (index === 0) {
+      setIsHeroReady(true);
+    }
+  };
+
   return (
     <main className="min-h-screen relative">
       <Navbar />
@@ -69,23 +82,32 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden group" suppressHydrationWarning>
         {/* Background Videos */}
-        <div className="absolute inset-0 w-full h-full z-0 bg-slate-900">
+        <div className="absolute inset-0 w-full h-full z-0 bg-[#050505]">
           {HERO_VIDEOS.map((src, index) => (
             <video 
               key={src}
               ref={(el) => { videoRefs.current[index] = el }}
               muted 
               playsInline
+              preload={index === 0 ? "auto" : "metadata"}
+              onCanPlayThrough={() => handleVideoReady(index)}
               onEnded={() => handleVideoEnded(index)}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out ${
-                index === currentVideoIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                index === currentVideoIndex && loadedVideos.has(index) ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             >
               <source src={src} type="video/mp4" />
             </video>
           ))}
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-slate-900/60 z-20" />
+          {/* Subtle Ambient Overlay */}
+          <div className={`absolute inset-0 bg-slate-900/60 z-20 transition-opacity duration-1000 ${isHeroReady ? 'opacity-100' : 'opacity-0'}`} />
+          
+          {/* Minimalist Loader */}
+          {!isHeroReady && (
+            <div className="absolute inset-0 z-40 flex items-center justify-center bg-slate-900">
+               <div className="w-12 h-12 border-2 border-white/10 border-t-white/60 rounded-full animate-spin" />
+            </div>
+          )}
         </div>
 
         {/* Mute Toggle */}
@@ -93,9 +115,9 @@ export default function Home() {
           onClick={() => setIsMuted(!isMuted)}
           aria-label={isMuted ? "Unmute video" : "Mute video"}
           suppressHydrationWarning
-          className="absolute bottom-24 right-6 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+          className="absolute top-4 right-16 md:top-24 md:right-8 z-[60] p-2 md:p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
         >
-          {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+          {isMuted ? <VolumeX className="w-5 h-5 md:w-6 md:h-6" /> : <Volume2 className="w-5 h-5 md:w-6 md:h-6" />}
         </button>
 
         <div className="relative z-30 max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -117,41 +139,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6 mt-12 py-6 border-t border-white/10">
-              <div className="flex -space-x-4">
-                <div className="group relative w-12 h-12 rounded-full bg-slate-900/90 border border-slate-700 flex items-center justify-center hover:z-10 hover:scale-110 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 cursor-default">
-                  <BrainCircuit className="w-5 h-5 text-emerald-400" />
-                  <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 border border-slate-700 text-[10px] text-emerald-400 font-bold px-2 py-1 rounded whitespace-nowrap pointer-events-none">
-                    AI SYSTEMS
-                  </div>
-                </div>
-                <div className="group relative w-12 h-12 rounded-full bg-slate-900/90 border border-slate-700 flex items-center justify-center hover:z-10 hover:scale-110 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-default">
-                  <Code2 className="w-5 h-5 text-blue-400" />
-                  <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 border border-slate-700 text-[10px] text-blue-400 font-bold px-2 py-1 rounded whitespace-nowrap pointer-events-none">
-                    ENGINEERING
-                  </div>
-                </div>
-                <div className="group relative w-12 h-12 rounded-full bg-slate-900/90 border border-slate-700 flex items-center justify-center hover:z-10 hover:scale-110 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/20 transition-all duration-300 cursor-default">
-                  <ShieldCheck className="w-5 h-5 text-amber-400" />
-                  <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 border border-slate-700 text-[10px] text-amber-400 font-bold px-2 py-1 rounded whitespace-nowrap pointer-events-none">
-                    SECURITY
-                  </div>
-                </div>
-              </div>
-              <div className="hidden sm:block w-px h-8 bg-white/10" />
-              <div className="text-center sm:text-left">
-                <p className="text-sm font-medium text-slate-300 tracking-wide mb-1">
-                  Full-Cycle Development
-                </p>
-                <div className="flex items-center gap-2 text-xs text-slate-500 font-mono uppercase tracking-wider">
-                  <span>Strategy</span>
-                  <span className="w-1 h-1 rounded-full bg-slate-700" />
-                  <span>Execution</span>
-                  <span className="w-1 h-1 rounded-full bg-slate-700" />
-                  <span>Scale</span>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
