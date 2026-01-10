@@ -67,7 +67,7 @@ export default function Home() {
       <audio ref={audioRef} src="/audio/LeoVoice.mp3" loop />
 
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex items-end pb-20 overflow-hidden group">
+      <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden group" suppressHydrationWarning>
         {/* Background Videos */}
         <div className="absolute inset-0 w-full h-full z-0 bg-slate-900">
           {HERO_VIDEOS.map((src, index) => (
@@ -93,7 +93,7 @@ export default function Home() {
           onClick={() => setIsMuted(!isMuted)}
           aria-label={isMuted ? "Unmute video" : "Mute video"}
           suppressHydrationWarning
-          className="absolute top-32 right-8 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+          className="absolute bottom-24 right-6 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
         >
           {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
         </button>
