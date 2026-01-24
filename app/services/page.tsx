@@ -249,10 +249,15 @@ export default function Services() {
                   ))}
                 </div>
 
-                <Link href="/contact" className={`group inline-flex items-center text-lg font-semibold ${service.color} hover:opacity-80 transition-opacity`}>
-                  {service.cta}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <div className="flex flex-wrap gap-4">
+                  <Link href={`/services/${service.id}`} className={`group inline-flex items-center text-lg font-semibold ${service.color} hover:opacity-80 transition-opacity`}>
+                    Learn More
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link href="/contact" className="inline-flex items-center text-lg font-semibold text-slate-500 hover:text-slate-700 transition-colors">
+                    {service.cta}
+                  </Link>
+                </div>
               </FadeIn>
             </div>
 

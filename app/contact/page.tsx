@@ -124,10 +124,10 @@ export default function Contact() {
                       <label htmlFor="budget" className="block text-sm font-medium text-slate-700 mb-2">Budget (optional)</label>
                       <select id="budget" name="budget" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 outline-none transition-all">
                         <option value="">Select a range</option>
-                        <option value="small">&lt; $1k</option>
-                        <option value="medium">$1k - $5k</option>
-                        <option value="large">$5k - $10k</option>
-                        <option value="enterprise">$10k+</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="enterprise">Enterprise</option>
                       </select>
                     </div>
                     <div>
@@ -160,13 +160,13 @@ export default function Contact() {
             <div>
               <h3 className="text-lg font-semibold text-slate-900 mb-6">Direct Contact</h3>
               <div className="space-y-6">
-                <a href="mailto:tinotendanyash@gmail.com" className="flex items-center group">
+                <a href="mailto:contact@leothetechguy.com" className="flex items-center group">
                   <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mr-4 group-hover:bg-[#0071e3] transition-colors">
                     <Mail className="w-5 h-5 text-[#0071e3] group-hover:text-white transition-colors" />
                   </div> 
                   <div>
                     <p className="text-sm text-slate-500 font-medium mb-1">Email</p>
-                    <p className="text-lg text-slate-900 font-medium">admin@LeoTheTechGuy.com</p>
+                    <p className="text-lg text-slate-900 font-medium">contact@leothetechguy.com</p>
                   </div>
                 </a>
                 
@@ -207,10 +207,6 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Before you message...</h2>
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-              <h3 className="font-bold text-slate-900 mb-2">What is your typical budget range?</h3>
-              <p className="text-slate-600">Most projects start at $5k. Small tools can be less, large platforms are more.</p>
-            </div>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
               <h3 className="font-bold text-slate-900 mb-2">How fast can you start?</h3>
               <p className="text-slate-600">I usually book 2-3 weeks in advance. Message me to check current availability.</p>

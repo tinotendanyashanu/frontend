@@ -1,4 +1,4 @@
-import { Globe, Database, Smartphone, Layout, Home, Heart } from 'lucide-react';
+import { Globe, Database, Smartphone, Layout, Home, Heart, Truck } from 'lucide-react';
 
 export interface Project {
   id: string;
@@ -66,6 +66,19 @@ export const projects: Project[] = [
     size: 'medium',
     gradient: "from-purple-500/20 to-pink-500/20",
     icon: Smartphone,
+    status: 'Live'
+  },
+  {
+    id: "moversklub",
+    title: "MoversKlub",
+    category: "Logistics & Transport",
+    description: "Professional logistics platform for South African moving services, featuring refrigerated transport, event logistics, and white-glove removals with real-time tracking.",
+    impact: "Streamlining logistics operations across South Africa with 24/7 support.",
+    link: "https://www.moversklub.co.za/",
+    tags: ["Next.js", "Logistics", "Service Platform"],
+    size: 'medium',
+    gradient: "from-sky-500/20 to-blue-500/20",
+    icon: Truck,
     status: 'Live'
   },
   {

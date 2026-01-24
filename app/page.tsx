@@ -473,7 +473,7 @@ export default function Home() {
                 },
                 {
                    q: "How much does a project cost?",
-                   a: "It depends on the scope. I offer fixed-price packages for clear projects and retainer options for ongoing work. Book a call to get a custom quote."
+                   a: "It depends on the scope and complexity. I offer flexible options for different project sizes. Book a call to discuss your needs and get a custom quote."
                 },
                 {
                    q: "How long does it take to build an MVP?",

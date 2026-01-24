@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, MapPin, Twitter, Instagram, Facebook } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   return (
@@ -13,7 +14,16 @@ const Footer = () => {
           
           {/* Column 1: Brand */}
           <div className="space-y-4">
-            <span className="text-lg font-semibold tracking-tight text-slate-900">LeoTheTechGuy</span>
+            <div className="flex items-center gap-2">
+              <Image 
+                src="/logo_transparent.png" 
+                alt="LeoTheTechGuy Logo" 
+                width={40} 
+                height={40}
+                className="w-10 h-10 object-contain"
+              />
+              <span className="text-lg font-semibold tracking-tight text-slate-900">LeoTheTechGuy</span>
+            </div>
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
               I create intelligent, scalable tools for innovators and teams ready to grow. Bridging the gap between imagination and engineering.
             </p>
@@ -36,9 +46,9 @@ const Footer = () => {
           <div className="flex flex-col space-y-4">
             <h3 className="text-sm font-semibold text-slate-900 tracking-tight mb-1">Get in Touch</h3>
             
-            <a href="mailto:admin@LeoTheTechGuy.com" className="flex items-center text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors group">
+            <a href="mailto:contact@leothetechguy.com" className="flex items-center text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors group">
               <Mail className="w-4 h-4 mr-2 text-slate-400 group-hover:text-[#4C8BFF] transition-colors stroke-width-1.5" />
-              admin@LeoTheTechGuy.com
+              contact@leothetechguy.com
             </a>
             
             <div className="flex items-center text-sm text-slate-500">

@@ -125,7 +125,7 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-10">My Journey</h3>
                 <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px before:h-full before:w-0.5 before:bg-slate-200">
                     {[
-                    { year: "2018", title: "The Beginning", desc: "Wrote my first lines of code. Built simple web apps and fell in love with the logic and creativity of programming.", icon: <Terminal className="w-5 h-5 text-white" /> },
+                    { year: "2015", title: "The Beginning", desc: "Wrote my first lines of code. Built simple web apps and fell in love with the logic and creativity of programming.", icon: <Terminal className="w-5 h-5 text-white" /> },
                     { year: "2020", title: "Freelancing & Startups", desc: "Started working with early-stage founders. Learned how to translate business requirements into technical reality.", icon: <Briefcase className="w-5 h-5 text-white" /> },
                     { year: "2022", title: "Deep Tech Focus", desc: "Dove deep into AI, Machine Learning, and Cybersecurity. Realized that the future belongs to intelligent, secure systems.", icon: <Cpu className="w-5 h-5 text-white" /> },
                     { year: "Present", title: "Leo The Tech Guy", desc: "Now I help businesses and founders build world-class technology, scaling products from zero to one and beyond.", icon: <Globe className="w-5 h-5 text-white" /> }
