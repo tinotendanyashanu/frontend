@@ -28,7 +28,7 @@ export const projects: Project[] = [
     size: 'large',
     gradient: "from-emerald-500/20 to-teal-500/20",
     icon: Globe,
-    status: 'Live'
+    status: 'Pilot'
   },
   {
     id: "nexnet",
