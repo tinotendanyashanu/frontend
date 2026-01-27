@@ -61,7 +61,8 @@ const Prism: React.FC<PrismProps> = ({
     const HOVSTR = Math.max(0, hoverStrength || 1);
     const INERT = Math.max(0, Math.min(1, inertia || 0.12));
 
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const dpr = Math.min(isMobile ? 1.5 : 2, window.devicePixelRatio || 1);
     const renderer = new Renderer({
       dpr,
       alpha: transparent,
@@ -77,10 +78,12 @@ const Prism: React.FC<PrismProps> = ({
       inset: '0',
       width: '100%',
       height: '100%',
-      display: 'block'
+      display: 'block',
+      touchAction: 'none' // Prevent scrolling while interacting with the prism if needed, or allow it
     } as Partial<CSSStyleDeclaration>);
     container.appendChild(gl.canvas);
 
+    // ... (rest of shader/program setup remains same)
     const vertex = /* glsl */ `
       attribute vec2 position;
       void main() {
@@ -310,9 +313,14 @@ const Prism: React.FC<PrismProps> = ({
       roll = 0;
     let targetYaw = 0,
       targetPitch = 0;
+    
+    // Idle rotation for mobile/non-hover
+    let baseRotationYaw = 0;
+    let baseRotationPitch = 0;
+
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-    const pointer = { x: 0, y: 0, inside: true };
+    const pointer = { x: 0, y: 0, inside: !isMobile };
     const onMove = (e: PointerEvent) => {
       const ww = Math.max(1, window.innerWidth);
       const wh = Math.max(1, window.innerHeight);
@@ -325,10 +333,14 @@ const Prism: React.FC<PrismProps> = ({
       pointer.inside = true;
     };
     const onLeave = () => {
-      pointer.inside = false;
+      if (!isMobile) pointer.inside = false;
     };
-    const onBlur = () => {
-      pointer.inside = false;
+    const onDown = () => {
+      pointer.inside = true;
+      startRAF();
+    };
+    const onUp = () => {
+      if (isMobile) pointer.inside = false;
     };
 
     let onPointerMove: ((e: PointerEvent) => void) | null = null;
@@ -338,8 +350,10 @@ const Prism: React.FC<PrismProps> = ({
         startRAF();
       };
       window.addEventListener('pointermove', onPointerMove, { passive: true });
+      window.addEventListener('pointerdown', onDown, { passive: true });
+      window.addEventListener('pointerup', onUp, { passive: true });
       window.addEventListener('mouseleave', onLeave);
-      window.addEventListener('blur', onBlur);
+      window.addEventListener('blur', onUp);
       program.uniforms.uUseBaseWobble.value = 0;
     } else if (animationType === '3drotate') {
       program.uniforms.uUseBaseWobble.value = 0;
@@ -354,10 +368,16 @@ const Prism: React.FC<PrismProps> = ({
       let continueRAF = true;
 
       if (animationType === 'hover') {
+        // Subtle idle rotation that decreases when interacting
+        const idleInfluence = pointer.inside ? 0.3 : 1.0;
+        baseRotationYaw += TS * 0.01 * idleInfluence;
+        baseRotationPitch = Math.sin(time * 0.5 * TS) * 0.15 * idleInfluence;
+
         const maxPitch = 0.6 * HOVSTR;
         const maxYaw = 0.6 * HOVSTR;
-        targetYaw = (pointer.inside ? -pointer.x : 0) * maxYaw;
-        targetPitch = (pointer.inside ? pointer.y : 0) * maxPitch;
+        targetYaw = (pointer.inside ? -pointer.x : 0) * maxYaw + baseRotationYaw;
+        targetPitch = (pointer.inside ? pointer.y : 0) * maxPitch + baseRotationPitch;
+        
         const prevYaw = yaw;
         const prevPitch = pitch;
         const prevRoll = roll;
@@ -366,7 +386,7 @@ const Prism: React.FC<PrismProps> = ({
         roll = lerp(prevRoll, 0, 0.1);
         program.uniforms.uRot.value = setMat3FromEuler(yaw, pitch, roll, rotBuf);
 
-        if (NOISE_IS_ZERO) {
+        if (NOISE_IS_ZERO && !isMobile) {
           const settled =
             Math.abs(yaw - targetYaw) < 1e-4 && Math.abs(pitch - targetPitch) < 1e-4 && Math.abs(roll) < 1e-4;
           if (settled) continueRAF = false;
