@@ -4,6 +4,8 @@ export interface Service {
   id: string;
   title: string;
   subtitle: string;
+  headline: string;     // New: Large primary headline
+  subheadline: string;  // New: Secondary colored headline
   description: string;
   longDescription: string;
   offerings: string[];
@@ -15,6 +17,8 @@ export interface Service {
   bg: string;
   border: string;
   lightBg: string;
+  accentColor: string;  // New: Hex color for accents
+  gradient: string;     // New: Tailwind gradient classes
   benefits: {
     title: string;
     description: string;
@@ -36,10 +40,12 @@ export const services: Service[] = [
     id: "ai-automation",
     title: "AI & Intelligent Automation",
     subtitle: "Smarter Systems, Less Work",
+    headline: "Smarter Systems.",
+    subheadline: "Less Work.",
     description: "I build AI tools that automate tasks, analyze data, and bring intelligence into everyday operations. From prediction engines to chatbots to custom models, if it's powered by AI, I'm interested.",
     longDescription: "Artificial Intelligence isn't just a buzzword—it's a transformative tool that can revolutionize how your business operates. I specialize in building practical AI solutions that solve real problems: automating repetitive tasks, extracting insights from data, and creating intelligent systems that learn and improve over time. Whether you need a custom chatbot that actually understands context, a prediction engine that helps you make better decisions, or a computer vision system that processes visual data at scale, I deliver AI that works in the real world—not just in demos.",
     offerings: [
-      "Custom LLM Integration (GPT-4, Claude, Llama)",
+      "Custom LLM Integration (GPT-4, Claude)",
       "Automated Workflows & AI Agents",
       "Predictive Analytics Engines",
       "Intelligent Chatbots & Support Systems",
@@ -56,6 +62,8 @@ export const services: Service[] = [
     bg: "bg-[#10B981]/10",
     border: "border-[#10B981]/20",
     lightBg: "bg-emerald-50",
+    accentColor: "#10B981",
+    gradient: "from-emerald-500/20 via-transparent to-transparent",
     benefits: [
       {
         title: "Reduce Manual Work",
@@ -116,6 +124,8 @@ export const services: Service[] = [
     id: "software-dev",
     title: "Full-Stack Engineering",
     subtitle: "Clean, Modern Software Built With Care",
+    headline: "Beautiful Code.",
+    subheadline: "Scalable Systems.",
     description: "I build applications that feel smooth, work fast, and scale. Whether it's a platform, dashboard, API, or full system, I make sure it's elegant, efficient, and future-ready.",
     longDescription: "Great software isn't just about making things work—it's about building systems that are maintainable, scalable, and delightful to use. With years of experience across the full stack, I create web applications that combine beautiful front-end experiences with robust, secure back-end architecture. From high-performance web apps to complex SaaS platforms, I write clean, tested code that other developers can understand and extend. I don't just ship features—I build foundations that support your growth for years to come.",
     offerings: [
@@ -136,6 +146,8 @@ export const services: Service[] = [
     bg: "bg-[#4C8BFF]/10",
     border: "border-[#4C8BFF]/20",
     lightBg: "bg-blue-50",
+    accentColor: "#4C8BFF",
+    gradient: "from-blue-500/20 via-transparent to-transparent",
     benefits: [
       {
         title: "Fast & Responsive",
@@ -196,6 +208,8 @@ export const services: Service[] = [
     id: "cybersecurity",
     title: "Cybersecurity & Defense",
     subtitle: "Protect What Matters",
+    headline: "Protect Everything.",
+    subheadline: "Trust Nothing.",
     description: "I break things to understand them, then secure them so nobody else can break them. I help founders keep their systems safe from day one.",
     longDescription: "In today's threat landscape, security can't be an afterthought—it needs to be built into every layer of your system. I bring a hacker's mindset to defense: understanding how attackers think and operate, then building walls they can't breach. From conducting thorough vulnerability assessments to designing secure architectures from scratch, I help you protect your users' data, your reputation, and your business. Whether you're a startup handling sensitive data or an established company looking to level up your security posture, I provide the expertise you need.",
     offerings: [
@@ -216,6 +230,8 @@ export const services: Service[] = [
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/20",
     lightBg: "bg-emerald-50",
+    accentColor: "#10B981",
+    gradient: "from-emerald-500/20 via-transparent to-transparent",
     benefits: [
       {
         title: "Identify Vulnerabilities",
@@ -276,6 +292,8 @@ export const services: Service[] = [
     id: "mentorship",
     title: "Tech Mentorship & Strategy",
     subtitle: "Helping You Build Something Real",
+    headline: "Build Smarter.",
+    subheadline: "Move Faster.",
     description: "If you have an idea but don't know how to execute it, I'll help you plan it, break it down, and turn it into a working product.",
     longDescription: "Having a great idea is just the beginning—turning it into reality requires technical knowledge, strategic planning, and experience navigating the countless decisions that come with building a product. Whether you're a non-technical founder trying to understand your options, a startup looking for part-time CTO guidance, or a junior developer wanting to level up, I provide the mentorship and strategic advice you need. I've been through the trenches of building products, making mistakes, and finding solutions. Let me help you skip the expensive lessons and get to success faster.",
     offerings: [
@@ -296,6 +314,8 @@ export const services: Service[] = [
     bg: "bg-amber-500/10",
     border: "border-amber-500/20",
     lightBg: "bg-amber-50",
+    accentColor: "#F59E0B",
+    gradient: "from-amber-500/20 via-transparent to-transparent",
     benefits: [
       {
         title: "Avoid Costly Mistakes",
