@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function IndividualsPage() {
   return (
-    <main className="min-h-screen bg-white selection:bg-emerald-100 font-sans text-slate-900">
+    <main className="min-h-screen bg-slate-50 selection:bg-emerald-100 font-sans text-slate-900">
       <Navbar />
       
       <ServiceHero 
@@ -52,15 +52,15 @@ export default function IndividualsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
                     <div className="text-emerald-600 font-bold text-xl mb-4">01. Architect</div>
                     <p className="text-slate-600">We map your user journey. How does a visitor become a newsletter subscriber, then a client?</p>
                  </div>
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
                     <div className="text-emerald-600 font-bold text-xl mb-4">02. Design</div>
                     <p className="text-slate-600">We create a visual identity that reflects your premium standing in the market. No templates.</p>
                  </div>
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
                     <div className="text-emerald-600 font-bold text-xl mb-4">03. Optimize</div>
                     <p className="text-slate-600">We perfect the technical SEO and load speeds (Core Web Vitals) so Google loves you.</p>
                  </div>
@@ -78,7 +78,7 @@ export default function IndividualsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* Custom Website - Large */}
-            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 relative overflow-hidden group">
+            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 relative overflow-hidden group hover:border-emerald-200 transition-all">
               <div className="relative z-10">
                 <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-8 text-emerald-600">
                   <Monitor className="w-8 h-8" />
@@ -96,7 +96,7 @@ export default function IndividualsPage() {
               </div>
             </div>
             
-            {/* Personal Brand */}
+            {/* Personal Brand - Dark Card */}
              <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-10 border border-slate-800 flex flex-col justify-between group">
                <div>
                    <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6 text-emerald-400">
@@ -110,8 +110,8 @@ export default function IndividualsPage() {
             </div>
 
             {/* E-commerce */}
-             <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 text-emerald-600">
+             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <ShoppingBag className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">E-commerce Systems</h3>
@@ -121,8 +121,8 @@ export default function IndividualsPage() {
             </div>
 
             {/* Booking */}
-             <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 text-emerald-600">
+             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <Calendar className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Booking & Automation</h3>
@@ -132,8 +132,8 @@ export default function IndividualsPage() {
             </div>
 
             {/* Optimization/Redesign */}
-             <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 text-emerald-600">
+             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <Zap className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Redesign & Optimize</h3>
@@ -147,20 +147,20 @@ export default function IndividualsPage() {
       </section>
 
       {/* Impact / Metrics */}
-      <section className="py-24 bg-emerald-900 text-white">
+      <section className="py-24 bg-black text-white border-y border-white/10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-               <div className="grid md:grid-cols-3 gap-12 text-center divider-y md:divide-y-0 md:divide-x divide-emerald-800">
+               <div className="grid md:grid-cols-3 gap-12 text-center divider-y md:divide-y-0 md:divide-x divide-white/10">
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">100</div>
-                        <div className="text-emerald-200 font-medium">PageSpeed Score</div>
+                        <div className="text-emerald-400 font-medium">PageSpeed Score</div>
                     </div>
                     <div className="p-4">
-                        <div className="text-5xl font-bold mb-2">24h</div>
-                        <div className="text-emerald-200 font-medium">Response Time</div>
+                        <div className="text-5xl font-bold mb-2">&lt;24h</div>
+                        <div className="text-emerald-400 font-medium">Delivery Speed</div>
                     </div>
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">SEO</div>
-                        <div className="text-emerald-200 font-medium">Optimized Architecture</div>
+                        <div className="text-emerald-400 font-medium">Optimized Architecture</div>
                     </div>
                </div>
           </div>
@@ -171,7 +171,7 @@ export default function IndividualsPage() {
         <div className="max-w-3xl mx-auto px-6">
             <h2 className="text-4xl font-bold text-slate-900 mb-6">Stand out from the noise.</h2>
             <p className="text-xl text-slate-600 mb-10">
-                Stop using generic templates. Build a platform that worthy of your brand.
+                Stop using generic templates. Build a platform that's worthy of your brand.
             </p>
             <Link href="/contact" className="inline-flex items-center px-10 py-5 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-500/20">
                 Start My Project

@@ -52,15 +52,15 @@ export default function SMEPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
                     <div className="text-emerald-600 font-bold text-xl mb-4">01. Audit</div>
                     <p className="text-slate-600">We map every manual process in your business to identify bottlenecks and redundancies.</p>
                  </div>
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
                     <div className="text-emerald-600 font-bold text-xl mb-4">02. Automate</div>
                     <p className="text-slate-600">We deploy code-based automations (not just Zapier) to handle reliable, complex workflows.</p>
                  </div>
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
                     <div className="text-emerald-600 font-bold text-xl mb-4">03. Scale</div>
                     <p className="text-slate-600">We implement dashboards effectively giving you a "cockpit" to manage the business.</p>
                  </div>
@@ -68,7 +68,7 @@ export default function SMEPage() {
          </div>
       </section>
 
-      {/* Core Capabilities - "Bento" Style but Professional */}
+      {/* Core Capabilities */}
       <section className="py-24 px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
@@ -78,7 +78,7 @@ export default function SMEPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* Automation - Large */}
-            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 relative overflow-hidden group">
+            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 relative overflow-hidden group hover:border-emerald-200 transition-all">
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-8 text-emerald-700">
                   <Bot className="w-7 h-7" />
@@ -96,7 +96,7 @@ export default function SMEPage() {
               </div>
             </div>
             
-            {/* Dashboards */}
+            {/* Dashboards - Dark Accent Card (Keep contrast) */}
              <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-10 border border-slate-800 flex flex-col justify-between group">
                <div>
                   <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6 text-emerald-400">
@@ -110,8 +110,8 @@ export default function SMEPage() {
             </div>
 
             {/* CRM */}
-             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-blue-700">
+             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <Users className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">CRM Architecture</h3>
@@ -121,8 +121,8 @@ export default function SMEPage() {
             </div>
 
             {/* Sales Engines */}
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group">
-              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-6 text-amber-700">
+            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <LineChart className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Sales Engineering</h3>
@@ -132,8 +132,8 @@ export default function SMEPage() {
             </div>
 
              {/* Speed */}
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6 text-purple-700">
+            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <Zap className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Process Optimization</h3>
@@ -147,20 +147,20 @@ export default function SMEPage() {
       </section>
 
       {/* Impact / Metrics */}
-      <section className="py-24 bg-emerald-900 text-white">
+      <section className="py-24 bg-black text-white border-y border-white/10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-               <div className="grid md:grid-cols-3 gap-12 text-center divider-y md:divide-y-0 md:divide-x divide-emerald-800">
+               <div className="grid md:grid-cols-3 gap-12 text-center divider-y md:divide-y-0 md:divide-x divide-white/10">
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">30%</div>
-                        <div className="text-emerald-200 font-medium">Reduction in OpEx</div>
+                        <div className="text-emerald-400 font-medium">Reduction in OpEx</div>
                     </div>
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">100+</div>
-                        <div className="text-emerald-200 font-medium">Hours Saved Monthly</div>
+                        <div className="text-emerald-400 font-medium">Hours Saved Monthly</div>
                     </div>
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">2x</div>
-                        <div className="text-emerald-200 font-medium">Revenue Capacity</div>
+                        <div className="text-emerald-400 font-medium">Revenue Capacity</div>
                     </div>
                </div>
           </div>

@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function EnterprisePage() {
   return (
-    <main className="min-h-screen bg-slate-50 selection:bg-indigo-100 font-sans text-slate-900">
+    <main className="min-h-screen bg-slate-50 selection:bg-emerald-100 font-sans text-slate-900">
       <Navbar />
       
       <ServiceHero 
@@ -21,13 +21,13 @@ export default function EnterprisePage() {
         description="Digital transformation isn't just about moving to the cloud. It's about building intelligent, self-correcting systems that scale securely."
         ctaText="Request Enterprise Consultation"
         ctaLink="/contact"
-        themeColor="indigo"
+        themeColor="emerald"
       />
 
       {/* The Challenge */}
       <section className="py-20 px-6 lg:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
-            <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm mb-4 block">The Challenge</span>
+            <span className="text-emerald-600 font-bold tracking-wider uppercase text-sm mb-4 block">The Challenge</span>
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-8 leading-tight">
                 Legacy Systems & Data Silos.
             </h2>
@@ -46,22 +46,22 @@ export default function EnterprisePage() {
       <section className="py-20 px-6 lg:px-8 bg-slate-50 border-y border-slate-200">
          <div className="max-w-7xl mx-auto">
             <div className="mb-16 max-w-3xl">
-                <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm mb-4 block">Our Approach</span>
+                <span className="text-emerald-600 font-bold tracking-wider uppercase text-sm mb-4 block">Our Approach</span>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Secure Modernization.</h2>
                 <p className="text-xl text-slate-600">We decouple legacy dependencies and build secure, private intelligence layers.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                    <div className="text-indigo-600 font-bold text-xl mb-4">01. Decouple</div>
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
+                    <div className="text-emerald-600 font-bold text-xl mb-4">01. Decouple</div>
                     <p className="text-slate-600">We wrap legacy systems in modern API layers to enable new integrations without risky rewrites.</p>
                  </div>
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                    <div className="text-indigo-600 font-bold text-xl mb-4">02. Secure</div>
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
+                    <div className="text-emerald-600 font-bold text-xl mb-4">02. Secure</div>
                     <p className="text-slate-600">We implement Zero Trust architecture and private VPCs for all AI/Data operations.</p>
                  </div>
-                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-                    <div className="text-indigo-600 font-bold text-xl mb-4">03. Intelligence</div>
+                 <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 hover:border-emerald-200 transition-colors">
+                    <div className="text-emerald-600 font-bold text-xl mb-4">03. Intelligence</div>
                     <p className="text-slate-600">We deploy RAG (Retrieval Augmented Generation) systems to make your data chat-accessible.</p>
                  </div>
             </div>
@@ -78,9 +78,9 @@ export default function EnterprisePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* Digital Transformation - Large */}
-            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 relative overflow-hidden group">
+            <div className="lg:col-span-2 bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-200 relative overflow-hidden group hover:border-emerald-200 transition-all">
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center mb-8 text-indigo-700">
+                <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-8 text-emerald-700">
                   <GitBranch className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-slate-900">Digital Transformation Architecture</h3>
@@ -88,15 +88,15 @@ export default function EnterprisePage() {
                   Strategic modernization of legacy systems. We re-engineer workflows to be API-first and cloud-native, reducing maintenance costs and enabling rapid innovation.
                 </p>
                 <ul className="grid sm:grid-cols-2 gap-4 mb-8">
-                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-indigo-600 mr-3" /> Legacy Migration Strategies</li>
-                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-indigo-600 mr-3" /> Microservices Architecture</li>
-                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-indigo-600 mr-3" /> API Gateway Implementation</li>
-                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-indigo-600 mr-3" /> Hybrid Cloud Setup</li>
+                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-emerald-600 mr-3" /> Legacy Migration Strategies</li>
+                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-emerald-600 mr-3" /> Microservices Architecture</li>
+                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-emerald-600 mr-3" /> API Gateway Implementation</li>
+                    <li className="flex items-center text-sm font-medium text-slate-700"><CheckCircle2 className="w-4 h-4 text-emerald-600 mr-3" /> Hybrid Cloud Setup</li>
                 </ul>
               </div>
             </div>
             
-            {/* RAG Systems */}
+            {/* RAG Systems - Dark Accent */}
              <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-10 border border-slate-800 flex flex-col justify-between group">
                <div>
                   <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6 text-emerald-400">
@@ -110,8 +110,8 @@ export default function EnterprisePage() {
             </div>
 
             {/* Cloud Migration */}
-             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-blue-700">
+             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <Server className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">Secure Cloud Migration</h3>
@@ -121,8 +121,8 @@ export default function EnterprisePage() {
             </div>
 
             {/* DevSecOps */}
-            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group">
-              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-6 text-amber-700">
+            <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                 <Lock className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-slate-900">DevSecOps & Security</h3>
@@ -132,8 +132,8 @@ export default function EnterprisePage() {
             </div>
 
             {/* Department Automation */}
-             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6 text-purple-700">
+             <div className="bg-slate-50 rounded-3xl p-8 md:p-10 border border-slate-200 flex flex-col group hover:border-emerald-200 transition-all">
+                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-emerald-700">
                     <ShieldCheck className="w-6 h-6" />
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-slate-900">Department Automation</h3>
@@ -147,20 +147,20 @@ export default function EnterprisePage() {
       </section>
 
       {/* Impact / Metrics */}
-      <section className="py-24 bg-indigo-900 text-white">
+      <section className="py-24 bg-black text-white border-y border-white/10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-               <div className="grid md:grid-cols-3 gap-12 text-center divider-y md:divide-y-0 md:divide-x divide-indigo-800">
+               <div className="grid md:grid-cols-3 gap-12 text-center divider-y md:divide-y-0 md:divide-x divide-white/10">
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">SOC2</div>
-                        <div className="text-indigo-200 font-medium">Compliance Ready</div>
+                        <div className="text-emerald-400 font-medium">Compliance Ready</div>
                     </div>
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">100%</div>
-                        <div className="text-indigo-200 font-medium">Data Sovereignty</div>
+                        <div className="text-emerald-400 font-medium">Data Sovereignty</div>
                     </div>
                     <div className="p-4">
                         <div className="text-5xl font-bold mb-2">24/7</div>
-                        <div className="text-indigo-200 font-medium">System Reliability</div>
+                        <div className="text-emerald-400 font-medium">System Reliability</div>
                     </div>
                </div>
           </div>
@@ -173,7 +173,7 @@ export default function EnterprisePage() {
             <p className="text-xl text-slate-600 mb-10">
                 Schedule a consultation to discuss your digital transformation roadmap.
             </p>
-            <Link href="/contact" className="inline-flex items-center px-10 py-5 bg-indigo-600 text-white rounded-full font-medium hover:bg-indigo-700 transition-colors shadow-xl shadow-indigo-600/20">
+            <Link href="/contact" className="inline-flex items-center px-10 py-5 bg-emerald-600 text-white rounded-full font-medium hover:bg-emerald-700 transition-colors shadow-xl shadow-emerald-600/20">
                 Request Enterprise Consultation
                 <ArrowRight className="ml-2 w-6 h-6" />
             </Link>

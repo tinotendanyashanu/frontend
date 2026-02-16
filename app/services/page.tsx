@@ -17,7 +17,7 @@ export default function ServicesPage() {
       <section className="relative h-screen w-full snap-start overflow-hidden flex items-center justify-center">
         {/* Background */}
         <div className="absolute inset-0 z-0 opacity-60">
-           <Prism animationType="hover" hueShift={1.0} hoverStrength={2} scale={4.5} />
+           <Prism animationType="hover" hueShift={1.0} hoverStrength={2} scale={4.5} suspendWhenOffscreen={true} />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-0 pointer-events-none" />
 
@@ -55,7 +55,7 @@ export default function ServicesPage() {
       {/* Slide 2: Startups */}
       <section className="relative h-screen w-full snap-start overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0 opacity-60">
-           <Prism animationType="rotate" hueShift={0.6} hoverStrength={1} scale={5} />
+           <Prism animationType="rotate" hueShift={0.6} hoverStrength={1} scale={5} suspendWhenOffscreen={true} />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-0 pointer-events-none" />
         
@@ -86,7 +86,7 @@ export default function ServicesPage() {
       {/* Slide 3: Enterprise */}
       <section className="relative h-screen w-full snap-start overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0 opacity-60">
-           <Prism animationType="rotate" hueShift={0.7} hoverStrength={1} scale={4} />
+           <Prism animationType="rotate" hueShift={0.7} hoverStrength={1} scale={4} suspendWhenOffscreen={true} />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-0 pointer-events-none" />
 
@@ -117,7 +117,7 @@ export default function ServicesPage() {
       {/* Slide 4: Individuals */}
       <section className="relative h-screen w-full snap-start overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0 opacity-60">
-           <Prism animationType="hover" hueShift={1.0} hoverStrength={2} scale={4.5} />
+           <Prism animationType="hover" hueShift={1.0} hoverStrength={2} scale={4.5} suspendWhenOffscreen={true} />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-0 pointer-events-none" />
 
