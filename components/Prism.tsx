@@ -443,7 +443,7 @@ const Prism: React.FC<PrismProps> = ({
       if (animationType === 'hover') {
         if (onPointerMove) window.removeEventListener('pointermove', onPointerMove as EventListener);
         window.removeEventListener('mouseleave', onLeave);
-        window.removeEventListener('blur', onBlur);
+        window.removeEventListener('blur', onUp);
       }
       if (suspendWhenOffscreen) {
         const io = (container as PrismContainer).__prismIO as IntersectionObserver | undefined;
@@ -451,6 +451,10 @@ const Prism: React.FC<PrismProps> = ({
         delete (container as PrismContainer).__prismIO;
       }
       if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
+      
+      // Explicitly lose context to free memory
+      const extension = gl.getExtension('WEBGL_lose_context');
+      if (extension) extension.loseContext();
     };
   }, [
     height,
