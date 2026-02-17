@@ -34,13 +34,15 @@ export async function POST(request: Request) {
       to: email,
       subject: "We've received your message",
       html: EmailTemplates.contactConfirmation(name),
+      replyTo: 'contact@leothetechguy.com'
     });
 
     // Send Admin Notification
-    await sendAdminNotification(
-      'Contact Form Submission',
-      `Name: ${name}\nEmail: ${email}\nProject: ${project}\nMessage: ${message}`
-    );
+    await sendAdminNotification({
+      subject: 'Contact Form Submission',
+      text: `Name: ${name}\nEmail: ${email}\nProject: ${project}\nMessage: ${message}`,
+      replyTo: email
+    });
 
     return NextResponse.json({ success: true, data: contact }, { status: 201 });
 

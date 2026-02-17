@@ -30,13 +30,15 @@ export async function POST(request: Request) {
       to: email,
       subject: 'Your Leo Systems Partner Application',
       html: EmailTemplates.partnerApplicationReceived(name),
+      replyTo: 'contact@leothetechguy.com'
     });
 
     // Email to Admin
-    await sendAdminNotification(
-      'Partner Application',
-      `Name: ${name}\nCompany: ${companyName}\nType: ${partnershipType}\nWebsite: ${website || 'N/A'}`
-    );
+    await sendAdminNotification({
+      subject: 'Partner Application',
+      text: `Name: ${name}\nCompany: ${companyName}\nType: ${partnershipType}\nWebsite: ${website || 'N/A'}`,
+      replyTo: email
+    });
 
     return NextResponse.json({ success: true, data: application }, { status: 201 });
 

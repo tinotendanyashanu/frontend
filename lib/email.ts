@@ -2,17 +2,23 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = 'Leo Systems <noreply@leosystems.ai>'; // Verify this domain in Resend dashboard
+const FROM_EMAIL = 'Leo Systems <noreply@leothetechguy.com>'; // Verified domain
 const ADMIN_EMAIL = 'contact@leothetechguy.com'; 
+
+const LOGO_URL = 'https://leothetechguy.com/logo_transparent.png'; // Using smaller, transparent logo for better email compatibility
+
+// ... (rest of imports/constants)
 
 export async function sendEmail({
   to,
   subject,
   html,
+  replyTo = ADMIN_EMAIL, // Default reply-to is admin
 }: {
   to: string;
   subject: string;
   html: string;
+  replyTo?: string;
 }) {
   try {
     const data = await resend.emails.send({
@@ -20,6 +26,7 @@ export async function sendEmail({
       to,
       subject,
       html,
+      reply_to: replyTo,
     });
     console.log(`Email sent to ${to}:`, data);
     return { success: true, data };
@@ -32,36 +39,25 @@ export async function sendEmail({
 export async function sendAdminNotification({
   subject,
   text,
+  replyTo, 
 }: {
   subject: string;
   text: string;
+  replyTo?: string;
 }) {
-  // Simple plain text notification for admin
   try {
       const data = await resend.emails.send({
           from: FROM_EMAIL,
           to: ADMIN_EMAIL,
           subject: `[ADMIN] ${subject}`,
           html: `<p>${text}</p>`,
+          reply_to: replyTo,
       });
       console.log(`Admin notification sent:`, data);
   } catch (error) {
       console.error('Failed to send admin notification', error);
   }
 }
-
-// --- TEMPLATES ---
-
-const EMAIL_STYLES = `
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: #334155;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-`;
-
-const LOGO_URL = 'https://leosystems.ai/logo.png'; // Placeholder, user needs to verify this asset exists or use a hosted one
 
 function BaseTemplate(content: string) {
   return `

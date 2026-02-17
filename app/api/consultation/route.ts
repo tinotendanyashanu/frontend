@@ -29,13 +29,15 @@ export async function POST(request: Request) {
       to: email,
       subject: 'Your Strategy Session Request',
       html: EmailTemplates.consultationConfirmation(name, date),
+      replyTo: 'contact@leothetechguy.com'
     });
 
     // Email to Admin
-    await sendAdminNotification(
-      'Consultation Request',
-      `Name: ${name}\nEmail: ${email}\nTopic: ${topic || 'N/A'}\nRequested Date: ${date || 'N/A'}`
-    );
+    await sendAdminNotification({
+      subject: 'Consultation Request',
+      text: `Name: ${name}\nEmail: ${email}\nTopic: ${topic || 'N/A'}\nRequested Date: ${date || 'N/A'}`,
+      replyTo: email
+    });
 
     return NextResponse.json({ success: true, data: consultation }, { status: 201 });
 

@@ -35,13 +35,15 @@ export async function POST(request: Request) {
       to: email,
       subject: 'Project Inquiry Received',
       html: EmailTemplates.projectInquiryConfirmation(name, project),
+      replyTo: 'contact@leothetechguy.com' // Explicitly set support email
     });
 
     // Email to Admin
-    await sendAdminNotification(
-      'Project Inquiry',
-      `Name: ${name}\nEmail: ${email}\nProject: ${project}\nBudget: ${budget}\nTimeline: ${timeline}\nDescription: ${message}`
-    );
+    await sendAdminNotification({
+      subject: 'Project Inquiry',
+      text: `Name: ${name}\nEmail: ${email}\nProject: ${project}\nBudget: ${budget}\nTimeline: ${timeline}\nDescription: ${message}`,
+      replyTo: email
+    });
 
     return NextResponse.json({ success: true, data: projectInquiry }, { status: 201 });
 
