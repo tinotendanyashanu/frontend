@@ -1,43 +1,50 @@
 'use client';
 
-import React, { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Mail, MapPin, Twitter, Instagram, Facebook, Send, Loader2, CheckCircle, AlertCircle, Youtube } from 'lucide-react';
-import { submitContactForm, ContactState } from '../actions';
-
-const initialState: ContactState = {
-  success: false,
-  message: '',
-};
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button 
-      type="submit" 
-      disabled={pending}
-      className="w-full inline-flex justify-center items-center px-8 py-4 text-base font-medium text-white bg-[#0071e3] rounded-full shadow-lg shadow-blue-500/20 hover:bg-[#0077ED] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
-    >
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 w-5 h-5 animate-spin" />
-          Sending...
-        </>
-      ) : (
-        <>
-          Send Message
-          <Send className="ml-2 w-5 h-5" />
-        </>
-      )}
-    </button>
-  );
-}
 
 export default function Contact() {
-  const [state, formAction] = useActionState(submitContactForm, initialState);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      project: formData.get('project'),
+      budget: formData.get('budget'),
+      timeline: formData.get('timeline'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const res = await fetch('/api/project-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message || 'Something went wrong');
+      }
+
+      setSuccess(true);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -62,7 +69,7 @@ export default function Contact() {
           {/* Contact Form */}
           <div className="bg-slate-50/50 backdrop-blur-sm rounded-3xl p-8 lg:p-10 border border-slate-200/60">
             
-            {state.success ? (
+            {success ? (
               <div className="text-center py-8 animate-in fade-in zoom-in duration-500">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
                   <CheckCircle className="w-10 h-10 text-green-600" />
@@ -92,16 +99,14 @@ export default function Contact() {
               <>
                 <h2 className="text-2xl font-semibold text-slate-900 mb-8">Send a Message</h2>
                 
-                {state.message && (
-                  <div className={`mb-6 p-4 rounded-xl flex items-start ${state.success ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
-                    {state.success ? <CheckCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" /> : <AlertCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />}
-                    <p>{state.message}</p>
+                {error && (
+                  <div className="mb-6 p-4 rounded-xl flex items-start bg-red-50 text-red-800 border border-red-200">
+                    <AlertCircle className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
+                    <p>{error}</p>
                   </div>
                 )}
 
-                <form action={formAction} className="space-y-6">
-                  {/* Honeypot field for basic bot protection */}
-                  <input type="hidden" name="company" autoComplete="off" />
+                <form onSubmit={handleSubmit} className="space-y-6">
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
@@ -147,7 +152,23 @@ export default function Contact() {
                     <textarea id="message" name="message" required rows={4} className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 outline-none transition-all resize-none" placeholder="Tell me more about your project..."></textarea>
                   </div>
 
-                  <SubmitButton />
+                  <button 
+                    type="submit" 
+                    disabled={loading}
+                    className="w-full inline-flex justify-center items-center px-8 py-4 text-base font-medium text-white bg-[#0071e3] rounded-full shadow-lg shadow-blue-500/20 hover:bg-[#0077ED] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="ml-2 w-5 h-5" />
+                      </>
+                    )}
+                  </button>
 
                 </form>
               </>

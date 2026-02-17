@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Cal, { getCalApi } from "@calcom/embed-react";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Calendar, Clock, Video, CheckCircle } from 'lucide-react';
+import { Calendar, Clock, Video, CheckCircle, MessageSquare, Loader2, AlertCircle } from 'lucide-react';
 
 export default function BookMeeting() {
   // Initialize Cal.com API
@@ -14,6 +14,45 @@ export default function BookMeeting() {
       cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
     })();
   }, []);
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+
+  async function handleConsultationRequest(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      topic: formData.get('topic'),
+    };
+
+    try {
+      const res = await fetch('/api/consultation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message || 'Something went wrong');
+      }
+
+      setSuccess(true);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -61,7 +100,7 @@ export default function BookMeeting() {
       </section>
 
       {/* Cal.com Embed */}
-      <section className="pb-24 px-6 lg:px-8 max-w-5xl mx-auto">
+      <section className="pb-12 px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
           <div className="p-8 lg:p-12" style={{ minHeight: '800px' }}>
             <Cal 
@@ -72,6 +111,47 @@ export default function BookMeeting() {
             />
           </div>
         </div>
+      </section>
+      
+      {/* Alternative Options (Direct Request) */}
+      <section className="pb-24 px-6 lg:px-8 max-w-3xl mx-auto">
+          <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+              <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Can't find a time?</h2>
+                  <p className="text-slate-600">Send a request and I'll get back to you with alternative slots.</p>
+              </div>
+
+              {success ? (
+                  <div className="bg-green-100 text-green-800 p-6 rounded-xl text-center">
+                      <CheckCircle className="w-8 h-8 mx-auto mb-2" />
+                      <p className="font-bold">Request Sent!</p>
+                      <p>I'll check my schedule and email you.</p>
+                  </div>
+              ) : (
+                  <form onSubmit={handleConsultationRequest} className="space-y-4">
+                      {error && (
+                        <div className="p-4 bg-red-50 text-red-700 rounded-lg flex items-center border border-red-200">
+                          <AlertCircle className="w-5 h-5 mr-3 flex-shrink-0" />
+                          {error}
+                        </div>
+                      )}
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <input type="text" name="name" required placeholder="Your Name" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] outline-none" />
+                          <input type="email" name="email" required placeholder="Your Email" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] outline-none" />
+                      </div>
+                      <input type="text" name="topic" placeholder="Preferred time or topic (optional)" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] outline-none" />
+                      
+                      <button 
+                        type="submit" 
+                        disabled={loading}
+                        className="w-full py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-black transition-colors flex justify-center items-center"
+                      >
+                         {loading ? <Loader2 className="animate-spin w-5 h-5" /> : 'Request Slot'}
+                      </button>
+                  </form>
+              )}
+          </div>
       </section>
 
       {/* FAQ Section */}
