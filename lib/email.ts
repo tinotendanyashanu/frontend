@@ -2,10 +2,18 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = 'Leo Systems <noreply@leothetechguy.com>'; // Verified domain
+const FROM_EMAIL = 'Leo The Tech Guy <noreply@leothetechguy.com>'; // Verified domain
 const ADMIN_EMAIL = 'contact@leothetechguy.com'; 
 
 const LOGO_URL = 'https://leothetechguy.com/logo_transparent.png'; // Using smaller, transparent logo for better email compatibility
+
+const EMAIL_STYLES = `
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8fafc;
+`;
 
 // ... (rest of imports/constants)
 
@@ -26,7 +34,7 @@ export async function sendEmail({
       to,
       subject,
       html,
-      reply_to: replyTo,
+      replyTo: replyTo,
     });
     console.log(`Email sent to ${to}:`, data);
     return { success: true, data };
@@ -51,7 +59,7 @@ export async function sendAdminNotification({
           to: ADMIN_EMAIL,
           subject: `[ADMIN] ${subject}`,
           html: `<p>${text}</p>`,
-          reply_to: replyTo,
+          replyTo: replyTo,
       });
       console.log(`Admin notification sent:`, data);
   } catch (error) {
@@ -69,8 +77,8 @@ function BaseTemplate(content: string) {
         ${content}
       </div>
       <div style="margin-top: 30px; text-align: center; font-size: 12px; color: #94a3b8;">
-        <p>Leo Systems &bull; <a href="https://leosystems.ai" style="color: #94a3b8; text-decoration: none;">leosystems.ai</a></p>
-        <p>You received this email because you contacted Leo Systems.</p>
+        <p>Leo The Tech Guy &bull; <a href="https://www.leothetechguy.com" style="color: #94a3b8; text-decoration: none;">www.leothetechguy.com</a></p>
+        <p>You received this email because you contacted Leo The Tech Guy.</p>
       </div>
     </div>
   `;
@@ -81,7 +89,7 @@ export const EmailTemplates = {
     BaseTemplate(`
       <h2 style="color: #0f172a; font-size: 20px; margin-bottom: 16px;">We've received your message</h2>
       <p>Hi ${name},</p>
-      <p>Thanks for reaching out to Leo Systems. I've received your message and will get back to you shortly.</p>
+      <p>Thanks for reaching out to Leo The Tech Guy. I've received your message and will get back to you shortly.</p>
       <p>If your matter is urgent, please feel free to follow up.</p>
       <br/>
       <p>Best regards,<br/>Leo</p>
@@ -91,7 +99,7 @@ export const EmailTemplates = {
     BaseTemplate(`
       <h2 style="color: #0f172a; font-size: 20px; margin-bottom: 16px;">Project Inquiry Received</h2>
       <p>Hi ${name},</p>
-      <p>Thank you for inquiring about building <strong>${project}</strong> with Leo Systems.</p>
+      <p>Thank you for inquiring about building <strong>${project}</strong> with Leo The Tech Guy.</p>
       <p>I am reviewing your project details. If it looks like a good fit, I'll send you a link to schedule a discovery call so we can discuss the scope and next steps.</p>
       <p>You can expect to hear from me within 1-2 business days.</p>
       <br/>
@@ -102,8 +110,31 @@ export const EmailTemplates = {
     BaseTemplate(`
       <h2 style="color: #0f172a; font-size: 20px; margin-bottom: 16px;">Partner Application Received</h2>
       <p>Hi ${name},</p>
-      <p>Thanks for applying to the Leo Systems Partner Network.</p>
-      <p>We review applications weekly. You'll hear from us soon regarding the status of your application.</p>
+      <p>Thanks for applying to the Leo The Tech Guy Partner Network.</p>
+      <p>We are currently reviewing your application.</p>
+      <p>Once approved, you will receive an <strong>activation link</strong> in your email to access your partner dashboard.</p>
+      <br/>
+      <p>Best,<br/>The Partner Team</p>
+    `),
+    
+  verifyEmail: (name: string, link: string) =>
+    BaseTemplate(`
+      <h2 style="color: #0f172a; font-size: 20px; margin-bottom: 16px;">Activate your Account</h2>
+      <p>Hi ${name},</p>
+      <p>Welcome to the Leo The Tech Guy Partner Network! Please click the link below to activate your account:</p>
+      <p><a href="${link}" style="display: inline-block; background-color: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px;">Activate Account</a></p>
+      <p>This link is valid for 1 hour.</p>
+      <br/>
+      <p>Best,<br/>The Partner Team</p>
+    `),
+
+  resetPassword: (name: string, link: string) =>
+    BaseTemplate(`
+      <h2 style="color: #0f172a; font-size: 20px; margin-bottom: 16px;">Reset your Password</h2>
+      <p>Hi ${name},</p>
+      <p>We received a request to reset your password. Click the link below to set a new password:</p>
+      <p><a href="${link}" style="display: inline-block; background-color: #0f172a; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px;">Reset Password</a></p>
+      <p>If you didn't request this, you can safely ignore this email.</p>
       <br/>
       <p>Best,<br/>The Partner Team</p>
     `),
@@ -124,8 +155,8 @@ export const EmailTemplates = {
       <h2 style="color: #10b981; font-size: 20px; margin-bottom: 16px;">Welcome to the Partner Network!</h2>
       <p>Hi ${name},</p>
       <p>Congratulations! Your application has been approved.</p>
-      <p>You can now access your partner dashboard to start referring clients and tracking commissions.</p>
-      <p><a href="https://leosystems.ai/partner/login" style="display: inline-block; background-color: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px;">Access Dashboard</a></p>
+      <p>Please click the link below to activate your account and access your dashboard.</p>
+      <p><a href="https://www.leothetechguy.com/partner/login" style="display: inline-block; background-color: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 10px;">Login to Dashboard</a></p>
       <br/>
       <p>Welcome aboard,<br/>Leo</p>
     `),
@@ -134,7 +165,7 @@ export const EmailTemplates = {
     BaseTemplate(`
       <h2 style="color: #0f172a; font-size: 20px; margin-bottom: 16px;">Update on your Partner Application</h2>
       <p>Hi ${name},</p>
-      <p>Thank you for your interest in the Leo Systems Partner Network.</p>
+      <p>Thank you for your interest in the Leo The Tech Guy Partner Network.</p>
       <p>After careful review, we are unable to accept your application at this time. We encourage you to apply again in the future as your business grows.</p>
       <br/>
       <p>Best regards,<br/>The Partner Team</p>
