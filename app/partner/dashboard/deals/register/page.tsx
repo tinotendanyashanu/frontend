@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { registerDeal } from '@/lib/actions/partner';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -11,7 +12,7 @@ const initialState = {
 };
 
 export default function RegisterDealPage() {
-  const [state, dispatch] = useFormState(registerDeal, initialState);
+  const [state, dispatch] = useActionState(registerDeal, initialState);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -51,6 +52,23 @@ export default function RegisterDealPage() {
                 />
             </div>
             {state?.errors?.estimatedValue && <p className="text-red-500 text-xs mt-1">{state.errors.estimatedValue}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Service Type</label>
+            <select 
+              name="serviceType" 
+              required 
+              defaultValue=""
+              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all bg-white"
+            >
+              <option value="" disabled>Select service type...</option>
+              <option value="SME">SME</option>
+              <option value="Startup">Startup</option>
+              <option value="Enterprise">Enterprise</option>
+              <option value="Individual">Individual</option>
+            </select>
+             {/* Map error if present, though state.errors type is loose here */}
           </div>
 
           <div>

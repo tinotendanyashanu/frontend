@@ -23,11 +23,13 @@ async function getDeals(query: string, status: string) {
   return Deal.find(filter).populate('partnerId', 'name email').sort({ createdAt: -1 }).lean();
 }
 
-export default async function AdminDealsPage({
-  searchParams,
-}: {
-  searchParams: { q?: string; status?: string };
+export default async function AdminDealsPage(props: {
+  searchParams: Promise<{ q?: string; status?: string }>;
 }) {
+  const session = await auth();
+  if (!session?.user?.email) return null; // Or unauthorized page
+
+  const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const status = searchParams.status || 'all';
   const deals = await getDeals(query, status);

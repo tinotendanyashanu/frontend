@@ -23,11 +23,10 @@ async function getPartners(query: string, status: string) {
   return Partner.find(filter).sort({ createdAt: -1 }).lean();
 }
 
-export default async function AdminPartnersPage({
-  searchParams,
-}: {
-  searchParams: { q?: string; status?: string };
+export default async function AdminPartnersPage(props: {
+  searchParams: Promise<{ q?: string; status?: string }>;
 }) {
+  const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const status = searchParams.status || 'all';
   const partners = await getPartners(query, status);
