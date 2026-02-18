@@ -1,6 +1,9 @@
 import { auth } from '@/auth';
 import Sidebar from '@/components/partner/Sidebar';
 import { redirect } from 'next/navigation';
+import OnboardingTour from '@/components/OnboardingTour';
+import dbConnect from '@/lib/mongodb';
+import Partner from '@/models/Partner';
 
 export default async function DashboardLayout({
   children,
@@ -9,24 +12,35 @@ export default async function DashboardLayout({
 }) {
   const session = await auth();
 
-  if (!session?.user) {
+  if (!session?.user?.email) {
     redirect('/partner/login');
   }
 
+  await dbConnect();
+  const partner = await Partner.findOne({ email: session.user.email }).select('hasCompletedOnboarding name').lean() as any;
+
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#f8f9fa]">
+      <OnboardingTour userHasCompleted={partner?.hasCompletedOnboarding || false} />
       <Sidebar user={session.user} />
-      <div className="pl-64">
-        <header className="bg-white shadow-sm border-b border-slate-200 h-16 flex items-center px-8 justify-between sticky top-0 z-10">
-             <h1 className="text-xl font-semibold text-slate-800">Dashboard</h1>
-             <div className="flex items-center space-x-4">
-                 {/* Notifications or secondary actions could go here */}
-                 <div className="text-sm text-slate-500">
+      <div className="pl-64 transition-all duration-300">
+        {/* Header content... */}
+        <header className="bg-white/50 backdrop-blur-sm sticky top-0 z-30 h-20 flex items-center px-10 justify-between">
+             <div>
+                <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
+                <p className="text-slate-500 text-xs font-medium">
                      {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                 </div>
+                </p>
              </div>
-        </header>
-        <main className="p-8 max-w-7xl mx-auto">
+             
+             <button className="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-600 hover:shadow-md transition-all">
+                <span className="sr-only">Notifications</span>
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+             </button>
+        </header> 
+        <main className="px-10 py-6 max-w-7xl mx-auto">
           {children}
         </main>
       </div>

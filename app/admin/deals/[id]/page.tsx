@@ -10,7 +10,8 @@ async function getDeal(id: string) {
   return Deal.findById(id).populate('partnerId', 'name email tier').lean();
 }
 
-export default async function AdminDealDetailsPage({ params }: { params: { id: string } }) {
+export default async function AdminDealDetailsPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const deal = await getDeal(params.id);
   
   if (!deal) return <div>Deal not found</div>;

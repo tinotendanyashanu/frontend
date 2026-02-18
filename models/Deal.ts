@@ -10,6 +10,7 @@ export interface IDeal extends Document {
   dealStatus: 'registered' | 'under_review' | 'approved' | 'closed' | 'rejected';
   paymentStatus: 'pending' | 'received' | 'commission_paid';
   paymentMethod?: 'cash' | 'bank_transfer' | 'stripe' | 'other';
+  serviceType: 'SME' | 'Startup' | 'Enterprise' | 'Individual';
   notes?: string;
   closedAt?: Date;
   createdAt: Date;
@@ -36,6 +37,11 @@ const DealSchema: Schema = new Schema({
   paymentMethod: { 
     type: String, 
     enum: ['cash', 'bank_transfer', 'stripe', 'other'] 
+  },
+  serviceType: {
+    type: String,
+    enum: ['SME', 'Startup', 'Enterprise', 'Individual'],
+    required: true
   },
   notes: { type: String },
   closedAt: { type: Date },

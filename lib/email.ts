@@ -179,5 +179,25 @@ export const EmailTemplates = {
 ${details}
       </div>
       <p>Check the admin dashboard for more info.</p>
+    `),
+
+  tierUpgrade: (name: string, newTier: string) =>
+    BaseTemplate(`
+      <h2 style="color: #10b981; font-size: 20px; margin-bottom: 16px;">Congratulations! You've Leveled Up!</h2>
+      <p>Hi ${name},</p>
+      <p>We are thrilled to inform you that you have been upgraded to the <strong>${newTier.toUpperCase()}</strong> tier!</p>
+      <p>This unlocks new commission rates and benefits. Check your dashboard for details.</p>
+      <br/>
+      <p>Keep up the great work,<br/>Leo The Tech Guy</p>
+    `),
+
+  commissionPaid: (name: string, dealName: string, amount: number) =>
+    BaseTemplate(`
+      <h2 style="color: #10b981; font-size: 20px; margin-bottom: 16px;">Commission Payment Sent</h2>
+      <p>Hi ${name},</p>
+      <p>Great news! We've sent you a commission payment of <strong>$${amount}</strong> for the <strong>${dealName}</strong> deal.</p>
+      <p>The funds should arrive in your account shortly.</p>
+      <br/>
+      <p>Thanks for your partnership,<br/>Leo The Tech Guy</p>
     `)
 };

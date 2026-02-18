@@ -1,0 +1,94 @@
+import { auth } from '@/auth';
+import dbConnect from '@/lib/mongodb';
+import Partner from '@/models/Partner';
+import SettingsForm from '@/components/partner/SettingsForm';
+import { User, CreditCard, Mail, Award, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+
+async function getPartnerSettings(email: string) {
+  await dbConnect();
+  const partner = await Partner.findOne({ email }).lean() as any;
+  return partner;
+}
+
+export default async function SettingsPage() {
+  const session = await auth();
+  if (!session?.user?.email) return null;
+
+  const partner = await getPartnerSettings(session.user.email);
+  if (!partner) return <div>Partner not found</div>;
+
+  return (
+    <div className="space-y-8 max-w-3xl">
+      <div>
+        <h2 className="text-2xl font-bold text-slate-900">Settings</h2>
+        <p className="text-slate-500">Manage your profile and payout information.</p>
+      </div>
+
+      {/* Profile Card */}
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+        <div className="p-8 border-b border-slate-50">
+          <h3 className="text-lg font-bold text-slate-900 flex items-center">
+            <User className="h-5 w-5 mr-2 text-slate-400" />
+            Profile Information
+          </h3>
+          <p className="text-sm text-slate-500 mt-1">Your account details. Contact support to update your name or email.</p>
+        </div>
+        <div className="p-8">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Full Name</label>
+              <div className="flex items-center px-4 py-3 bg-slate-50 rounded-xl border border-slate-100">
+                <User className="h-4 w-4 text-slate-400 mr-3" />
+                <span className="text-slate-900 font-medium">{partner.name}</span>
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Email Address</label>
+              <div className="flex items-center px-4 py-3 bg-slate-50 rounded-xl border border-slate-100">
+                <Mail className="h-4 w-4 text-slate-400 mr-3" />
+                <span className="text-slate-900 font-medium">{partner.email}</span>
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Partner Tier</label>
+              <div className="flex items-center px-4 py-3 bg-slate-50 rounded-xl border border-slate-100">
+                <Award className="h-4 w-4 text-emerald-500 mr-3" />
+                <span className="text-slate-900 font-medium capitalize">{partner.tier || 'Referral'} Partner</span>
+              </div>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Account Status</label>
+              <div className="flex items-center px-4 py-3 bg-slate-50 rounded-xl border border-slate-100">
+                <CheckCircle className="h-4 w-4 text-emerald-500 mr-3" />
+                <span className="text-emerald-700 font-medium capitalize">{partner.status || 'Active'}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bank Details Form */}
+      <div>
+        <div className="flex items-center space-x-2 mb-4 px-1">
+             <CreditCard className="h-5 w-5 text-slate-400" />
+             <h3 className="text-lg font-bold text-slate-900">Payout / Bank Details</h3>
+        </div>
+        <p className="text-sm text-slate-500 mb-4 px-1">Enter your bank details to receive commission payouts. Keep these up to date.</p>
+        
+        <SettingsForm bankDetails={partner.bankDetails} />
+      </div>
+
+      {/* Danger Zone */}
+      <div className="bg-white rounded-2xl border border-red-100 shadow-sm overflow-hidden">
+        <div className="p-8">
+          <h3 className="text-lg font-bold text-red-700 mb-2">Danger Zone</h3>
+          <p className="text-sm text-slate-500 mb-4">
+            To deactivate your partner account, please contact support at{' '}
+            <a href="mailto:contact@leothetechguy.com" className="text-emerald-600 hover:underline">contact@leothetechguy.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

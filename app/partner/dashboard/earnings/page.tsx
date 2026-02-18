@@ -1,23 +1,48 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Payout from '@/models/Payout';
 import Partner from '@/models/Partner';
-import { DollarSign, Clock, CheckCircle } from 'lucide-react';
+import Payout from '@/models/Payout';
+import { DollarSign, TrendingUp, Clock, CreditCard } from 'lucide-react';
 
-async function getEarningsData(userId: string) {
+async function getEarningsData(email: string) {
   await dbConnect();
-  const partner = await Partner.findById(userId).lean();
-  const payouts = await Payout.find({ partnerId: userId }).sort({ createdAt: -1 }).lean();
+  const partner = await Partner.findOne({ email }).lean();
+  if (!partner) return null;
+
+  const payouts = await Payout.find({ partnerId: partner._id }).sort({ processedAt: -1 }).lean();
+  
   return { partner, payouts };
 }
 
 export default async function EarningsPage() {
   const session = await auth();
-  if (!session?.user?.id) return null;
+  if (!session?.user?.email) return null;
 
-  const { partner, payouts } = await getEarningsData(session.user.id);
+  const data = await getEarningsData(session.user.email);
+  if (!data) return <div>Partner not found</div>;
 
-  if (!partner) return null;
+  const { partner, payouts } = data;
+
+  const stats = [
+    {
+      name: 'Total Earned',
+      value: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.totalCommissionEarned),
+      icon: DollarSign,
+      color: 'bg-emerald-500',
+    },
+    {
+      name: 'Paid Out',
+      value: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.paidCommission),
+      icon: CreditCard,
+      color: 'bg-blue-500',
+    },
+    {
+       name: 'Pending',
+       value: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.pendingCommission),
+       icon: Clock,
+       color: 'bg-amber-500',
+    }
+  ];
 
   return (
     <div className="space-y-8">
@@ -26,85 +51,65 @@ export default async function EarningsPage() {
         <p className="text-slate-500">Track your commissions and payment history.</p>
       </div>
 
-      {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
-           <div className="flex items-center space-x-3 mb-2">
-               <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600">
-                   <DollarSign className="h-5 w-5" />
-               </div>
-               <p className="text-sm font-medium text-slate-500">Total Earned</p>
-           </div>
-           <p className="text-2xl font-bold text-slate-900">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.totalCommissionEarned)}</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
-           <div className="flex items-center space-x-3 mb-2">
-               <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
-                   <CheckCircle className="h-5 w-5" />
-               </div>
-               <p className="text-sm font-medium text-slate-500">Paid Out</p>
-           </div>
-           <p className="text-2xl font-bold text-slate-900">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.paidCommission)}</p>
-        </div>
-
-        <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
-           <div className="flex items-center space-x-3 mb-2">
-               <div className="p-2 bg-amber-100 rounded-lg text-amber-600">
-                   <Clock className="h-5 w-5" />
-               </div>
-               <p className="text-sm font-medium text-slate-500">Pending</p>
-           </div>
-           <p className="text-2xl font-bold text-slate-900">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.pendingCommission)}</p>
-        </div>
+        {stats.map((stat) => (
+          <div key={stat.name} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300">
+             <div className="flex items-center justify-between mb-6">
+                 <div className={`p-4 rounded-2xl ${stat.color} bg-opacity-10`}>
+                     <stat.icon className={`h-8 w-8 ${stat.color.replace('bg-', 'text-')}`} />
+                 </div>
+             </div>
+             <div>
+                <p className="text-4xl font-bold text-slate-900 tracking-tight mb-2">{stat.value}</p>
+                <p className="text-base font-semibold text-slate-500">{stat.name}</p>
+             </div>
+          </div>
+        ))}
       </div>
 
-      {/* Payout History */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100">
-            <h3 className="text-lg font-semibold text-slate-900">Payout History</h3>
-        </div>
-        <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-600">
-                <thead className="bg-slate-50 text-slate-500 font-medium uppercase text-xs">
-                    <tr>
-                        <th className="px-6 py-4">Reference ID</th>
-                        <th className="px-6 py-4">Amount</th>
-                        <th className="px-6 py-4">Status</th>
-                        <th className="px-6 py-4">Method</th>
-                        <th className="px-6 py-4">Date Processed</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                    {payouts.length > 0 ? (
-                        payouts.map((payout: any) => (
-                            <tr key={payout._id} className="hover:bg-slate-50 transition-colors">
-                                <td className="px-6 py-4 font-mono text-xs">{payout.reference || payout._id.toString().slice(-8)}</td>
-                                <td className="px-6 py-4 font-medium text-slate-900">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(payout.amount)}</td>
-                                <td className="px-6 py-4">
-                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize 
-                                        ${payout.status === 'paid' ? 'bg-emerald-100 text-emerald-800' : 
-                                          payout.status === 'failed' ? 'bg-red-100 text-red-800' :
-                                          'bg-blue-100 text-blue-800'}`}>
-                                        {payout.status}
-                                    </span>
-                                </td>
-                                <td className="px-6 py-4 capitalize">{payout.method.replace('_', ' ')}</td>
-                                <td className="px-6 py-4 text-slate-400">
-                                    {payout.processedAt ? new Date(payout.processedAt).toLocaleDateString() : '-'}
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <tr>
-                            <td colSpan={5} className="px-6 py-12 text-center text-slate-400">
-                                No payouts recorded yet.
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </div>
+      <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
+          <div className="p-8 border-b border-slate-50">
+              <h3 className="text-lg font-bold text-slate-900">Payout History</h3>
+              <p className="text-sm text-slate-500">Record of all processed payments.</p>
+          </div>
+          <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm text-slate-600">
+                  <thead className="bg-white text-slate-500 font-bold uppercase text-xs tracking-wider">
+                      <tr>
+                          <th className="px-8 py-6 border-b border-slate-50">Reference</th>
+                          <th className="px-8 py-6 border-b border-slate-50">Amount</th>
+                          <th className="px-8 py-6 border-b border-slate-50">Method</th>
+                          <th className="px-8 py-6 border-b border-slate-50">Date</th>
+                          <th className="px-8 py-6 border-b border-slate-50">Status</th>
+                      </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                      {payouts.length > 0 ? (
+                          payouts.map((payout: any) => (
+                              <tr key={payout._id} className="group hover:bg-slate-50/80 transition-colors">
+                                  <td className="px-8 py-5 font-mono text-slate-500 text-xs">{payout.reference || '-'}</td>
+                                  <td className="px-8 py-5 font-bold text-slate-900">
+                                      {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(payout.amount)}
+                                  </td>
+                                  <td className="px-8 py-5 capitalize font-medium">{payout.method.replace('_', ' ')}</td>
+                                  <td className="px-8 py-5 text-slate-400 font-medium">{new Date(payout.processedAt).toLocaleDateString()}</td>
+                                  <td className="px-8 py-5">
+                                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 capitalize">
+                                          {payout.status}
+                                      </span>
+                                  </td>
+                              </tr>
+                          ))
+                      ) : (
+                          <tr>
+                              <td colSpan={5} className="px-8 py-16 text-center text-slate-400 font-medium">
+                                  No payouts received yet.
+                              </td>
+                          </tr>
+                      )}
+                  </tbody>
+              </table>
+          </div>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import { z } from 'zod';
 const DealSchema = z.object({
   clientName: z.string().min(2, "Client name is required"),
   estimatedValue: z.coerce.number().min(1, "Estimated value must be greater than 0"),
+  serviceType: z.enum(['SME', 'Startup', 'Enterprise', 'Individual']),
   notes: z.string().optional(),
 });
 
@@ -24,6 +25,7 @@ export async function registerDeal(prevState: any, formData: FormData) {
   const validatedFields = DealSchema.safeParse({
     clientName: formData.get('clientName'),
     estimatedValue: formData.get('estimatedValue'),
+    serviceType: formData.get('serviceType'),
     notes: formData.get('notes'),
   });
 
@@ -34,7 +36,7 @@ export async function registerDeal(prevState: any, formData: FormData) {
     };
   }
 
-  const { clientName, estimatedValue, notes } = validatedFields.data;
+  const { clientName, estimatedValue, serviceType, notes } = validatedFields.data;
 
   try {
     await dbConnect();
@@ -49,6 +51,7 @@ export async function registerDeal(prevState: any, formData: FormData) {
       partnerId: session.user.id,
       clientName,
       estimatedValue,
+      serviceType,
       notes,
       dealStatus: 'registered',
       commissionRate: 0.10, // Default, admin can change
@@ -70,4 +73,13 @@ export async function registerDeal(prevState: any, formData: FormData) {
 
   revalidatePath('/partner/dashboard/deals');
   redirect('/partner/dashboard/deals');
+}
+
+export async function completeOnboarding() {
+  const session = await auth();
+  if (!session?.user?.id) return;
+
+  await dbConnect();
+  await Partner.findByIdAndUpdate(session.user.id, { hasCompletedOnboarding: true });
+  revalidatePath('/partner/dashboard');
 }

@@ -100,7 +100,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
+export default function ProjectPage(props: { params: Promise<{ id: string }> }) {
+  const params = React.use(props.params);
   const project = projects.find((p) => p.id === params.id);
 
   if (!project) {

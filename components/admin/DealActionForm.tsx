@@ -8,6 +8,7 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [finalValue, setFinalValue] = useState(deal.finalValue || deal.estimatedValue);
+  const [commissionRate, setCommissionRate] = useState(deal.commissionRate || 0.10);
   const [status, setStatus] = useState(deal.dealStatus);
   
   // Payment recording state
@@ -19,7 +20,7 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
       e.preventDefault();
       setLoading(true);
       try {
-          await updateDealStatus(deal._id, status, Number(finalValue));
+          await updateDealStatus(deal._id, status, Number(finalValue), Number(commissionRate));
           router.refresh();
       } catch (err) {
           console.error(err);
@@ -69,6 +70,18 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
                     type="number" 
                     value={finalValue} 
                     onChange={(e) => setFinalValue(e.target.value)}
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                />
+            </div>
+            <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Commission Rate (0.10 = 10%)</label>
+                <input 
+                    type="number" 
+                    step="0.01"
+                    min="0"
+                    max="1"
+                    value={commissionRate} 
+                    onChange={(e) => setCommissionRate(e.target.value)}
                     className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
             </div>

@@ -20,7 +20,18 @@ export interface IPartner extends Document {
     totalCommissionEarned: number;
     pendingCommission: number;
     paidCommission: number;
+    paidDealsSinceLastPayout: number;
   };
+  hasReceivedAcademyBonus: boolean;
+  hasCompletedOnboarding: boolean;
+  partnerProgress: {
+    courseId: string;
+    completedLessons: string[];
+    progressPercentage: number;
+    isCompleted: boolean;
+    examScore?: number;
+    examAttempts?: number;
+  }[];
   createdAt: Date;
   updatedAt: Date;
   verificationToken?: string;
@@ -61,11 +72,22 @@ const PartnerSchema: Schema = new Schema({
     totalCommissionEarned: { type: Number, default: 0 },
     pendingCommission: { type: Number, default: 0 },
     paidCommission: { type: Number, default: 0 },
+    paidDealsSinceLastPayout: { type: Number, default: 0 },
   },
+  hasReceivedAcademyBonus: { type: Boolean, default: false },
   verificationToken: String,
   verificationTokenExpiry: Date,
   resetPasswordToken: String,
   resetPasswordTokenExpiry: Date,
+  hasCompletedOnboarding: { type: Boolean, default: false },
+  partnerProgress: [{
+    courseId: String,
+    completedLessons: [String],
+    progressPercentage: Number,
+    isCompleted: Boolean,
+    examScore: Number,
+    examAttempts: { type: Number, default: 0 },
+  }],
 }, { timestamps: true });
 
 // Prevent recompilation of model in development
