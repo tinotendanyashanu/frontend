@@ -6,18 +6,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PlayCircle, CheckCircle, BarChart } from 'lucide-react';
 
-async function getPartnerProgress(email: string) {
-    await dbConnect();
-    const partner = await Partner.findOne({ email }).lean() as any;
-    return partner?.partnerProgress || [];
-}
+
 
 export default async function AcademyPage() {
   const session = await auth();
   if (!session?.user?.email) return null;
 
   const courses = await getCourses();
-  const progressList = await getPartnerProgress(session.user.email);
+  await dbConnect();
+  const partner = await Partner.findOne({ email: session.user.email }).select('partnerType partnerProgress').lean() as any;
+  const progressList = partner?.partnerProgress || [];
+  const partnerType = partner?.partnerType || 'standard';
+
+  const filteredCourses = courses.filter((course: any) => {
+      if (!course.targetAudience || course.targetAudience.includes('all')) return true;
+      return course.targetAudience.includes(partnerType);
+  });
 
   return (
     <div className="space-y-8">
@@ -27,7 +31,7 @@ export default async function AcademyPage() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course: any) => {
+          {filteredCourses.map((course: any) => {
               const progress = progressList.find((p: any) => p.courseId === course._id.toString());
               const percent = progress?.progressPercentage || 0;
               const isCompleted = progress?.isCompleted;

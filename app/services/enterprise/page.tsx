@@ -56,7 +56,7 @@ export default function EnterprisePage() {
                             <h3 className="text-2xl font-bold text-slate-900">Cloud-Native Architecture</h3>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed pl-14 border-l-2 border-slate-200 group-hover:border-indigo-500 transition-colors duration-300">
-                            We re-architect critical workflows using microservices and serverless patterns. This decouples monolithic dependencies, allowing teams to ship faster.
+                            We re-architect critical workflows into modular, independently deployable components — removing bottlenecks and allowing your teams to move faster with less risk.
                         </p>
                     </div>
 
@@ -67,7 +67,7 @@ export default function EnterprisePage() {
                             <h3 className="text-2xl font-bold text-slate-900">AI Governance & Deployment</h3>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed pl-14 border-l-2 border-slate-200 group-hover:border-indigo-500 transition-colors duration-300">
-                            We deploy private, secure AI models within your VPC. Your data never leaves your control, enabling you to leverage LLMs for internal knowledge management safely.
+                            We deploy private, secure AI systems within your existing infrastructure. Your data never leaves your control — enabling intelligent internal knowledge management without compliance risk.
                         </p>
                     </div>
                 </div>

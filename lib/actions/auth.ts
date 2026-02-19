@@ -9,12 +9,24 @@ import { SignupSchema } from '@/lib/schemas';
 import { z } from 'zod';
 import { sendEmail, EmailTemplates } from '@/lib/email';
 
+
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', { ...Object.fromEntries(formData), redirectTo: '/partner/dashboard' });
+    const email = formData.get('email') as string;
+    await dbConnect();
+    const user = await Partner.findOne({ email });
+    
+    // Default redirect
+    let redirectTo = '/partner/dashboard';
+    
+    if (user && user.role === 'admin') {
+        redirectTo = '/admin';
+    }
+
+    await signIn('credentials', { ...Object.fromEntries(formData), redirectTo });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -44,6 +56,7 @@ export async function registerPartner(prevState: any, formData: FormData) {
     email: formData.get('email'),
     password: formData.get('password'),
     companyName: formData.get('companyName'),
+    partnerType: formData.get('partnerType'),
   });
 
   if (!validatedFields.success) {
@@ -65,6 +78,18 @@ export async function registerPartner(prevState: any, formData: FormData) {
       };
     }
 
+    const { partnerType } = validatedFields.data;
+    let referralCode = undefined;
+    let tier = 'referral';
+
+    if (partnerType === 'creator') {
+        tier = 'creator';
+        // Generate a base slug from name
+        const slugBase = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const randomSuffix = crypto.randomBytes(3).toString('hex');
+        referralCode = `leo-${slugBase}-${randomSuffix}`;
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationTokenExpiry = new Date(Date.now() + 3600 * 1000); // 1 hour
@@ -75,8 +100,10 @@ export async function registerPartner(prevState: any, formData: FormData) {
       companyName,
       password: hashedPassword,
       role: 'partner',
+      partnerType,
+      tier,
+      referralCode,
       status: 'pending', 
-      tier: 'referral',
       verificationToken,
       verificationTokenExpiry,
     });

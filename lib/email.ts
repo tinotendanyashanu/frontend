@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = 'Leo The Tech Guy <noreply@leothetechguy.com>'; // Verified domain
+const FROM_EMAIL = 'LeoTheTechGuy <noreply@leothetechguy.com>'; // Verified domain
 const ADMIN_EMAIL = 'contact@leothetechguy.com'; 
 
 const LOGO_URL = 'https://leothetechguy.com/logo_transparent.png'; // Using smaller, transparent logo for better email compatibility

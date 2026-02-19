@@ -12,18 +12,19 @@ import {
   Shield,
   LogOut,
   Settings,
-  GraduationCap
+  GraduationCap,
+  MousePointer2
 } from 'lucide-react';
 import { handleSignOut } from '@/lib/actions/auth';
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Overview', href: '/partner/dashboard', icon: LayoutDashboard },
-  { name: 'Deals', href: '/partner/dashboard/deals', icon: Briefcase },
-  { name: 'Earnings', href: '/partner/dashboard/earnings', icon: DollarSign },
-  { name: 'Academy', href: '/partner/dashboard/academy', icon: GraduationCap },
-  { name: 'Tier Progress', href: '/partner/dashboard/tier', icon: Award },
-  // { name: 'Resources', href: '/partner/dashboard/resources', icon: FolderOpen },
+  { name: 'Overview', href: '/partner/dashboard', icon: LayoutDashboard, roles: ['standard', 'creator'] },
+  { name: 'Leads', href: '/partner/dashboard/leads', icon: MousePointer2, roles: ['creator'] },
+  { name: 'Deals', href: '/partner/dashboard/deals', icon: Briefcase, roles: ['standard', 'creator'] }, // Creators can see deals too? User says yes.
+  { name: 'Earnings', href: '/partner/dashboard/earnings', icon: DollarSign, roles: ['standard', 'creator'] },
+  { name: 'Academy', href: '/partner/dashboard/academy', icon: GraduationCap, roles: ['standard', 'creator'] },
+  { name: 'Tier Progress', href: '/partner/dashboard/tier', icon: Award, roles: ['standard'] },
 ];
 
 const secondaryNavigation = [
@@ -31,7 +32,7 @@ const secondaryNavigation = [
   { name: 'Settings', href: '/partner/dashboard/settings', icon: Settings },
 ];
 
-export default function Sidebar({ user }: { user: any }) {
+export default function Sidebar({ user, partnerType = 'standard' }: { user: any, partnerType?: string }) {
   const pathname = usePathname();
 
   return (
@@ -66,7 +67,7 @@ export default function Sidebar({ user }: { user: any }) {
       </div>
 
       <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
-        {navigation.map((item) => {
+        {navigation.filter(item => !item.roles || item.roles.includes(partnerType)).map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link

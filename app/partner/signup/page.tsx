@@ -47,6 +47,26 @@ export default function SignupPage() {
             </div>
 
             <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Partner Type</label>
+              <div className="grid grid-cols-1 gap-3">
+                <label className="relative flex items-start p-3 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                  <input type="radio" name="partnerType" value="standard" defaultChecked className="mt-1 mr-3 text-emerald-600 focus:ring-emerald-500" />
+                  <div>
+                    <span className="block text-sm font-medium text-slate-900">Business / Agency</span>
+                    <span className="block text-xs text-slate-500 mt-0.5">For consultants and agencies referring clients.</span>
+                  </div>
+                </label>
+                <label className="relative flex items-start p-3 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50">
+                  <input type="radio" name="partnerType" value="creator" className="mt-1 mr-3 text-emerald-600 focus:ring-emerald-500" />
+                  <div>
+                    <span className="block text-sm font-medium text-slate-900">Content Creator</span>
+                    <span className="block text-xs text-slate-500 mt-0.5">For YouTubers, bloggers, and social media influencers.</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
               <input 
                 type="email" 

@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Mail, MapPin, Twitter, Instagram, Facebook, Send, Loader2, CheckCircle, AlertCircle, Youtube } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, Twitter, Instagram, Facebook, Youtube, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [showCustomInitiative, setShowCustomInitiative] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,11 +17,17 @@ export default function Contact() {
     setError('');
 
     const formData = new FormData(e.currentTarget);
+    
+    let initiative = formData.get('initiative');
+    if (initiative === 'other') {
+      initiative = formData.get('custom_initiative');
+    }
+
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
       project: formData.get('project'),
-      budget: formData.get('budget'),
+      initiative: initiative,
       timeline: formData.get('timeline'),
       message: formData.get('message'),
     };
@@ -57,7 +64,7 @@ export default function Contact() {
             Let’s Talk
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed font-normal">
-            Have a project in mind? Want to collaborate? Need guidance? Or just want to discuss an idea? I’m open to it. I reply fast, and I’m easy to talk to.
+            Share your goals and I'll respond with clarity. Every engagement begins with a conversation.
           </p>
         </div>
       </section>
@@ -126,14 +133,29 @@ export default function Contact() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="budget" className="block text-sm font-medium text-slate-700 mb-2">Budget (optional)</label>
-                      <select id="budget" name="budget" className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 outline-none transition-all">
-                        <option value="">Select a range</option>
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="enterprise">Enterprise</option>
+                      <label htmlFor="initiative" className="block text-sm font-medium text-slate-700 mb-2">Initiative Type</label>
+                      <select 
+                        id="initiative" 
+                        name="initiative" 
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 outline-none transition-all"
+                        onChange={(e) => setShowCustomInitiative(e.target.value === 'other')}
+                      >
+                        <option value="">What type of initiative?</option>
+                        <option value="focused">Focused Project</option>
+                        <option value="growth">Growth Initiative</option>
+                        <option value="upgrade">System Upgrade</option>
+                        <option value="partnership">Long-Term Partnership</option>
+                        <option value="enterprise">Enterprise-Level Transformation</option>
+                        <option value="other">Other</option>
                       </select>
+                      {showCustomInitiative && (
+                        <input 
+                          type="text" 
+                          name="custom_initiative" 
+                          placeholder="Please specify..." 
+                          className="mt-3 w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#0071e3] focus:ring-2 focus:ring-[#0071e3]/20 outline-none transition-all animate-in fade-in slide-in-from-top-2"
+                        />
+                      )}
                     </div>
                     <div>
                       <label htmlFor="timeline" className="block text-sm font-medium text-slate-700 mb-2">Timeline</label>
@@ -197,7 +219,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-slate-500 font-medium mb-1">Location</p>
-                    <p className="text-lg text-slate-900 font-semibold">Binary</p>
+                    <p className="text-lg text-slate-900 font-semibold">Warsaw, Poland<br />Serving clients worldwide</p>
                   </div>
                 </div>
               </div>
@@ -214,6 +236,9 @@ export default function Contact() {
                 </a>
                 <a href="https://facebook.com/Leothetechguy" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white text-slate-400 transition-all duration-300" aria-label="Follow on Facebook">
                   <Facebook className="w-6 h-6" />
+                </a>
+                <a href="https://www.youtube.com/@LeoTheTechGuy" className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-[#FF0000] hover:border-[#FF0000] hover:text-white text-slate-400 transition-all duration-300" aria-label="Follow on YouTube">
+                  <Youtube className="w-6 h-6" />
                 </a>
               </div>
             </div>

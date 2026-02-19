@@ -126,7 +126,32 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Slide 5: Partner/Footer */}
+      {/* Slide 5: How I Work - New Section */}
+      <section className="relative h-screen w-full snap-start overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0 z-0 opacity-60">
+           <Prism animationType="hover" hueShift={0.2} hoverStrength={1} scale={4} suspendWhenOffscreen={true} />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-0 pointer-events-none" />
+
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
+          <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 drop-shadow-2xl">
+            How I Work
+          </h2>
+          <p className="text-xl md:text-2xl text-slate-200 mb-10 font-light tracking-wide max-w-2xl drop-shadow-md">
+             Transparent, structured, and outcome-driven.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Link 
+              href="/how-i-work" 
+              className="px-10 py-3.5 bg-white text-black rounded-full font-medium sm:min-w-[200px] hover:bg-slate-200 transition-colors flex items-center justify-center group"
+            >
+              View Process <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Slide 6: Partner/Footer */}
       <section className="relative h-screen w-full snap-start overflow-hidden bg-slate-950 flex flex-col">
         <div className="flex-grow flex items-center justify-center relative">
             {/* Subtle background glow */}

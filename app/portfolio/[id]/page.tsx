@@ -100,8 +100,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage(props: { params: Promise<{ id: string }> }) {
-  const params = React.use(props.params);
+export default async function ProjectPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const project = projects.find((p) => p.id === params.id);
 
   if (!project) {
@@ -110,84 +110,7 @@ export default function ProjectPage(props: { params: Promise<{ id: string }> }) 
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className={`relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 lg:px-8 max-w-7xl mx-auto`}>
-        <div className="mb-8">
-            <Link href="/portfolio" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-[#4C8BFF] transition-colors">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Portfolio
-            </Link>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 mb-6">
-                    {project.title}
-                </h1>
-                <p className="text-xl text-slate-600 leading-relaxed mb-8">
-                    {project.description}
-                </p>
-                <div className="flex flex-wrap gap-3 mb-8">
-                    {project.techStack.map((tech, i) => (
-                        <span key={i} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium">
-                            {tech}
-                        </span>
-                    ))}
-                </div>
-            </div>
-            <div className={`aspect-video rounded-2xl ${project.heroImage} flex items-center justify-center shadow-2xl`}>
-                <span className="text-white/50 text-2xl font-bold">Project Screenshot / Demo</span>
-            </div>
-        </div>
-      </section>
-
-      {/* Content Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-                <div>
-                    <h2 className="text-2xl font-bold text-slate-900 mb-4">The Challenge</h2>
-                    <p className="text-slate-600 leading-relaxed">
-                        {project.challenge}
-                    </p>
-                </div>
-                <div>
-                    <h2 className="text-2xl font-bold text-slate-900 mb-4">The Solution</h2>
-                    <p className="text-slate-600 leading-relaxed">
-                        {project.solution}
-                    </p>
-                </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm mb-16">
-                <h2 className="text-2xl font-bold text-slate-900 mb-6">Key Features</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {project.features.map((feature, i) => (
-                        <div key={i} className="flex items-start">
-                            <CheckCircle className="w-5 h-5 text-[#4C8BFF] mr-3 mt-0.5 flex-shrink-0" />
-                            <span className="text-slate-700">{feature}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div className="text-center">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">The Outcome</h2>
-                <p className="text-xl text-slate-600 mb-12">
-                    {project.outcome}
-                </p>
-                <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-[#4C8BFF] rounded-lg shadow-lg shadow-blue-500/30 hover:bg-blue-600 hover:shadow-blue-500/40 transition-all duration-200">
-                    Start a Project Like This
-                    <ArrowUpRight className="ml-2 w-5 h-5" />
-                </Link>
-            </div>
-
-        </div>
-      </section>
-
-      <Footer />
+       <div>Test Page for {project.title}</div>
     </main>
   );
 }
