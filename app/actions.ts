@@ -18,9 +18,12 @@ export async function submitContactForm(prevState: ContactState, formData: FormD
   // Simple in-memory rate limit keyed by email (fallback when no per-request context)
   const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000; // 5 minutes
   const RATE_LIMIT_MAX = 3;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!(global as any)._contactRateLimiter) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (global as any)._contactRateLimiter = new Map<string, number[]>();
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const limiter: Map<string, number[]> = (global as any)._contactRateLimiter;
 
   // Honeypot to catch bots

@@ -1,28 +1,32 @@
 import { auth } from '@/auth';
-import { getCourse } from '@/lib/actions/academy';
-import Partner from '@/models/Partner';
 import dbConnect from '@/lib/mongodb';
+import CourseModel from '@/models/Course';
+import { getCourseProgress } from '@/lib/actions/academy';
+import AcademyCourseClient from '@/components/academy/AcademyCourseClient';
+import { redirect, notFound } from 'next/navigation';
+import { Course } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, PlayCircle, CheckCircle, Lock, Award } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
-async function getPartnerProgress(email: string) {
-    await dbConnect();
-    const partner = await Partner.findOne({ email }).lean() as any;
-    return partner?.partnerProgress || [];
+export const dynamic = 'force-dynamic';
+
+async function getCourse(slug: string) {
+  await dbConnect();
+  const course = await CourseModel.findOne({ slug }).lean() as unknown as Course;
+  return course;
 }
 
 export default async function CourseDetailPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;
   const session = await auth();
-  if (!session?.user?.email) return null;
+  if (!session?.user?.email) redirect('/login');
 
   const course = await getCourse(params.slug);
   if (!course) notFound();
 
   const progressList = await getPartnerProgress(session.user.email);
-  const progress = progressList.find((p: any) => p.courseId === course._id.toString());
+  const progress = progressList.find((p) => p.courseId === course._id.toString());
   const completedLessons = progress?.completedLessons || [];
 
   return (
@@ -52,7 +56,7 @@ export default async function CourseDetailPage(props: { params: Promise<{ slug: 
           <div className="p-8">
               <h3 className="text-xl font-bold text-slate-900 mb-6">Course Content</h3>
               <div className="space-y-4">
-                  {course.lessons.map((lesson: any, index: number) => {
+                  {course.lessons.map((lesson, index) => {
                       const isCompleted = completedLessons.includes(lesson.slug);
                        // Simple logic: First lesson always unlocked, others unlock if previous completed
                       const isLocked = index > 0 && !completedLessons.includes(course.lessons[index - 1].slug);

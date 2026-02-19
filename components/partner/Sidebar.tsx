@@ -7,8 +7,6 @@ import {
   DollarSign, 
   Briefcase, 
   Award, 
-  BookOpen, 
-  FolderOpen,
   Shield,
   LogOut,
   Settings,
@@ -32,7 +30,9 @@ const secondaryNavigation = [
   { name: 'Settings', href: '/partner/dashboard/settings', icon: Settings },
 ];
 
-export default function Sidebar({ user, partnerType = 'standard' }: { user: any, partnerType?: string }) {
+import { Partner } from '@/types';
+
+export default function Sidebar({ user, partnerType = 'standard' }: { user: Partner, partnerType?: string }) {
   const pathname = usePathname();
 
   return (

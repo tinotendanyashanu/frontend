@@ -1,8 +1,8 @@
 'use client';
 
-import { Search, Bell, User } from 'lucide-react';
+import { Search, Bell } from 'lucide-react';
 
-export default function AdminHeader({ user }: { user: any }) {
+export default function AdminHeader({ user }: { user: { name?: string | null, email?: string | null, image?: string | null } }) {
   return (
     <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 h-16 flex items-center px-8 justify-between sticky top-0 z-20">
       {/* Global Search */}

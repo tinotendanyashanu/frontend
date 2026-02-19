@@ -379,7 +379,7 @@ export function getServiceById(id: string): Service | undefined {
 }
 
 export function getServiceIcon(iconName: string) {
-  const icons: { [key: string]: any } = {
+  const icons: { [key: string]: React.ElementType } = {
     BrainCircuit,
     Code2,
     ShieldCheck,

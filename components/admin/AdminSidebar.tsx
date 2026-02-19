@@ -7,7 +7,6 @@ import {
   Users, 
   Briefcase, 
   CreditCard, 
-  Settings,
   ShieldAlert,
   LogOut,
   MessageSquare

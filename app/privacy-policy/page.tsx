@@ -3,23 +3,26 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Link from 'next/link';
 
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      <div className="pt-32 pb-24 px-6 lg:px-8 max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Privacy Policy</h1>
-        <p className="text-slate-500 mb-12">Last Updated: February 19, 2026</p>
+      <div className="max-w-4xl mx-auto px-6 lg:px-8 py-12">
+        <h1 className="text-4xl font-bold mb-8 text-slate-900">Privacy Policy</h1>
         
-        <div className="prose prose-slate prose-lg max-w-none space-y-12">
+        <div className="prose prose-slate max-w-none">
+          <p className="mb-4">Last Updated: {new Date().toLocaleDateString()}</p>
+          
+          <p className="mb-6">
+            At Leo the Tech Guy (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;), we respect your privacy and are committed to protecting it through our compliance with this policy.
+          </p>
           
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mb-4">1. Introduction</h2>
             <p className="text-slate-600 leading-relaxed">
-              At Leo Systems ("LeoTheTechGuy", "we", "us", or "our"), we value your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [leothetechguy.com], use our services, or join our Partner Network.
+              At Leo Systems (&quot;LeoTheTechGuy&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), we value your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [leothetechguy.com], use our services, or join our Partner Network.
             </p>
           </section>
 

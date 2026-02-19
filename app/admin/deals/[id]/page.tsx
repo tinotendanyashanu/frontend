@@ -1,6 +1,7 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
 import Deal from '@/models/Deal';
+import { IPartner } from '@/models/Partner';
 import DealActionForm from '@/components/admin/DealActionForm';
 import Link from 'next/link';
 import { ArrowLeft, User, DollarSign, Calendar } from 'lucide-react';
@@ -16,7 +17,7 @@ export default async function AdminDealDetailsPage(props: { params: Promise<{ id
   
   if (!deal) return <div>Deal not found</div>;
   
-  const partner = deal.partnerId as any;
+  const partner = deal.partnerId as unknown as IPartner;
 
   return (
     <div className="max-w-4xl mx-auto">

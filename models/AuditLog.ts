@@ -5,18 +5,18 @@ export interface IAuditLog extends Document {
   entityId: mongoose.Types.ObjectId;
   action: string;
   performedBy: mongoose.Types.ObjectId; // User ID of admin or partner
-  metadata?: Record<string, any>; // Flexible JSON for details
+  metadata?: Record<string, unknown>; // Flexible JSON for details
   createdAt: Date;
 }
 
 const AuditLogSchema: Schema = new Schema({
-  entityType: { 
-    type: String, 
+  entityType: {
+    type: String,
     enum: ['deal', 'partner', 'payout'],
-    required: true 
+    required: true
   },
   entityId: { type: Schema.Types.ObjectId, required: true },
-  action: { type: String, required: true },
+  details: { type: Schema.Types.Mixed, required: true },
   performedBy: { type: Schema.Types.ObjectId, ref: 'Partner', required: true },
   metadata: { type: Schema.Types.Mixed },
 }, { timestamps: { createdAt: true, updatedAt: false } }); // Only createdAt needed for logs

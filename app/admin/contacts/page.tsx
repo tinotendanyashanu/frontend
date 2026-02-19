@@ -1,7 +1,7 @@
 
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Contact from '@/models/Contact';
+import Contact, { IContact } from '@/models/Contact';
 import Link from 'next/link';
 import ContactsClient from '@/components/admin/ContactsClient';
 import { redirect } from 'next/navigation';
@@ -22,11 +22,13 @@ export default async function AdminContactsPage() {
   const contacts = await getContacts();
   
   // Transform data for table
-  const tableData = contacts.map((contact: any) => ({
+  const tableData = contacts.map((contact: IContact) => ({
       ...contact,
       id: contact._id.toString(),
       _id: contact._id.toString(),
       createdAtString: new Date(contact.createdAt).toLocaleDateString() + ' ' + new Date(contact.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      budget: contact.budget || 'N/A',
+      timeline: contact.timeline || 'N/A',
       budgetFormatted: contact.budget ? contact.budget : 'N/A',
   }));
 

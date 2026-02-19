@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { updateDealStatus, recordCommissionPayment } from '@/lib/actions/admin';
 import { useRouter } from 'next/navigation';
-import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+import { CheckCircle, XCircle } from 'lucide-react';
 
-export default function DealActionForm({ deal, partnerName }: { deal: any, partnerName: string }) {
+import { Deal } from '@/types';
+
+export default function DealActionForm({ deal, partnerName }: { deal: Deal, partnerName: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [finalValue, setFinalValue] = useState(deal.finalValue || deal.estimatedValue);
@@ -30,9 +32,13 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
           await updateDealStatus(deal._id, status, Number(finalValue), Number(commissionRate));
           setSuccess('Deal status updated successfully');
           router.refresh();
-      } catch (err: any) {
+      } catch (err: unknown) {
           console.error(err);
-          setError(err.message || 'Failed to update status');
+          if (err instanceof Error) {
+            setError(err.message || 'Failed to update status');
+          } else {
+            setError('Failed to update status');
+          }
       } finally {
           setLoading(false);
       }
@@ -47,9 +53,13 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
           await recordCommissionPayment(deal._id, Number(paymentAmount), paymentMethod, paymentRef);
           setSuccess('Commission payment recorded successfully');
           router.refresh();
-      } catch (err: any) {
+      } catch (err: unknown) {
           console.error(err);
-          setError(err.message || 'Failed to record payment');
+          if (err instanceof Error) {
+             setError(err.message || 'Failed to record payment');
+          } else {
+             setError('Failed to record payment');
+          }
       } finally {
           setLoading(false);
       }
@@ -100,7 +110,7 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
                 <input 
                     type="number" 
                     value={finalValue} 
-                    onChange={(e) => setFinalValue(e.target.value)}
+                    onChange={(e) => setFinalValue(Number(e.target.value))}
                     className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
             </div>
@@ -112,7 +122,7 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
                     min="0"
                     max="1"
                     value={commissionRate} 
-                    onChange={(e) => setCommissionRate(e.target.value)}
+                    onChange={(e) => setCommissionRate(Number(e.target.value))}
                     className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
             </div>
@@ -140,7 +150,7 @@ export default function DealActionForm({ deal, partnerName }: { deal: any, partn
                     <input 
                         type="number" 
                         value={paymentAmount} 
-                        onChange={(e) => setPaymentAmount(e.target.value)}
+                        onChange={(e) => setPaymentAmount(Number(e.target.value))}
                         className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                 </div>

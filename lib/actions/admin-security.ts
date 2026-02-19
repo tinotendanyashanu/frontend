@@ -52,8 +52,11 @@ export async function adminSendPasswordReset(partnerId: string) {
         });
 
         return { success: true, message: `Password reset link sent to ${partner.email}` };
-    } catch (error: any) {
-        console.error('Admin Password Reset Error:', error);
-        return { success: false, message: error.message || 'Failed to send reset link.' };
+    } catch (err: unknown) {
+        console.error('Admin Password Reset Error:', err);
+        if (err instanceof Error) {
+            return { success: false, message: err.message };
+        }
+        return { success: false, message: 'An unknown error occurred.' };
     }
 }

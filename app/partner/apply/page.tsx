@@ -41,8 +41,12 @@ export default function PartnerApply() {
       }
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unexpected error occurred');
+      }
     } finally {
       setLoading(false);
     }
@@ -59,7 +63,7 @@ export default function PartnerApply() {
             </div>
             <h1 className="text-3xl font-bold text-slate-900 mb-4">Application Received</h1>
             <p className="text-gray-500 mb-8 text-lg">
-              Thanks for applying to the Partner Network. We'll review your application and get back to you shortly.
+              Thanks for applying to the Partner Network. We&apos;ll review your application and get back to you shortly.
             </p>
             <Link href="/" className="inline-flex justify-center items-center px-6 py-3 text-base font-bold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all">
               Back to Home

@@ -14,7 +14,7 @@ const BankDetailsSchema = z.object({
   iban: z.string().optional(),
 });
 
-export async function updateBankDetails(prevState: any, formData: FormData) {
+export async function updateBankDetails(prevState: unknown, formData: FormData) {
   const session = await auth();
   if (!session?.user?.email) {
     return { message: 'Unauthorized', success: false };

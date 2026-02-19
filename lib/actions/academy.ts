@@ -4,8 +4,8 @@ import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
 import Course from '@/models/Course';
 import Partner from '@/models/Partner';
+import { Partner as IPartner } from '@/types';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 export async function submitExam(courseId: string, answers: number[]) {
   const session = await auth();
@@ -22,7 +22,7 @@ export async function submitExam(courseId: string, answers: number[]) {
 
   // Calculate Score
   let correctCount = 0;
-  course.exam.questions.forEach((q: any, index: number) => {
+  course.exam.questions.forEach((q, index) => {
     if (answers[index] === q.correctAnswer) {
       correctCount++;
     }
@@ -38,7 +38,7 @@ export async function submitExam(courseId: string, answers: number[]) {
     return { error: 'Partner not found' };
   }
   
-  const progressIndex = partner.partnerProgress.findIndex((p: any) => p.courseId === courseId);
+  const progressIndex = partner.partnerProgress.findIndex((p) => p.courseId === courseId);
   
   if (progressIndex > -1) {
     partner.partnerProgress[progressIndex].examScore = score;
@@ -61,13 +61,12 @@ export async function submitExam(courseId: string, answers: number[]) {
   // Check for All Courses Completed Bonus
   if (passed && !partner.hasReceivedAcademyBonus) {
       const allCourses = await Course.find({ published: true });
-      const completedCount = partner.partnerProgress.filter((p: any) => p.isCompleted).length;
       // Note: We just updated/pushed the current course, so if count matches, they are done.
       // But we need to be careful if partnerProgress has duplicates or old data.
       // Ideally we check if every published course ID is present and completed in partnerProgress.
       
-      const allCompleted = allCourses.every((c: any) => 
-          partner.partnerProgress.some((p: any) => p.courseId === c._id.toString() && p.isCompleted)
+      const allCompleted = allCourses.every((c) => 
+          partner.partnerProgress.some((p) => p.courseId === c._id.toString() && p.isCompleted)
       );
 
       if (allCompleted) {
@@ -97,7 +96,7 @@ export async function completeLesson(courseId: string, lessonSlug: string) {
   const course = await Course.findById(courseId);
   if (!course) return { error: 'Course not found' };
 
-  const progressIndex = partner.partnerProgress.findIndex((p: any) => p.courseId === courseId);
+  const progressIndex = partner.partnerProgress.findIndex((p) => p.courseId === courseId);
 
   if (progressIndex > -1) {
     if (!partner.partnerProgress[progressIndex].completedLessons.includes(lessonSlug)) {
@@ -139,6 +138,12 @@ export async function getCourses() {
 export async function getCourse(slug: string) {
   await dbConnect();
   return await Course.findOne({ slug, published: true }).lean();
+}
+
+export async function getPartnerProgress(email: string) {
+  await dbConnect();
+  const partner = await Partner.findOne({ email }).lean() as unknown as IPartner;
+  return partner?.partnerProgress || [];
 }
 
 import { courses as initialCourses } from '@/lib/data/academy-content';

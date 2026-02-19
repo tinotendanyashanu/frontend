@@ -47,8 +47,11 @@ export default function LoginPage() {
 
             <LoginButton />
             
-            <p className="text-center text-sm text-slate-500 mt-6">
-              Don't have an account? <Link href="/partner/signup" className="text-emerald-600 hover:text-emerald-700 font-medium">Apply here</Link>
+            <p className="mt-2 text-sm text-slate-600">
+              Don&apos;t have an account?{' '}
+              <Link href="/contact" className="font-medium text-emerald-600 hover:text-emerald-500">
+                Apply to become a partner
+              </Link>
             </p>
           </form>
         </div>
@@ -59,7 +62,7 @@ export default function LoginPage() {
         <div className="relative z-10 max-w-md">
           <h2 className="text-4xl font-bold mb-6">Complete transparency.</h2>
           <p className="text-lg text-slate-300 leading-relaxed">
-            "The Leo Systems partner dashboard gives us real-time visibility into our referrals and commissions. It's the most professional agency program we've worked with."
+            &quot;The Leo Systems partner dashboard gives us real-time visibility into our referrals and commissions. It&apos;s the most professional agency program we&apos;ve worked with.&quot;
           </p>
         </div>
         

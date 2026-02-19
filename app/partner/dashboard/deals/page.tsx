@@ -1,23 +1,23 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Deal from '@/models/Deal';
+import DealModel from '@/models/Deal';
+import PartnerModel from '@/models/Partner';
 import Link from 'next/link';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search } from 'lucide-react'; // Kept Search, changed Plus to PlusCircle in the edit, but Plus is used in the JSX. I will keep Plus as it's used.
+import { Deal, Partner } from '@/types';
 
-async function getDeals(userId: string, query: string, status: string) {
+async function getDeals(email: string) {
   await dbConnect();
-  const filter: any = { partnerId: userId };
-  
-  if (status && status !== 'all') {
-      filter.dealStatus = status;
-  }
-  
-  if (query) {
-      filter.clientName = { $regex: query, $options: 'i' };
-  }
+  const partner = await PartnerModel.findOne({ email }).lean() as unknown as Partner;
+  if (!partner) return null;
 
-  return Deal.find(filter).sort({ createdAt: -1 }).lean();
+  const deals = await DealModel.find({ partnerId: partner._id })
+    .sort({ createdAt: -1 })
+    .lean() as unknown as Deal[];
+    
+  return deals;
 }
+
 
 export default async function DealsPage(props: {
     searchParams: Promise<{ q?: string; status?: string }>;
@@ -92,7 +92,7 @@ export default async function DealsPage(props: {
                 </thead>
                 <tbody className="divide-y divide-slate-50">
                     {deals.length > 0 ? (
-                        deals.map((deal: any) => (
+                        deals.map((deal) => (
                             <tr key={deal._id} className="group hover:bg-slate-50/80 transition-colors">
                                 <td className="px-8 py-5 font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">{deal.clientName}</td>
                                 <td className="px-8 py-5 font-medium">

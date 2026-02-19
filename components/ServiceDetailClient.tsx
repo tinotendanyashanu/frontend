@@ -7,7 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Service, getServiceIcon } from '@/data/services';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, ChevronDown } from 'lucide-react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 // Animations
 const fadeInUp = {
@@ -137,7 +137,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">What's Included</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">What&apos;s Included</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
               Everything you need to {service.outcome.toLowerCase()}
             </p>
@@ -176,7 +176,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
                 Why this <span style={{ color: service.accentColor }}>matters.</span>
               </h2>
               <p className="text-xl text-slate-400 leading-relaxed mb-12">
-                It's not just about features. It's about the tangible impact on your business growth and efficiency.
+                It&apos;s not just about features. It&apos;s about the tangible impact on your business growth and efficiency.
               </p>
               
               <div className="space-y-8">
@@ -306,7 +306,7 @@ export default function ServiceDetailClient({ service }: { service: Service }) {
             Ready to start?
           </h2>
           <p className="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
-            Let's discuss how {service.title} can transform your business.
+            Let&apos;s discuss how {service.title} can transform your business.
           </p>
           <Link 
             href="/contact" 

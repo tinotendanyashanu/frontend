@@ -14,7 +14,22 @@ export default function EngagementModels() {
 
       {/* Hero Section — Full-width image panel below headline */}
       <section className="pt-32 pb-0 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="max-w-4xl mb-10">
+        <div className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-2xl">
+          <Image
+            src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600&q=85&auto=format&fit=crop"
+            alt="Structured technology engagement"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-900/30 to-transparent" />
+          <div className="absolute inset-0 flex items-end p-10">
+            <p className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-6 leading-[1.05]">
+              Precision-built systems. Structured execution. Long-term results.
+            </p>
+          </div>
+        </div>
+        <div className="max-w-4xl mt-10">
           <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-slate-900 mb-8 leading-tight">
             How I Work
           </h1>
@@ -39,21 +54,7 @@ export default function EngagementModels() {
         </div>
 
         {/* Hero Image Banner */}
-        <div className="relative w-full h-[420px] rounded-3xl overflow-hidden shadow-2xl">
-          <Image
-            src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1600&q=85&auto=format&fit=crop"
-            alt="Structured technology engagement"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-900/30 to-transparent" />
-          <div className="absolute inset-0 flex items-end p-10">
-            <p className="text-white/80 text-lg font-light max-w-md leading-relaxed">
-              Precision-built systems. Structured execution. Long-term results.
-            </p>
-          </div>
-        </div>
+
       </section>
 
       {/* Engagement Models Container */}

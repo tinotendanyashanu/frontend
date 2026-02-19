@@ -42,7 +42,7 @@ export async function POST(request: Request) {
             if (partner) {
                 // Create Lead
                 await Lead.create({
-                    partnerId: partner._id as any,
+                    partnerId: partner._id,
                     name,
                     email,
                     source: 'contact_form',

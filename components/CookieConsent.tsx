@@ -1,35 +1,29 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Cookie } from 'lucide-react';
 
 export default function CookieConsent() {
-  const [showBanner, setShowBanner] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already made a choice
     const consent = localStorage.getItem('cookie_consent');
     if (!consent) {
-      setShowBanner(true);
+        setIsVisible(true);
     }
   }, []);
 
-  const handleAccept = () => {
-    localStorage.setItem('cookie_consent', 'accepted');
-    setShowBanner(false);
-    // Trigger a reload or event to start tracking if needed, 
-    // but AnalyticsTracker will likely pick it up on next nav or if it watches storage (it doesn't yet).
-    // For now, simple acceptance is recorded.
-    window.location.reload(); 
+  const accept = () => {
+    localStorage.setItem('cookie_consent', 'true');
+    setIsVisible(false);
   };
 
-  const handleDecline = () => {
-    localStorage.setItem('cookie_consent', 'declined');
-    setShowBanner(false);
+  const decline = () => {
+    localStorage.setItem('cookie_consent', 'false');
+    setIsVisible(false);
   };
 
-  if (!showBanner) return null;
+  if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 md:p-6 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50 animate-in slide-in-from-bottom duration-500">
@@ -42,20 +36,20 @@ export default function CookieConsent() {
                 <h3 className="font-bold text-slate-900 text-sm md:text-base mb-1">We value your privacy</h3>
                 <p className="text-sm text-slate-500 max-w-2xl">
                     We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
-                    By clicking "Accept All", you consent to our use of cookies.
+                    By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                 </p>
             </div>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
              <button 
-                onClick={handleDecline}
-                className="flex-1 md:flex-none px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors whitespace-nowrap"
+                onClick={decline}
+                className="flex-1 md:flex-none py-2.5 px-6 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition-colors whitespace-nowrap"
             >
-                Necessary Only
+                Decline
             </button>
             <button 
-                onClick={handleAccept}
-                className="flex-1 md:flex-none px-6 py-2 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors shadow-lg shadow-purple-500/20 whitespace-nowrap"
+                onClick={accept}
+                className="flex-1 md:flex-none py-2.5 px-6 rounded-xl bg-purple-600 text-white font-bold text-sm hover:bg-purple-700 transition-colors shadow-lg shadow-purple-500/20 whitespace-nowrap"
             >
                 Accept All
             </button>

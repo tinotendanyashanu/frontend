@@ -16,7 +16,7 @@ export default function SimpleLineChart({ data, title, height = 200, color = 'st
     }).join(' ');
 
     return (
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm col-span-2 lg:col-span-1">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="text-lg font-bold text-slate-900 mb-6">{title}</h3>
             <div className="relative" style={{ height: `${height}px` }}>
                 <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full overflow-visible">
@@ -48,7 +48,6 @@ export default function SimpleLineChart({ data, title, height = 200, color = 'st
                      <polygon 
                         points={`0,100 ${points} 100,100`} 
                         fill={`url(#gradient-${title.replace(/\s/g, '')})`}
-                        className={color.replace('stroke-', 'fill-')}
                         opacity="0.2"
                     />
 
@@ -66,7 +65,7 @@ export default function SimpleLineChart({ data, title, height = 200, color = 'st
                                 strokeWidth="2"
                                 vectorEffect="non-scaling-stroke"
                              >
-                                <title>{d.label}: {d.value}</title>
+                                <title suppressHydrationWarning>{`${d.label}: ${d.value}`}</title>
                              </circle>
                          );
                     })}

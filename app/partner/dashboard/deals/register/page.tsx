@@ -23,7 +23,7 @@ export default function RegisterDealPage() {
 
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
         <h2 className="text-2xl font-bold text-slate-900 mb-2">Register New Deal</h2>
-        <p className="text-slate-500 mb-8">Submit a potential client for review. We'll protect this lead for 90 days.</p>
+        <p className="text-slate-600 mb-8">Register a new deal to track your commission. Please provide accurate details about the client and project scope. We&apos;ll review the deal within 24 hours.</p>
 
         <form action={dispatch} className="space-y-6">
           <div>

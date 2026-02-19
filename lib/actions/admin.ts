@@ -8,7 +8,6 @@ import Payout from '@/models/Payout';
 import AuditLog from '@/models/AuditLog';
 import { revalidatePath } from 'next/cache';
 import { sendEmail, EmailTemplates } from '@/lib/email';
-import { z } from 'zod';
 
 // Middleware check helper
 async function checkAdmin() {
@@ -96,7 +95,7 @@ export async function updateDealStatus(dealId: string, status: string, finalValu
   const deal = await Deal.findById(dealId);
   if (!deal) throw new Error('Deal not found');
 
-  const updates: any = { dealStatus: status };
+  const updates: Record<string, unknown> = { dealStatus: status };
   
   // Logic when specific statuses are set
   if (status === 'approved') {
@@ -242,7 +241,7 @@ export async function recordCommissionPayment(dealId: string, amount: number, me
 }
 
 export async function deletePartner(partnerId: string) {
-     const admin = await checkAdmin();
+     await checkAdmin();
      await dbConnect();
      await Partner.findByIdAndDelete(partnerId);
      revalidatePath('/admin/partners');

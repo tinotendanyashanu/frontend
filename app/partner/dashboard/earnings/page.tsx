@@ -1,16 +1,20 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Partner from '@/models/Partner';
-import Payout from '@/models/Payout';
-import { DollarSign, TrendingUp, Clock, CreditCard } from 'lucide-react';
+import PartnerModel from '@/models/Partner';
+import PayoutModel from '@/models/Payout';
+import { DollarSign, CreditCard, Clock } from 'lucide-react';
+import { Partner, Payout } from '@/types';
 
 async function getEarningsData(email: string) {
   await dbConnect();
-  const partner = await Partner.findOne({ email }).lean();
+  const partner = await PartnerModel.findOne({ email }).lean() as unknown as Partner;
+  
   if (!partner) return null;
 
-  const payouts = await Payout.find({ partnerId: partner._id }).sort({ processedAt: -1 }).lean();
-  
+  const payouts = await PayoutModel.find({ partnerId: partner._id })
+    .sort({ createdAt: -1 })
+    .lean() as unknown as Payout[];
+
   return { partner, payouts };
 }
 
@@ -85,7 +89,7 @@ export default async function EarningsPage() {
                   </thead>
                   <tbody className="divide-y divide-slate-50">
                       {payouts.length > 0 ? (
-                          payouts.map((payout: any) => (
+                          payouts.map((payout) => (
                               <tr key={payout._id} className="group hover:bg-slate-50/80 transition-colors">
                                   <td className="px-8 py-5 font-mono text-slate-500 text-xs">{payout.reference || '-'}</td>
                                   <td className="px-8 py-5 font-bold text-slate-900">

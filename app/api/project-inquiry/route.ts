@@ -43,11 +43,11 @@ export async function POST(request: Request) {
             if (partner) {
                 // Create Lead
                 await Lead.create({
-                    partnerId: partner._id as any,
+                    partnerId: partner._id,
                     name,
                     email,
                     source: 'project_inquiry',
-                    dealId: projectInquiry._id as any // tracking link
+                    dealId: projectInquiry._id // tracking link
                 });
                 
                 // Increment stats

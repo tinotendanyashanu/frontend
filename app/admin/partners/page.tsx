@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Partner from '@/models/Partner';
+import Partner, { IPartner } from '@/models/Partner';
 import Link from 'next/link';
 import PartnersClient from '@/components/admin/PartnersClient';
 
@@ -8,14 +8,14 @@ async function getPartners() {
   await dbConnect();
   // Fetch all partners for client-side sorting/filtering for now (assuming < 1000)
   // For larger datasets, we'd move this logic to the server with params.
-  return Partner.find({ role: 'partner' }).sort({ createdAt: -1 }).lean();
+  return Partner.find({ role: 'partner' }).sort({ createdAt: -1 }).lean() as unknown as IPartner[];
 }
 
 export default async function AdminPartnersPage() {
   const partners = await getPartners();
   
   // Transform data for table to ensure serializable
-  const tableData = partners.map((partner: any) => ({
+  const tableData = partners.map((partner: IPartner) => ({
       ...partner,
       id: partner._id.toString(),
       _id: partner._id.toString(),

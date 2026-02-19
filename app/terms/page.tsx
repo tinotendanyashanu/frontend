@@ -20,14 +20,7 @@ export default function TermsOfService() {
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-slate-600 leading-relaxed">
-              By accessing and using this website [leothetechguy.com] (the "Site") and any services provided by Leo Systems ("Company", "we", "us", or "our"), you agree to comply with and be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our Site or Services.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">2. Services Offered</h2>
-            <p className="text-slate-600 leading-relaxed">
-              Leo Systems provides technology consulting, software development, and digital infrastructure services to businesses and individuals. We also operate a Partner Network that allows individuals and entities to earn commissions by referring clients to our services.
+               Leo Systems provides technology consulting, software development, and digital infrastructure services to businesses and individuals. We also operate a Partner Network that allows individuals and entities to earn commissions by referring clients to our services.
             </p>
           </section>
 
@@ -62,42 +55,52 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">4. Intellectual Property</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">4. &quot;As Is&quot; and &quot;As Available&quot; Disclaimer</h2>
+            <p>
+                The Service is provided to You &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service.
+            </p>
+            <p className="mt-2">
+                Without limiting the foregoing, neither the Company nor any of the company&apos;s provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">5. Intellectual Property</h2>
             <p className="text-slate-600 leading-relaxed">
               The Service and its original content (excluding Content provided by users), features, and functionality are and will remain the exclusive property of Leo Systems and its licensors. The Service is protected by copyright, trademark, and other laws of both Zimbabwe and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Leo Systems.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">5. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">6. Limitation of Liability</h2>
             <p className="text-slate-600 leading-relaxed">
               In no event shall Leo Systems, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from (i) your access to or use of or inability to access or use the Service; (ii) any conduct or content of any third party on the Service; (iii) any content obtained from the Service; and (iv) unauthorized access, use or alteration of your transmissions or content, whether based on warranty, contract, tort (including negligence) or any other legal theory, whether or not we have been informed of the possibility of such damage.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">6. Termination</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">7. Termination</h2>
             <p className="text-slate-600 leading-relaxed">
               We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms. Partner accounts found to be engaging in fraudulent referrals will be terminated immediately and any pending commissions forfeited.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">7. Governing Law</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">8. Governing Law</h2>
             <p className="text-slate-600 leading-relaxed">
               These Terms shall be governed and construed in accordance with the laws of Zimbabwe, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">8. Changes to Terms</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">9. Changes to Terms</h2>
             <p className="text-slate-600 leading-relaxed">
-              We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+              We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days&apos; notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">9. Contact Us</h2>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">10. Contact Us</h2>
             <div className="mt-4 p-6 bg-slate-50 rounded-2xl border border-slate-200">
                <p className="font-semibold text-slate-900">Email: <a href="mailto:contact@leothetechguy.com" className="text-blue-600 hover:text-blue-800">contact@leothetechguy.com</a></p>
             </div>

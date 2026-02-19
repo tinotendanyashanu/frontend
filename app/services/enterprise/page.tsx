@@ -1,10 +1,9 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShieldCheck, Database, Server, Lock, ArrowRight, GitBranch, CheckCircle2, Globe, FileKey } from 'lucide-react';
+import { ShieldCheck, Lock, ArrowRight, GitBranch, CheckCircle2 } from 'lucide-react';
 import ServiceHero from '@/components/ServiceHero';
 
 export const metadata = {
@@ -34,7 +33,7 @@ export default function EnterprisePage() {
                      <span className="text-indigo-600 font-bold tracking-wider uppercase text-sm mb-4 block">The Methodology</span>
                      <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">Digital Transformation Protocol.</h2>
                      <p className="text-lg text-slate-600 leading-relaxed">
-                         Legacy systems shouldn't stifle innovation. We build bridge architectures that allow you to modernize iteratively, reducing risk while unlocking new capabilities.
+                      Enterprise systems shouldn&apos;t be slow or clunky. We bring consumer-grade UX to enterprise infrastructure, ensuring security, scalability, and adoption.
                      </p>
                 </div>
                 <div className="lg:w-2/3 grid gap-12">
