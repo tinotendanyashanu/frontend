@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Contact from '@/models/Contact';
 import { sendEmail, EmailTemplates, sendAdminNotification } from '@/lib/email';
+import { cookies } from 'next/headers';
+import Partner from '@/models/Partner';
+import Lead from '@/models/Lead';
 
 export async function POST(request: Request) {
   try {
@@ -28,6 +31,32 @@ export async function POST(request: Request) {
       timeline, // Optional
       budget    // Optional
     });
+
+    // Check for referral cookie
+    const cookieStore = await cookies();
+    const referralCode = cookieStore.get('leo_partner_ref')?.value;
+
+    if (referralCode) {
+        try {
+            const partner = await Partner.findOne({ referralCode });
+            if (partner) {
+                // Create Lead
+                await Lead.create({
+                    partnerId: partner._id as any,
+                    name,
+                    email,
+                    source: 'contact_form',
+                });
+                
+                // Increment stats
+                await Partner.findByIdAndUpdate(partner._id, {
+                    $inc: { 'stats.referralLeads': 1 }
+                });
+            }
+        } catch (err) {
+            console.error('Error processing referral:', err);
+        }
+    }
 
     // Send User Confirmation
     await sendEmail({

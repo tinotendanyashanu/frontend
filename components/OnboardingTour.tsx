@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Check, X, ArrowRight } from 'lucide-react';
 import { completeOnboarding } from '@/lib/actions/partner'; 
 
-const steps = [
+const standardSteps = [
   {
     title: "Welcome to your Partner Dashboard",
     description: "This is your command center. Track your referrals, earnings, and progress all in one place.",
@@ -29,11 +29,36 @@ const steps = [
   }
 ];
 
-export default function OnboardingTour({ userHasCompleted }: { userHasCompleted: boolean }) {
+const creatorSteps = [
+  {
+    title: "Welcome Content Creator",
+    description: "Your dashboard is optimized for content-driven growth. Track clicks, leads, and commissions.",
+    target: "/partner/dashboard", 
+  },
+  {
+    title: "Get Your Link",
+    description: "Copy your unique referral link from the Overview page and start sharing it with your audience.",
+    target: "/partner/dashboard", 
+  },
+  {
+    title: "Track Leads",
+    description: "See exactly who signed up through your link in the Leads tab.",
+    target: "/partner/dashboard/leads", 
+  },
+  {
+    title: "Academy & Resources",
+    description: "Learn how to optimize your content for conversion in our Creator Academy.",
+    target: "/partner/dashboard/academy", 
+  }
+];
+
+export default function OnboardingTour({ userHasCompleted, partnerType = 'standard' }: { userHasCompleted: boolean, partnerType?: 'standard' | 'creator' }) {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [mounted, setMounted] = useState(false);
+
+  const steps = partnerType === 'creator' ? creatorSteps : standardSteps;
 
   useEffect(() => {
     setMounted(true);

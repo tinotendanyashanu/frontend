@@ -56,7 +56,7 @@ export default function SMEPage() {
                             <h3 className="text-2xl font-bold text-slate-900">Architect & Automate</h3>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed pl-14 border-l-2 border-slate-200 group-hover:border-emerald-500 transition-colors duration-300">
-                            We design standard operating procedures (SOPs) and translate them into code. Using n8n, Make, and custom scripts, we build the "nervous system" of your business.
+                            We translate your standard operating procedures into automated systems — the "nervous system" of your business, running continuously without manual input.
                         </p>
                     </div>
 

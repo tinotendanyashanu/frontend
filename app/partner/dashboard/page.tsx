@@ -18,7 +18,8 @@ import {
   Megaphone,
   Sparkles,
   CalendarCheck,
-  Star
+  Star,
+  MousePointer2
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -50,8 +51,38 @@ export default async function DashboardPage() {
   if (!data) return <div>Partner not found</div>;
 
   const { partner, deals, totalCourses, completedCourses } = data;
+  const isCreator = partner.partnerType === 'creator';
 
-  const stats = [
+  const stats = isCreator ? [
+    {
+      name: 'Referral Clicks',
+      value: (partner.stats.referralClicks || 0).toLocaleString(),
+      icon: MousePointer2,
+      color: 'bg-blue-500',
+      href: '#'
+    },
+    {
+      name: 'Leads Generated',
+      value: (partner.stats.referralLeads || 0).toLocaleString(),
+      icon: TrendingUp,
+      color: 'bg-emerald-500',
+      href: '/partner/dashboard/leads'
+    },
+    {
+      name: 'Total Earnings',
+      value: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.totalCommissionEarned),
+      icon: DollarSign,
+      color: 'bg-amber-500',
+      href: '/partner/dashboard/earnings'
+    },
+    {
+      name: 'Academy Progress',
+      value: `${completedCourses}/${totalCourses} Courses`,
+      icon: GraduationCap,
+      color: 'bg-indigo-500',
+      href: '/partner/dashboard/academy'
+    },
+  ] : [
     {
       name: 'Total Revenue Referred',
       value: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(partner.stats.totalReferredRevenue),
@@ -85,14 +116,25 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-8">
       {/* Welcome Section */}
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4">
         <div>
             <h2 className="text-2xl font-bold text-slate-900">Overview</h2>
             <p className="text-slate-500">Welcome back, {partner.name}. Here's what's happening today.</p>
         </div>
-        <Link href="/partner/dashboard/deals/register" className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-            + Register Deal
-        </Link>
+        
+        {isCreator && partner.referralCode ? (
+             <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 w-full md:w-auto">
+                <div className="text-sm font-medium text-slate-500 whitespace-nowrap">Your Referral Link:</div>
+                <div className="bg-slate-50 px-3 py-1.5 rounded-lg text-sm font-mono text-slate-700 select-all">
+                    leosystems.com?ref={partner.referralCode}
+                </div>
+                {/* Simple Copy Button could go here */}
+             </div>
+        ) : (
+            <Link href="/partner/dashboard/deals/register" className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
+                + Register Deal
+            </Link>
+        )}
       </div>
 
       {/* Stats Grid */}

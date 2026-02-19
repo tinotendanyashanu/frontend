@@ -193,8 +193,8 @@ export default function Home() {
               link: "/services/enterprise"
             },
             {
-              title: "Consulting",
-              desc: "Private strategy sessions and infrastructure advisory for leaders and creators.",
+              title: "Strategy & Advisory",
+              desc: "For leaders who need clarity before building. Direction, architecture review, and technology strategy.",
               icon: <Lightbulb className="w-8 h-8 text-amber-500" />,
               link: "/book"
             }
@@ -224,7 +224,7 @@ export default function Home() {
             
             {[
               { step: "01", title: "Discovery Call", desc: "We discuss your idea, goals, and feasibility. No pressure, just clarity." },
-              { step: "02", title: "Plan & Proposal", desc: "I create a technical roadmap and a clear proposal with timeline and budget." },
+              { step: "02", title: "Plan & Proposal", desc: "I deliver a structured engagement plan with defined scope, milestones, and investment framework." },
               { step: "03", title: "Build & Deliver", desc: "I build your product with regular updates, then launch it to the world." }
             ].map((item, i) => (
               <div key={i} className="text-center bg-white">
@@ -236,9 +236,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-16 text-center">
-            <Link href="/book" className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 transition-all duration-200">
+          <div className="mt-16 text-center flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/book" className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all duration-200">
               Book a Strategy Session
+            </Link>
+            <Link href="/how-i-work" className="inline-flex justify-center items-center px-8 py-4 text-base font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-all duration-200">
+              Read Full Process <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -248,16 +251,16 @@ export default function Home() {
       <section className="relative z-10 py-24 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-16">
-                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">The Stack.</h2>
-                <p className="text-lg text-slate-600">Built on the bleeding edge for speed and scale.</p>
+                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Built for Scale.</h2>
+                <p className="text-lg text-slate-600">Every system is designed for performance, reliability, and long-term growth.</p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {[
-                    { name: "Next.js", icon: <Terminal className="w-6 h-6 text-slate-900" /> },
-                    { name: "TypeScript", icon: <Code2 className="w-6 h-6 text-blue-600" /> },
-                    { name: "Tailwind CSS", icon: <Layout className="w-6 h-6 text-cyan-500" /> },
-                    { name: "Supabase", icon: <Database className="w-6 h-6 text-emerald-500" /> }
+                    { name: "High-Performance Web", icon: <Terminal className="w-6 h-6 text-slate-900" /> },
+                    { name: "Structured Codebase", icon: <Code2 className="w-6 h-6 text-blue-600" /> },
+                    { name: "Precision Design", icon: <Layout className="w-6 h-6 text-cyan-500" /> },
+                    { name: "Scalable Data Layer", icon: <Database className="w-6 h-6 text-emerald-500" /> }
                 ].map((tech, i) => (
                     <div key={i} className="flex flex-col items-center justify-center p-8 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 group">
                         <div className="mb-4 p-4 bg-slate-50 rounded-full group-hover:scale-110 transition-transform duration-300">

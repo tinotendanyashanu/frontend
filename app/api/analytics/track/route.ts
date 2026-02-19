@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Analytics from '@/models/Analytics';
 import crypto from 'crypto';
-import geoip from 'geoip-lite';
+// import geoip from 'geoip-lite'; // Loaded dynamically
 
 export async function POST(req: NextRequest) {
   try {
@@ -35,7 +35,15 @@ export async function POST(req: NextRequest) {
       .digest('hex');
 
     // GeoIP Lookup
-    const geo = geoip.lookup(ip);
+    let geo: any;
+    /*
+    try {
+      const geoip = require('geoip-lite');
+      geo = geoip.lookup(ip);
+    } catch (e) {
+      console.error('GeoIP lookup failed:', e);
+    }
+    */
     
     await Analytics.create({
       path,

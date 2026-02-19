@@ -6,7 +6,9 @@ export interface IPartner extends Document {
   companyName?: string;
   password?: string; // Optional because initial signups might be OAuth or awaiting password set
   role: 'partner' | 'admin';
-  tier: 'referral' | 'agency' | 'enterprise';
+  partnerType: 'standard' | 'creator';
+  tier: 'referral' | 'agency' | 'enterprise' | 'creator';
+  referralCode?: string;
   status: 'active' | 'suspended' | 'pending';
   bankDetails?: {
     accountName: string;
@@ -21,6 +23,8 @@ export interface IPartner extends Document {
     pendingCommission: number;
     paidCommission: number;
     paidDealsSinceLastPayout: number;
+    referralClicks: number;
+    referralLeads: number;
   };
   hasReceivedAcademyBonus: boolean;
   hasCompletedOnboarding: boolean;
@@ -50,11 +54,17 @@ const PartnerSchema: Schema = new Schema({
     enum: ['partner', 'admin'],
     default: 'partner' 
   },
+  partnerType: {
+    type: String,
+    enum: ['standard', 'creator'],
+    default: 'standard'
+  },
   tier: { 
     type: String, 
-    enum: ['referral', 'agency', 'enterprise'],
+    enum: ['referral', 'agency', 'enterprise', 'creator'],
     default: 'referral' 
   },
+  referralCode: { type: String, unique: true, sparse: true },
   status: { 
     type: String, 
     enum: ['active', 'suspended', 'pending'],
@@ -73,6 +83,8 @@ const PartnerSchema: Schema = new Schema({
     pendingCommission: { type: Number, default: 0 },
     paidCommission: { type: Number, default: 0 },
     paidDealsSinceLastPayout: { type: Number, default: 0 },
+    referralClicks: { type: Number, default: 0 },
+    referralLeads: { type: Number, default: 0 },
   },
   hasReceivedAcademyBonus: { type: Boolean, default: false },
   verificationToken: String,

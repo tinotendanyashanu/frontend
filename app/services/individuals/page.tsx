@@ -56,7 +56,7 @@ export default function IndividualsPage() {
                             <h3 className="text-2xl font-bold text-slate-900">High-Performance Build</h3>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed pl-14 border-l-2 border-slate-200 group-hover:border-emerald-500 transition-colors duration-300">
-                            We code custom platforms using Next.js. This ensures instant load times, perfect SEO, and a user experience that feels like a native app.
+                            We build fully custom platforms engineered for instant load times, peak SEO performance, and user experiences that feel like native applications.
                         </p>
                     </div>
 
@@ -150,7 +150,7 @@ export default function IndividualsPage() {
                         </div>
                         <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">E-commerce Systems</h3>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                            Selling digital products or services? We build high-conversion storefronts integrated with Stripe/LemonSqueezy, handling tax, delivery, and access automatically.
+                            Selling digital products or services? We build high-conversion storefronts with integrated payment processing, automated tax handling, delivery, and access control built in from the start.
                         </p>
                         
                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">

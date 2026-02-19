@@ -17,12 +17,12 @@ export default async function DashboardLayout({
   }
 
   await dbConnect();
-  const partner = await Partner.findOne({ email: session.user.email }).select('hasCompletedOnboarding name').lean() as any;
+  const partner = await Partner.findOne({ email: session.user.email }).select('hasCompletedOnboarding name tier partnerType').lean() as any;
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
-      <OnboardingTour userHasCompleted={partner?.hasCompletedOnboarding || false} />
-      <Sidebar user={session.user} />
+      <OnboardingTour userHasCompleted={partner?.hasCompletedOnboarding || false} partnerType={partner?.partnerType || 'standard'} />
+      <Sidebar user={session.user} partnerType={partner?.partnerType || 'standard'} />
       <div className="pl-64 transition-all duration-300">
         {/* Header content... */}
         <header className="bg-white/50 backdrop-blur-sm sticky top-0 z-30 h-20 flex items-center px-10 justify-between">

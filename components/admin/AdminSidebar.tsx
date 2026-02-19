@@ -9,7 +9,8 @@ import {
   CreditCard, 
   Settings,
   ShieldAlert,
-  LogOut
+  LogOut,
+  MessageSquare
 } from 'lucide-react';
 import { handleSignOut } from '@/lib/actions/auth';
 
@@ -19,6 +20,7 @@ const navigation = [
   { name: 'Deals', href: '/admin/deals', icon: Briefcase },
   { name: 'Payouts', href: '/admin/payouts', icon: CreditCard },
   { name: 'Audit Logs', href: '/admin/audit', icon: ShieldAlert },
+  { name: 'Messages', href: '/admin/contacts', icon: MessageSquare },
 ];
 
 export default function AdminSidebar() {

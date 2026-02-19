@@ -60,7 +60,7 @@ export default function About() {
           >
             <div className="relative w-full max-w-md mx-auto aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-8 border-white bg-slate-100">
               <Image 
-                src="/images/Leo's Portrait.png" 
+                src="/images/leos-portrait.png" 
                 alt="Leo The Tech Guy" 
                 fill 
                 className="object-cover"

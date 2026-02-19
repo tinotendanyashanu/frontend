@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, MapPin, Twitter, Instagram, Facebook } from 'lucide-react';
+import { Mail, MapPin, Twitter, Instagram, Facebook, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -27,8 +27,10 @@ const Footer = () => {
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
               I create intelligent, scalable tools for innovators and teams ready to grow. Bridging the gap between imagination and engineering.
             </p>
-            <div className="pt-2">
-              <span className="text-xs text-slate-400">© 2025 LeoTheTechGuy. All rights reserved.</span>
+            <div className="pt-2 flex gap-4 text-xs text-slate-400">
+              <span>© 2025 LeoTheTechGuy.</span>
+              <Link href="/privacy-policy" className="hover:text-slate-600 transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-slate-600 transition-colors">Terms</Link>
             </div>
           </div>
 
@@ -37,6 +39,7 @@ const Footer = () => {
             <h3 className="text-sm font-semibold text-slate-900 tracking-tight mb-1">Explore</h3>
             <Link href="/" className="text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors w-max">Home</Link>
             <Link href="/services" className="text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors w-max">Services</Link>
+            <Link href="/how-i-work" className="text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors w-max">How I Work</Link>
             <Link href="/portfolio" className="text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors w-max">Portfolio</Link>
             <Link href="/about" className="text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors w-max">About</Link>
             <Link href="/contact" className="text-sm text-slate-500 hover:text-[#4C8BFF] transition-colors w-max">Contact</Link>
@@ -53,7 +56,7 @@ const Footer = () => {
             
             <div className="flex items-center text-sm text-slate-500">
               <MapPin className="w-4 h-4 mr-2 text-slate-400 stroke-width-1.5" />
-              Binary 1010
+              Warsaw, Poland. Serving clients worldwide.
             </div>
 
             <div className="flex space-x-4 pt-2">
@@ -65,6 +68,9 @@ const Footer = () => {
               </a>
               <a href="https://facebook.com/Leothetechguy" className="text-slate-400 hover:text-[#1877F2] transition-colors" aria-label="Facebook">
                 <Facebook className="w-5 h-5 stroke-width-1.5" />
+              </a>
+              <a href="https://www.youtube.com/@LeoTheTechGuy" className="text-slate-400 hover:text-[#FF0000] transition-colors" aria-label="YouTube">
+                <Youtube className="w-5 h-5 stroke-width-1.5" />
               </a>
             </div>
           </div>

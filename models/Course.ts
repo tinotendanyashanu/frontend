@@ -16,6 +16,7 @@ export interface ICourse extends Document {
   thumbnailUrl: string;
   level: 'beginner' | 'intermediate' | 'advanced';
   category: 'sales' | 'marketing' | 'product' | 'technical';
+  targetAudience: ('standard' | 'creator' | 'all')[];
   lessons: ILesson[];
   exam?: {
     questions: {
@@ -64,6 +65,11 @@ const CourseSchema: Schema = new Schema({
     type: String,
     enum: ['sales', 'marketing', 'product', 'technical'],
     default: 'sales'
+  },
+  targetAudience: {
+    type: [String],
+    enum: ['standard', 'creator', 'all'],
+    default: ['all']
   },
   lessons: [LessonSchema],
   exam: { type: ExamSchema },

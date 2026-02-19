@@ -76,6 +76,7 @@ export default function MediaPage() {
                <div className="flex items-center justify-between mb-12">
                    <h2 className="text-3xl font-bold text-slate-900">Daily Insights</h2>
                    <div className="flex gap-2">
+                       <a href="https://www.youtube.com/@LeoTheTechGuy" className="p-2 bg-white rounded-full text-[#FF0000] hover:bg-red-50 transition-colors"><Youtube className="w-5 h-5"/></a>
                        <a href="https://instagram.com/leothetechguy" className="p-2 bg-white rounded-full text-pink-600 hover:bg-pink-50 transition-colors"><Instagram className="w-5 h-5"/></a>
                        <a href="https://x.com/LeoTheTechGuy" className="p-2 bg-white rounded-full text-slate-900 hover:bg-slate-100 transition-colors"><Twitter className="w-5 h-5"/></a>
                    </div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -78,7 +79,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.className} bg-zinc-50 text-slate-800 relative overflow-x-hidden selection:bg-indigo-100 selection:text-indigo-900`} suppressHydrationWarning>
-        <AnalyticsTracker />
+        <React.Suspense fallback={null}>
+          <AnalyticsTracker />
+        </React.Suspense>
         <CookieConsent />
         <script
           type="application/ld+json"
