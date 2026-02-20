@@ -5,7 +5,6 @@ import dbConnect from '@/lib/mongodb';
 import Partner from '@/models/Partner';
 import { LoginSchema } from '@/lib/schemas';
 import { authConfig } from './auth.config';
-import { z } from 'zod';
 
 // Augment NextAuth types
 declare module 'next-auth' {

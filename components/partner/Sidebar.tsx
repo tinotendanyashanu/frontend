@@ -7,13 +7,12 @@ import {
   DollarSign, 
   Briefcase, 
   Award, 
-  BookOpen, 
-  FolderOpen,
   Shield,
   LogOut,
   Settings,
   GraduationCap,
-  MousePointer2
+  MousePointer2,
+  BookOpen
 } from 'lucide-react';
 import { handleSignOut } from '@/lib/actions/auth';
 import Image from 'next/image';
@@ -24,6 +23,7 @@ const navigation = [
   { name: 'Deals', href: '/partner/dashboard/deals', icon: Briefcase, roles: ['standard', 'creator'] }, // Creators can see deals too? User says yes.
   { name: 'Earnings', href: '/partner/dashboard/earnings', icon: DollarSign, roles: ['standard', 'creator'] },
   { name: 'Academy', href: '/partner/dashboard/academy', icon: GraduationCap, roles: ['standard', 'creator'] },
+  { name: 'Commercial Playbook', href: '/partner/dashboard/commercial-playbook', icon: BookOpen, roles: ['standard', 'creator'] },
   { name: 'Tier Progress', href: '/partner/dashboard/tier', icon: Award, roles: ['standard'] },
 ];
 
@@ -32,7 +32,9 @@ const secondaryNavigation = [
   { name: 'Settings', href: '/partner/dashboard/settings', icon: Settings },
 ];
 
-export default function Sidebar({ user, partnerType = 'standard' }: { user: any, partnerType?: string }) {
+import { Partner } from '@/types';
+
+export default function Sidebar({ user, partnerType = 'standard' }: { user: Partner, partnerType?: string }) {
   const pathname = usePathname();
 
   return (

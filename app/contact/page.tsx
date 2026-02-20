@@ -46,8 +46,12 @@ export default function Contact() {
       }
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     } finally {
       setLoading(false);
     }
@@ -61,10 +65,10 @@ export default function Contact() {
       <section className="pt-32 pb-16 px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="max-w-3xl">
           <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
-            Let’s Talk
+            Let&apos;s Talk
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed font-normal">
-            Share your goals and I'll respond with clarity. Every engagement begins with a conversation.
+            Share your goals and I&apos;ll respond with clarity. Every engagement begins with a conversation.
           </p>
         </div>
       </section>

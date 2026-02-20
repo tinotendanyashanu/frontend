@@ -1,13 +1,13 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Partner from '@/models/Partner';
+import PartnerModel from '@/models/Partner';
 import SettingsForm from '@/components/partner/SettingsForm';
 import { User, CreditCard, Mail, Award, CheckCircle } from 'lucide-react';
-import Link from 'next/link';
+import { Partner } from '@/types';
 
 async function getPartnerSettings(email: string) {
   await dbConnect();
-  const partner = await Partner.findOne({ email }).lean() as any;
+  const partner = await PartnerModel.findOne({ email }).lean() as unknown as Partner;
   return partner;
 }
 

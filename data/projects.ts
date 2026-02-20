@@ -1,3 +1,4 @@
+import { ElementType } from 'react';
 import { Globe, Database, Smartphone, Layout, Home, Heart, Truck } from 'lucide-react';
 
 export interface Project {
@@ -11,7 +12,7 @@ export interface Project {
   featured?: boolean;
   size: 'large' | 'medium' | 'small';
   gradient: string;
-  icon: any;
+  icon: ElementType;
   status: 'Live' | 'Prototype' | 'Demo' | 'Coming Soon' | 'Pilot';
 }
 

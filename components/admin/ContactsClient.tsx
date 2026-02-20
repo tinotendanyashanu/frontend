@@ -2,13 +2,24 @@
 
 import { Eye } from 'lucide-react';
 import Link from 'next/link';
-import DataTable from '@/components/admin/DataTable';
+import DataTable, { Column } from '@/components/admin/DataTable';
 
-export default function ContactsClient({ data }: { data: any[] }) {
-  const columns = [
+interface ContactRow {
+  id: string;
+  name: string;
+  email: string;
+  project: string;
+  budget: string;
+  timeline: string;
+  createdAtString: string;
+  message?: string;
+}
+
+export default function ContactsClient({ data }: { data: ContactRow[] }) {
+  const columns: Column<ContactRow>[] = [
       {
           header: 'Name',
-          accessor: (item: any) => (
+          accessor: (item: ContactRow) => (
               <div>
                   <div className="font-medium text-slate-900">{item.name}</div>
                   <div className="text-slate-400 text-xs">{item.email}</div>
@@ -21,7 +32,7 @@ export default function ContactsClient({ data }: { data: any[] }) {
       },
       {
           header: 'Budget',
-          accessor: (item: any) => (
+          accessor: (item: ContactRow) => (
              <span className="text-slate-600 text-sm">
                 {item.budget || '-'}
             </span>
@@ -29,7 +40,7 @@ export default function ContactsClient({ data }: { data: any[] }) {
       },
       {
           header: 'Timeline',
-          accessor: (item: any) => (
+          accessor: (item: ContactRow) => (
              <span className="text-slate-600 text-sm">
                 {item.timeline || '-'}
             </span>
@@ -41,7 +52,7 @@ export default function ContactsClient({ data }: { data: any[] }) {
       }
   ];
 
-  const actions = (item: any) => (
+  const actions = (item: ContactRow) => (
       <div className="flex items-center justify-end space-x-2">
           <Link href={`/admin/contacts/${item.id}`} className="p-1 text-slate-400 hover:text-purple-600 hover:bg-purple-50 rounded" title="View Details">
               <Eye className="h-4 w-4" />

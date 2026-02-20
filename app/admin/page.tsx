@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Partner from '@/models/Partner';
+import Partner, { IPartner } from '@/models/Partner';
 import Deal from '@/models/Deal';
 import Payout from '@/models/Payout';
 import { 
@@ -20,7 +20,9 @@ import SimpleLineChart from '@/components/admin/SimpleLineChart';
 import Analytics from '@/models/Analytics';
 
 async function getAdminStats() {
+  console.log('[getAdminStats] Starting...');
   await dbConnect();
+  console.log('[getAdminStats] Connected to DB');
   
   const partnerCount = await Partner.countDocuments({ role: 'partner' });
   const pendingPartners = await Partner.countDocuments({ status: 'pending' });
@@ -68,7 +70,7 @@ async function getAdminStats() {
       const dateStr = d.toISOString().split('T')[0];
       const dayLabel = d.toLocaleDateString('en-US', { weekday: 'short' });
       
-      const found = trafficStats.find((s: any) => s._id === dateStr);
+      const found = trafficStats.find((s: { _id: string; count: number }) => s._id === dateStr);
       trafficData.push({
           label: dayLabel,
           value: found ? found.count : 0
@@ -95,7 +97,7 @@ async function getAdminStats() {
       { $limit: 5 }
   ]);
   
-  const formattedLocations = locationStats.map((loc: any) => ({
+  const formattedLocations = locationStats.map((loc: { _id: string; count: number }) => ({
       name: loc._id || 'Unknown',
       value: loc.count
   }));
@@ -213,7 +215,7 @@ export default async function AdminDashboard() {
                       <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Top Locations</h3>
                       <div className="space-y-3">
                           {stats.formattedLocations && stats.formattedLocations.length > 0 ? (
-                              stats.formattedLocations.map((loc: any, i: number) => (
+                              stats.formattedLocations.map((loc: { name: string; value: number }, i: number) => (
                                   <div key={i} className="flex justify-between items-center text-sm">
                                       <span className="flex items-center text-slate-700">
                                           <span className="w-6 text-slate-400 font-mono text-xs">{i + 1}.</span>
@@ -266,8 +268,9 @@ export default async function AdminDashboard() {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                    {stats.recentPartners.map((partner: any) => (
-                        <tr key={partner._id} className="hover:bg-slate-50 transition-colors">
+                    {stats.recentPartners.map((partner: IPartner) => (
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        <tr key={(partner._id as any).toString()} className="hover:bg-slate-50 transition-colors">
                             <td className="px-6 py-4">
                                 <div className="font-medium text-slate-900">{partner.name}</div>
                                 <div className="text-slate-400 text-xs">{partner.email}</div>

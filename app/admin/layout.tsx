@@ -8,11 +8,15 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log('[AdminLayout] Checking session...');
   const session = await auth();
+  console.log('[AdminLayout] Session:', !!session, 'Role:', session?.user?.role);
 
   if (!session?.user || session.user.role !== 'admin') {
+    console.log('[AdminLayout] Unauthorized, redirecting to login');
     redirect('/partner/login');
   }
+  console.log('[AdminLayout] Authorized');
 
   return (
     <div className="min-h-screen bg-slate-50 flex">

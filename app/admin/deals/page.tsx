@@ -1,8 +1,11 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Deal from '@/models/Deal';
 import Link from 'next/link';
+import Deal, { IDeal } from '@/models/Deal';
+import { IPartner } from '@/models/Partner';
 import DealsClient from '@/components/admin/DealsClient';
+
+type PopulatedDeal = Omit<IDeal, 'partnerId'> & { partnerId: IPartner };
 
 async function getDeals() {
   await dbConnect();
@@ -10,13 +13,14 @@ async function getDeals() {
 }
 
 export default async function AdminDealsPage() {
-  const deals = await getDeals();
+  const deals = await getDeals() as unknown as PopulatedDeal[];
 
-  const tableData = deals.map((deal: any) => ({
-      ...deal,
+  const tableData = deals.map((deal: PopulatedDeal) => ({
       id: deal._id.toString(),
-      _id: deal._id.toString(),
+      clientName: deal.clientName,
       partnerName: deal.partnerId?.name || 'Unknown',
+      dealStatus: deal.dealStatus,
+      estimatedValue: deal.estimatedValue,
       valueFormatted: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(deal.estimatedValue),
       createdAtString: new Date(deal.createdAt).toLocaleDateString(),
   }));

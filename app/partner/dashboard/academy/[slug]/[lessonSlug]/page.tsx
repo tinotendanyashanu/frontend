@@ -1,18 +1,22 @@
 import { auth } from '@/auth';
-import { getCourse } from '@/lib/actions/academy';
-import Partner from '@/models/Partner';
 import dbConnect from '@/lib/mongodb';
+import CourseModel from '@/models/Course';
+import { getPartnerProgress, completeLesson } from '@/lib/actions/academy';
+import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, PlayCircle } from 'lucide-react';
-import { notFound } from 'next/navigation';
-import CompleteLessonButton from '@/components/academy/CompleteLessonButton';
+import { ArrowLeft, CheckCircle, PlayCircle } from 'lucide-react';
+
+import { Course, Lesson, PartnerProgress } from '@/types';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import CompleteLessonButton from '@/components/academy/CompleteLessonButton';
 
-async function getPartnerProgress(email: string) {
-    await dbConnect();
-    const partner = await Partner.findOne({ email }).lean() as any;
-    return partner?.partnerProgress || [];
+export const dynamic = 'force-dynamic';
+
+async function getLessonData(slug: string) {
+  await dbConnect();
+  const course = await CourseModel.findOne({ slug }).lean() as unknown as Course;
+  return course;
 }
 
 export default async function LessonPage(props: { params: Promise<{ slug: string; lessonSlug: string }> }) {
@@ -20,19 +24,19 @@ export default async function LessonPage(props: { params: Promise<{ slug: string
   const session = await auth();
   if (!session?.user?.email) return null;
 
-  const course = await getCourse(params.slug);
+  const course = await getLessonData(params.slug);
   if (!course) notFound();
 
-  const lesson = course.lessons.find((l: any) => l.slug === params.lessonSlug);
+  const lesson = course.lessons.find((l) => l.slug === params.lessonSlug);
   if (!lesson) notFound();
 
-  const currentIndex = course.lessons.findIndex((l: any) => l.slug === params.lessonSlug);
+  const currentIndex = course.lessons.findIndex((l) => l.slug === params.lessonSlug);
   const nextLesson = course.lessons[currentIndex + 1];
   const prevLesson = course.lessons[currentIndex - 1];
 
   const progressList = await getPartnerProgress(session.user.email);
-  const progress = progressList.find((p: any) => p.courseId === course._id.toString());
-  const isCompleted = progress?.completedLessons?.includes(lesson.slug);
+  const progress = progressList.find((p) => p.courseId === course._id.toString());
+  const isCompleted = progress?.completedLessons?.includes(lesson.slug) || false;
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -90,7 +94,7 @@ export default async function LessonPage(props: { params: Promise<{ slug: string
                     <div className="mb-12">
                         <h3 className="text-lg font-bold text-slate-900 mb-4">Lesson Visuals</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {lesson.imageUrls.map((url: string, idx: number) => (
+                            {lesson.imageUrls.map((url, idx) => (
                                 <div key={idx} className="relative h-48 rounded-lg overflow-hidden border border-slate-200 shadow-sm">
                                     <img src={url} alt={`Screenshot ${idx + 1}`} className="object-cover w-full h-full" />
                                 </div>

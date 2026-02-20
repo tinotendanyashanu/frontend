@@ -6,11 +6,9 @@ import Footer from '@/components/Footer';
 import { 
     ArrowUpRight, 
     Search,
-    Monitor,
     Briefcase, // Fallback for Office
     Keyboard,  // Fallback for Keychron
     Headphones, // Fallback for Shure
-    MousePointer2 // Fallback for Mouse
 } from 'lucide-react';
 import { 
     SiNextdotjs, 
@@ -27,7 +25,6 @@ import {
     SiLinear,
     SiArc
 } from 'react-icons/si'; 
-import Link from 'next/link';
 
 // --- Data ---
 
@@ -302,7 +299,7 @@ export default function ResourcesPage() {
 
                         {filteredTools.length > 0 ? (
                             <div className="grid grid-cols-1 border-t border-slate-100">
-                                {filteredTools.map((tool, index) => (
+                                {filteredTools.map((tool) => (
                                     <div 
                                         key={tool.name}
                                         className="group py-8 border-b border-slate-100 flex flex-col md:flex-row md:items-start md:justify-between gap-6 hover:bg-slate-50/50 transition-colors -mx-4 px-4 rounded-xl"

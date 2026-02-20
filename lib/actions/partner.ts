@@ -6,7 +6,7 @@ import Deal from '@/models/Deal';
 import Partner from '@/models/Partner';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { sendEmail, EmailTemplates } from '@/lib/email';
+import { sendEmail } from '@/lib/email';
 import { z } from 'zod';
 
 const DealSchema = z.object({
@@ -16,7 +16,7 @@ const DealSchema = z.object({
   notes: z.string().optional(),
 });
 
-export async function registerDeal(prevState: any, formData: FormData) {
+export async function registerDeal(prevState: unknown, formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
     return { message: 'Unauthorized' };
@@ -47,7 +47,7 @@ export async function registerDeal(prevState: any, formData: FormData) {
     // or use the tier-based default. 
     // For now, let's just create with default 10% (0.10) as per Deal model default.
     
-    const newDeal = await Deal.create({
+    await Deal.create({
       partnerId: session.user.id,
       clientName,
       estimatedValue,
@@ -64,11 +64,11 @@ export async function registerDeal(prevState: any, formData: FormData) {
         html: `<p>Partner <strong>${session.user.name}</strong> registered a new deal for <strong>${clientName}</strong> with estimated value of <strong>$${estimatedValue}</strong>.</p><a href="https://leosystems.ai/admin/deals">Review Deal</a>`,
     });
 
-  } catch (error) {
-    console.error('Deal registration error:', error);
-    return {
-      message: 'Database Error: Failed to Register Deal.',
-    };
+  } catch (err: unknown) {
+      if (err instanceof Error) {
+        throw new Error(err.message);
+      }
+      throw new Error('Failed to create partner application');
   }
 
   revalidatePath('/partner/dashboard/deals');

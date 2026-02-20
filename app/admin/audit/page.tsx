@@ -1,7 +1,9 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import AuditLog from '@/models/AuditLog';
-import { ShieldCheck } from 'lucide-react';
+import AuditLog, { IAuditLog } from '@/models/AuditLog';
+import { IPartner } from '@/models/Partner';
+
+type PopulatedAuditLog = Omit<IAuditLog, 'performedBy'> & { performedBy: IPartner | null };
 
 async function getAuditLogs() {
   await dbConnect();
@@ -9,7 +11,7 @@ async function getAuditLogs() {
     .populate('performedBy', 'name email')
     .sort({ createdAt: -1 })
     .limit(50) // Cap at 50 for now
-    .lean();
+    .lean() as unknown as PopulatedAuditLog[];
 }
 
 export default async function AuditPage() {
@@ -36,8 +38,9 @@ export default async function AuditPage() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                     {logs.length > 0 ? (
-                        logs.map((log: any) => (
-                            <tr key={log._id} className="hover:bg-slate-50 transition-colors">
+                        logs.map((log: PopulatedAuditLog) => (
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            <tr key={(log._id as any).toString()} className="hover:bg-slate-50 transition-colors">
                                 <td className="px-6 py-4 text-slate-400 whitespace-nowrap">
                                     {new Date(log.createdAt).toLocaleString()}
                                 </td>

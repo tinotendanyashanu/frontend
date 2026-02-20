@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { ArrowLeft, CheckCircle, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+// import Navbar from '@/components/Navbar';
+// import Footer from '@/components/Footer';
+// import { ArrowLeft, CheckCircle, ArrowUpRight } from 'lucide-react';
+// import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 // This would typically come from a CMS or database

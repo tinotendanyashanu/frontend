@@ -3,14 +3,16 @@ import dbConnect from '@/lib/mongodb';
 import Course from '@/models/Course';
 import ExamInterface from '@/components/academy/ExamInterface';
 import Link from 'next/link';
-import { ArrowLeft, AlertTriangle } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { redirect } from 'next/navigation';
+
+import { Course as ICourse } from '@/types';
 
 export const dynamic = 'force-dynamic';
 
 async function getCourseWithExam(slug: string) {
   await dbConnect();
-  const course = await Course.findOne({ slug }).lean() as any;
+  const course = await Course.findOne({ slug }).lean() as unknown as ICourse;
   return course;
 }
 

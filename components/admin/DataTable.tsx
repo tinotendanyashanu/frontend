@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { Search, ChevronLeft, ChevronRight, ArrowUpDown, Filter } from 'lucide-react';
 
-interface Column<T> {
+export interface Column<T> {
     header: string;
     accessor: keyof T | ((item: T) => React.ReactNode);
     className?: string;
 }
 
-interface DataTableProps<T> {
+export interface DataTableProps<T> {
     data: T[];
     columns: Column<T>[];
     searchKeys?: (keyof T)[];

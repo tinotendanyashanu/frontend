@@ -1,11 +1,26 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Payout from '@/models/Payout';
+import Payout, { IPayout } from '@/models/Payout';
+import { IPartner } from '@/models/Partner';
 import { Search, DollarSign } from 'lucide-react';
 
-async function getPayouts() {
+// Define a simpler type for the populated partner that doesn't strictly extend Document
+interface SimplePartner {
+  _id: string;
+  name: string;
+  email: string;
+}
+
+// Override partnerId to be SimplePartner or null (in case of populated failure)
+type PopulatedPayout = Omit<IPayout, 'partnerId'> & { 
+  partnerId: SimplePartner | null; 
+  _id: string | object; // handle ObjectId or string
+};
+
+async function getPayouts(): Promise<PopulatedPayout[]> {
   await dbConnect();
-  return Payout.find().populate('partnerId', 'name email').sort({ createdAt: -1 }).lean();
+  // Cast the result to unknown first to avoid Mongoose type complexity
+  return Payout.find().populate('partnerId', 'name email').sort({ createdAt: -1 }).lean() as unknown as PopulatedPayout[];
 }
 
 export default async function AdminPayoutsPage() {
@@ -35,8 +50,8 @@ export default async function AdminPayoutsPage() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                     {payouts.length > 0 ? (
-                        payouts.map((payout: any) => (
-                            <tr key={payout._id} className="hover:bg-slate-50 transition-colors">
+                        payouts.map((payout: PopulatedPayout) => (
+                            <tr key={payout._id as string} className="hover:bg-slate-50 transition-colors">
                                 <td className="px-6 py-4 font-mono text-xs text-slate-500">{payout.reference || payout._id.toString().slice(-8)}</td>
                                 <td className="px-6 py-4 font-medium text-slate-900">{payout.partnerId?.name}</td>
                                 <td className="px-6 py-4 text-emerald-600 font-medium">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(payout.amount)}</td>

@@ -35,7 +35,8 @@ export async function POST(req: NextRequest) {
       .digest('hex');
 
     // GeoIP Lookup
-    let geo: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const geo: any = null;
     /*
     try {
       const geoip = require('geoip-lite');

@@ -2,12 +2,12 @@ export const dynamic = 'force-dynamic';
 
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Partner from '@/models/Partner';
-import Deal from '@/models/Deal';
-import Course from '@/models/Course';
+import PartnerModel from '@/models/Partner';
+import DealModel from '@/models/Deal';
+import CourseModel from '@/models/Course';
+import { Partner, Deal, Course } from '@/types';
 import { 
   DollarSign, 
-  Briefcase, 
   TrendingUp, 
   Clock,
   GraduationCap,
@@ -25,20 +25,20 @@ import Link from 'next/link';
 
 async function getDashboardData(email: string) {
   await dbConnect();
-  const partner = await Partner.findOne({ email }).lean() as any;
+  const partner = await PartnerModel.findOne({ email }).lean() as unknown as Partner;
   
   if (!partner) return null;
 
-  const deals = await Deal.find({ partnerId: partner._id })
+  const deals = await DealModel.find({ partnerId: partner._id })
     .sort({ createdAt: -1 })
     .limit(5)
-    .lean();
+    .lean() as unknown as Deal[];
 
   // Fetch course progress
-  const courses = await Course.find({ published: true }).lean();
+  const courses = await CourseModel.find({ published: true }).lean() as unknown as Course[];
   const progressList = partner.partnerProgress || [];
   const totalCourses = courses.length;
-  const completedCourses = progressList.filter((p: any) => p.isCompleted).length;
+  const completedCourses = progressList.filter((p) => p.isCompleted).length;
     
   return { partner, deals, totalCourses, completedCourses };
 }
@@ -119,7 +119,7 @@ export default async function DashboardPage() {
       <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4">
         <div>
             <h2 className="text-2xl font-bold text-slate-900">Overview</h2>
-            <p className="text-slate-500">Welcome back, {partner.name}. Here's what's happening today.</p>
+            <p className="text-slate-500">Welcome back, {partner.name}. Here&apos;s what&apos;s happening today.</p>
         </div>
         
         {isCreator && partner.referralCode ? (
@@ -252,7 +252,7 @@ export default async function DashboardPage() {
         <div className="p-8 border-b border-slate-50 flex justify-between items-center">
             <div>
                 <h3 className="text-lg font-bold text-slate-900">Recent Deals</h3>
-                <p className="text-sm text-slate-500">Latest opportunities registered.</p>
+                <p className="text-sm text-slate-500 mb-4">You haven&apos;t registered any deals yet.</p>
             </div>
             <Link href="/partner/dashboard/deals" className="text-sm text-emerald-600 hover:text-emerald-700 font-bold px-4 py-2 bg-emerald-50 rounded-full transition-colors">View All &rarr;</Link>
         </div>
@@ -268,7 +268,7 @@ export default async function DashboardPage() {
                 </thead>
                 <tbody className="divide-y divide-slate-50">
                     {deals.length > 0 ? (
-                        deals.map((deal: any) => (
+                        deals.map((deal) => (
                             <tr key={deal._id} className="group hover:bg-slate-50/80 transition-colors">
                                 <td className="px-8 py-5 font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">{deal.clientName}</td>
                                 <td className="px-8 py-5 font-medium">

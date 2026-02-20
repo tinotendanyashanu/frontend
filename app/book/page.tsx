@@ -47,8 +47,12 @@ export default function BookMeeting() {
       }
 
       setSuccess(true);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     } finally {
       setLoading(false);
     }
@@ -65,7 +69,7 @@ export default function BookMeeting() {
             Book a Meeting
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed font-normal">
-            Let's discuss your project, idea, or challenge. Book a 15-20 minute call and we'll explore how I can help bring your vision to life.
+            Let&apos;s discuss your project, idea, or challenge. Book a 15-20 minute call and we&apos;ll explore how I can help bring your vision to life.
           </p>
         </div>
       </section>
@@ -117,15 +121,15 @@ export default function BookMeeting() {
       <section className="pb-24 px-6 lg:px-8 max-w-3xl mx-auto">
           <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
               <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Can't find a time?</h2>
-                  <p className="text-slate-600">Send a request and I'll get back to you with alternative slots.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Can&apos;t find a time?</h2>
+                  <p className="text-slate-600">Send a request and I&apos;ll get back to you with alternative slots.</p>
               </div>
 
               {success ? (
                   <div className="bg-green-100 text-green-800 p-6 rounded-xl text-center">
                       <CheckCircle className="w-8 h-8 mx-auto mb-2" />
                       <p className="font-bold">Request Sent!</p>
-                      <p>I'll check my schedule and email you.</p>
+                      <p>I&apos;ll check my schedule and email you.</p>
                   </div>
               ) : (
                   <form onSubmit={handleConsultationRequest} className="space-y-4">
@@ -160,7 +164,7 @@ export default function BookMeeting() {
         <div className="space-y-6">
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <h3 className="font-bold text-slate-900 mb-2">What happens after I book?</h3>
-            <p className="text-slate-600">You'll receive a calendar invitation with a Google Meet link. I'll also send you a confirmation email with prep questions.</p>
+            <p className="text-slate-600">You&apos;ll receive a calendar invitation with a Google Meet link. I&apos;ll also send you a confirmation email with prep questions.</p>
           </div>
           <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
             <h3 className="font-bold text-slate-900 mb-2">Do I need to prepare anything?</h3>

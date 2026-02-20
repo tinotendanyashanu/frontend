@@ -4,7 +4,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Palette, PenTool, ShoppingCart, Calendar, ArrowRight, CheckCircle2, Globe, Layout, Smartphone } from 'lucide-react';
+import { CheckCircle2, 
+    ArrowUpRight,
+    PenTool, ShoppingCart, Calendar } from 'lucide-react';
 import ServiceHero from '@/components/ServiceHero';
 
 export const metadata = {
@@ -32,9 +34,9 @@ export default function IndividualsPage() {
             <div className="flex flex-col lg:flex-row gap-16 items-start">
                 <div className="lg:w-1/3 sticky top-32">
                      <span className="text-emerald-600 font-bold tracking-wider uppercase text-sm mb-4 block">The Methodology</span>
-                     <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">The "Authority" Stack.</h2>
+                     <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">The &quot;Authority&quot; Stack.</h2>
                      <p className="text-lg text-slate-600 leading-relaxed">
-                         A website isn't enough. You need a platform that captures attention, builds trust, and converts visitors into clients or followers automatically.
+                         You have an idea that won&apos;t leave you alone. We turn that idea into a tangible, working product. No technical co-founder needed.
                      </p>
                 </div>
                 <div className="lg:w-2/3 grid gap-12">
@@ -96,7 +98,7 @@ export default function IndividualsPage() {
                         </div>
                         <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Portfolio Platforms</h3>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                             A static squarespace site won't cut it. We build dynamic portfolio systems that showcase your work, host your content, and capture leads with premium interactions.
+                             A static squarespace site won&apos;t cut it. We build dynamic portfolio systems that showcase your work, host your content, and capture leads with premium interactions.
                         </p>
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -182,7 +184,7 @@ export default function IndividualsPage() {
                         </div>
                         <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Booking & Automation</h3>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                            Stop emailing back and forth. We implement smart booking flows that qualify leads before they ever get on your calendar.
+                            Stop telling people about your idea and show them. We build high-fidelity &quot;clickable&quot; prototypes that look and feel like the real thing. Perfect for pitching investors or validating with users.
                         </p>
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -228,10 +230,10 @@ export default function IndividualsPage() {
                   <div>
                       <h2 className="text-3xl md:text-5xl font-bold mb-6">Build Your Legacy.</h2>
                       <p className="text-xl text-slate-400 leading-relaxed mb-8">
-                          Don't rely on rented land (social media). Own your platform, your data, and your audience with infrastructure that lasts.
+                          Don&apos;t rely on rented land (social media). Own your platform, your data, and your audience with infrastructure that lasts.
                       </p>
                       <Link href="/contact" className="inline-flex items-center px-8 py-4 bg-emerald-600 text-white rounded-full font-bold hover:bg-emerald-700 transition-colors">
-                          Start My Project <ArrowRight className="ml-2 w-5 h-5" />
+                          Start My Project <ArrowUpRight className="ml-2 w-5 h-5" />
                       </Link>
                   </div>
                   <div className="grid grid-cols-2 gap-6">
@@ -241,7 +243,7 @@ export default function IndividualsPage() {
                       </div>
                       <div className="bg-white/5 border border-white/10 p-6 rounded-xl backdrop-blur-sm">
                           <h4 className="font-bold text-lg mb-2 text-emerald-400">Mobile Perfect</h4>
-                          <p className="text-sm text-slate-400">Looks great on any device.</p>
+                          <p className="text-sm text-slate-400">You own everything we build. It&apos;s your IP.</p>
                       </div>
                        <div className="bg-white/5 border border-white/10 p-6 rounded-xl backdrop-blur-sm">
                           <h4 className="font-bold text-lg mb-2 text-emerald-400">Fast Loading</h4>

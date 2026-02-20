@@ -1,6 +1,6 @@
+
 import Link from 'next/link';
 import { ArrowRight, CheckCircle, Users, BarChart, Globe } from 'lucide-react';
-import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 
 export default function PartnerPage() {

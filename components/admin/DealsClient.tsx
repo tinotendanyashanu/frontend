@@ -2,10 +2,19 @@
 
 import { Eye } from 'lucide-react';
 import Link from 'next/link';
-import DataTable from '@/components/admin/DataTable';
+import DataTable, { Column } from '@/components/admin/DataTable';
 
-export default function DealsClient({ data }: { data: any[] }) {
-  const columns = [
+interface DealRow {
+  id: string;
+  clientName: string;
+  partnerName: string;
+  valueFormatted: string;
+  dealStatus: string;
+  createdAtString: string;
+}
+
+export default function DealsClient({ data }: { data: DealRow[] }) {
+  const columns: Column<DealRow>[] = [
       {
           header: 'Client',
           accessor: 'clientName',
@@ -21,7 +30,7 @@ export default function DealsClient({ data }: { data: any[] }) {
       },
       {
           header: 'Status',
-          accessor: (item: any) => (
+          accessor: (item: DealRow) => (
              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize 
                 ${item.dealStatus === 'approved' ? 'bg-emerald-100 text-emerald-800' : 
                   item.dealStatus === 'closed' ? 'bg-blue-100 text-blue-800' :
@@ -37,7 +46,7 @@ export default function DealsClient({ data }: { data: any[] }) {
       }
   ];
 
-  const actions = (item: any) => (
+  const actions = (item: DealRow) => (
       <Link href={`/admin/deals/${item.id}`} className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium text-sm">
           <Eye className="h-4 w-4 mr-1" /> View
       </Link>

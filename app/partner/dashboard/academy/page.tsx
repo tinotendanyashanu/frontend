@@ -1,10 +1,11 @@
 import { auth } from '@/auth';
 import { getCourses } from '@/lib/actions/academy';
-import Partner from '@/models/Partner';
+import PartnerModel from '@/models/Partner';
 import dbConnect from '@/lib/mongodb';
 import Link from 'next/link';
 import Image from 'next/image';
-import { PlayCircle, CheckCircle, BarChart } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
+import { Partner, Course } from '@/types';
 
 
 
@@ -12,13 +13,13 @@ export default async function AcademyPage() {
   const session = await auth();
   if (!session?.user?.email) return null;
 
-  const courses = await getCourses();
+  const courses = await getCourses() as unknown as Course[];
   await dbConnect();
-  const partner = await Partner.findOne({ email: session.user.email }).select('partnerType partnerProgress').lean() as any;
+  const partner = await PartnerModel.findOne({ email: session.user.email }).select('partnerType partnerProgress').lean() as unknown as Partner;
   const progressList = partner?.partnerProgress || [];
   const partnerType = partner?.partnerType || 'standard';
 
-  const filteredCourses = courses.filter((course: any) => {
+  const filteredCourses = courses.filter((course) => {
       if (!course.targetAudience || course.targetAudience.includes('all')) return true;
       return course.targetAudience.includes(partnerType);
   });
@@ -31,8 +32,8 @@ export default async function AcademyPage() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCourses.map((course: any) => {
-              const progress = progressList.find((p: any) => p.courseId === course._id.toString());
+          {filteredCourses.map((course) => {
+              const progress = progressList.find((p) => p.courseId === course._id.toString());
               const percent = progress?.progressPercentage || 0;
               const isCompleted = progress?.isCompleted;
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { adminSendPasswordReset } from '@/lib/actions/admin-security';
-import { KeyRound, Check, Loader2 } from 'lucide-react';
+import { KeyRound, Loader2 } from 'lucide-react';
 
 export default function AdminPasswordResetButton({ partnerId }: { partnerId: string }) {
     const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function AdminPasswordResetButton({ partnerId }: { partnerId: str
             const result = await adminSendPasswordReset(partnerId);
             setSuccess(result.success);
             setMessage(result.message);
-        } catch (err) {
+        } catch {
             setSuccess(false);
             setMessage('Failed to trigger reset.');
         } finally {

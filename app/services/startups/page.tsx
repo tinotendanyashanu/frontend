@@ -4,7 +4,13 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Rocket, Code2, Server, Globe, ArrowRight, CheckCircle2, Cpu, Zap, Layers } from 'lucide-react';
+import { 
+    Rocket, 
+    CheckCircle2, 
+    Layers,
+    Cpu,
+    ArrowRight
+} from 'lucide-react';
 import ServiceHero from '@/components/ServiceHero';
 
 export const metadata = {
@@ -32,9 +38,9 @@ export default function StartupsPage() {
             <div className="flex flex-col lg:flex-row gap-16 items-start">
                 <div className="lg:w-1/3 sticky top-32">
                      <span className="text-blue-600 font-bold tracking-wider uppercase text-sm mb-4 block">The Methodology</span>
-                     <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">The "Scale-First" Architecture.</h2>
+                     <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">The &quot;Scale-First&quot; Architecture.</h2>
                      <p className="text-lg text-slate-600 leading-relaxed">
-                         Speed is life for startups, but technical debt is death. We balance rapid iteration with solid architectural patterns that won't break when you hit 10k users.
+                      Does your tech partner understand the speed of a startup? Speed is life for startups, but technical debt is death. We balance rapid iteration with solid architectural patterns that won&apos;t break when you hit 10k users.
                      </p>
                 </div>
                 <div className="lg:w-2/3 grid gap-12">

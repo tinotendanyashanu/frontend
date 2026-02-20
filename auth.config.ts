@@ -11,20 +11,24 @@ export const authConfig = {
       const isOnDashboard = nextUrl.pathname.startsWith('/partner/dashboard');
       const isOnAdmin = nextUrl.pathname.startsWith('/admin');
       
+      console.log(`[Auth Config] Authorized check: ${nextUrl.pathname} | isLoggedIn: ${isLoggedIn} | Role: ${auth?.user?.role}`);
+
       if (isOnDashboard) {
         if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+        return false; 
       }
       
       if (isOnAdmin) {
         if (isLoggedIn && auth?.user?.role === 'admin') return true;
-        return false; // Redirect unauthenticated or non-admin users
+        console.log('[Auth Config] Admin check failed');
+        return false; 
       }
       
       return true;
     },
     jwt({ token, user }) {
       if (user) {
+        console.log(`[Auth Config] JWT Callback - User: ${user.email} | Role: ${user.role}`);
         token.role = user.role;
         token.id = user.id;
         token.tier = user.tier;
@@ -36,6 +40,7 @@ export const authConfig = {
         session.user.role = token.role;
         session.user.id = token.id as string;
         session.user.tier = token.tier;
+        console.log(`[Auth Config] Session Callback - Role: ${session.user.role}`);
       }
       return session;
     },

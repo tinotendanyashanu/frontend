@@ -342,7 +342,7 @@ export default function Home() {
                         <span className="text-yellow-500 font-bold uppercase tracking-widest text-xs mb-4 block">AI EdTech SaaS</span>
                         <h3 className="text-4xl lg:text-5xl font-semibold mb-6 tracking-tight group-hover:text-yellow-400 transition-colors">ZimPrep</h3>
                         <p className="text-xl text-neutral-400 mb-8 leading-relaxed">
-                            A SaaS platform for high school student revision powered by AI. Intelligent tutoring that adapts to every student's learning pace.
+                            A SaaS platform for high school student revision powered by AI. Intelligent tutoring that adapts to every student&apos;s learning pace.
                         </p>
                          <ul className="grid grid-cols-2 gap-y-4 gap-x-8 mb-10 text-neutral-300">
                              <li className="flex items-center gap-3 border-l text-sm pl-4 border-neutral-800">
@@ -373,7 +373,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div className="lg:col-span-5">
                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-slate-900 leading-[1.1]">
-                        I don't just write code. I build assets.
+                        I don&apos;t just write code. I build assets.
                    </h2>
                 </div>
                 <div className="lg:col-span-7 lg:pl-12 space-y-8">

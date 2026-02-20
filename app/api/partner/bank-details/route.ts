@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/mongodb';
-import Partner from '@/models/Partner';
+import Partner, { IPartner } from '@/models/Partner';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -12,7 +12,7 @@ export async function GET() {
   await dbConnect();
   const partner = await Partner.findOne({ email: session.user.email })
     .select('bankDetails')
-    .lean() as any;
+    .lean() as unknown as IPartner;
 
   return NextResponse.json({ bankDetails: partner?.bankDetails || null });
 }

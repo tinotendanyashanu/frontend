@@ -4,7 +4,13 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Bot, BarChart3, Users, Zap, CheckCircle2, ArrowRight, Layers, Workflow, LineChart } from 'lucide-react';
+import {
+    CheckCircle2,
+    Workflow,
+    Zap,
+    LineChart,
+    ArrowRight
+} from 'lucide-react';
 import ServiceHero from '@/components/ServiceHero';
 
 export const metadata = {
@@ -34,7 +40,7 @@ export default function SMEPage() {
                      <span className="text-emerald-600 font-bold tracking-wider uppercase text-sm mb-4 block">The Methodology</span>
                      <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">The 3-Step Optimization Protocol.</h2>
                      <p className="text-lg text-slate-600 leading-relaxed">
-                         Most "digital transformation" fails because it's additive. We focus on subtraction: removing friction, removing manual data entry, and removing bottlenecks.
+                         Most &quot;digital transformation&quot; fails because it&apos;s additive. We focus on subtraction: removing friction, removing manual data entry, and removing bottlenecks.
                      </p>
                 </div>
                 <div className="lg:w-2/3 grid gap-12">
@@ -45,7 +51,8 @@ export default function SMEPage() {
                             <h3 className="text-2xl font-bold text-slate-900">Audit & Map</h3>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed pl-14 border-l-2 border-slate-200 group-hover:border-emerald-500 transition-colors duration-300">
-                            We map every manual process in your business. From lead intake to invoice generation, we identify where human hours are being wasted on robot work.
+                            Let&apos;s build something that grows with you.
+r business. From lead intake to invoice generation, we identify where human hours are being wasted on robot work.
                         </p>
                     </div>
 
@@ -56,7 +63,7 @@ export default function SMEPage() {
                             <h3 className="text-2xl font-bold text-slate-900">Architect & Automate</h3>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed pl-14 border-l-2 border-slate-200 group-hover:border-emerald-500 transition-colors duration-300">
-                            We translate your standard operating procedures into automated systems — the "nervous system" of your business, running continuously without manual input.
+                            We translate your standard operating procedures into automated systems — the &quot;nervous system&quot; of your business, running continuously without manual input.
                         </p>
                     </div>
 
@@ -183,7 +190,7 @@ export default function SMEPage() {
                         </div>
                         <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Business Intelligence Dashboards</h3>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                             Gut feeling isn't a strategy. We centralize your scattered data (Stripe, Ads, CRM, Support) into live, actionable dashboards. Know your net profit, LTV, and churn in real-time.
+                             Gut feeling isn&apos;t a strategy. We centralize your scattered data (Stripe, Ads, CRM, Support) into live, actionable dashboards. Know your net profit, LTV, and churn in real-time.
                         </p>
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -238,7 +245,7 @@ export default function SMEPage() {
                   <div className="grid grid-cols-2 gap-6">
                       <div className="bg-white/5 border border-white/10 p-6 rounded-xl backdrop-blur-sm">
                           <h4 className="font-bold text-lg mb-2 text-emerald-400">99.9% Uptime</h4>
-                          <p className="text-sm text-slate-400">We monitor your systems 24/7 so you don't have to.</p>
+                          <p className="text-sm text-slate-400">We monitor your systems 24/7 so you don&apos;t have to.</p>
                       </div>
                       <div className="bg-white/5 border border-white/10 p-6 rounded-xl backdrop-blur-sm">
                           <h4 className="font-bold text-lg mb-2 text-emerald-400">Rapid Response</h4>

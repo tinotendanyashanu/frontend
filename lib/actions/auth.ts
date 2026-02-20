@@ -6,7 +6,6 @@ import dbConnect from '@/lib/mongodb';
 import Partner from '@/models/Partner';
 import bcrypt from 'bcryptjs';
 import { SignupSchema } from '@/lib/schemas';
-import { z } from 'zod';
 import { sendEmail, EmailTemplates } from '@/lib/email';
 
 
@@ -45,12 +44,9 @@ import crypto from 'crypto';
 // ... (existing helper function authenticate if needed, but we are replacing the whole file content for cleanliness or partials?)
 // I'll stick to replacing chunks to be safe.
 
-// New imports:
-import { redirect } from 'next/navigation';
-
 // ... authenticate function ...
 
-export async function registerPartner(prevState: any, formData: FormData) {
+export async function registerPartner(prevState: unknown, formData: FormData) {
   const validatedFields = SignupSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -94,7 +90,7 @@ export async function registerPartner(prevState: any, formData: FormData) {
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationTokenExpiry = new Date(Date.now() + 3600 * 1000); // 1 hour
 
-    const newPartner = await Partner.create({
+    await Partner.create({
       name,
       email,
       companyName,
@@ -149,7 +145,7 @@ export async function verifyEmail(token: string) {
     return { success: true, message: 'Account activated successfully!' };
 }
 
-export async function forgotPassword(prevState: any, formData: FormData) {
+export async function forgotPassword(prevState: unknown, formData: FormData) {
     const email = formData.get('email');
     if (!email || typeof email !== 'string') return { message: 'Invalid email' };
 
@@ -180,7 +176,7 @@ export async function forgotPassword(prevState: any, formData: FormData) {
     return { success: true, message: 'If an account exists, a reset link has been sent.' };
 }
 
-export async function resetPassword(prevState: any, formData: FormData) {
+export async function resetPassword(prevState: unknown, formData: FormData) {
     const token = formData.get('token');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');

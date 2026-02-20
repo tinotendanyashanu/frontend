@@ -5,7 +5,18 @@ import { useFormStatus } from 'react-dom'; // From react-dom in 19, but importin
 import { updateBankDetails } from '@/lib/actions/settings';
 import { CheckCircle, AlertCircle } from 'lucide-react';
 
-const initialState = {
+interface SettingsState {
+  message: string;
+  errors?: {
+    accountName?: string[];
+    bankName?: string[];
+    accountNumber?: string[];
+    [key: string]: string[] | undefined;
+  };
+  success: boolean;
+}
+
+const initialState: SettingsState = {
   message: '',
   errors: {},
   success: false,
@@ -24,7 +35,15 @@ function SaveButton() {
   );
 }
 
-export default function SettingsForm({ bankDetails }: { bankDetails: any }) {
+interface BankDetails {
+  accountName?: string;
+  bankName?: string;
+  accountNumber?: string;
+  sortCode?: string;
+  iban?: string;
+}
+
+export default function SettingsForm({ bankDetails }: { bankDetails?: BankDetails }) {
   const [state, dispatch] = useActionState(updateBankDetails, initialState);
 
   return (
@@ -56,7 +75,7 @@ export default function SettingsForm({ bankDetails }: { bankDetails: any }) {
                   className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
                   placeholder="e.g. John Smith"
                 />
-                {(state?.errors as any)?.accountName && <p className="text-red-500 text-xs mt-1">{(state.errors as any).accountName}</p>}
+                {state?.errors?.accountName && <p className="text-red-500 text-xs mt-1">{state.errors.accountName}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Bank Name *</label>
@@ -68,7 +87,7 @@ export default function SettingsForm({ bankDetails }: { bankDetails: any }) {
                   className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
                   placeholder="e.g. FNB, Standard Bank, Barclays"
                 />
-                {(state?.errors as any)?.bankName && <p className="text-red-500 text-xs mt-1">{(state.errors as any).bankName}</p>}
+                {state?.errors?.bankName && <p className="text-red-500 text-xs mt-1">{state.errors.bankName}</p>}
               </div>
             </div>
 
@@ -82,7 +101,7 @@ export default function SettingsForm({ bankDetails }: { bankDetails: any }) {
                 className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
                 placeholder="e.g. 1234567890"
               />
-              {(state?.errors as any)?.accountNumber && <p className="text-red-500 text-xs mt-1">{(state.errors as any).accountNumber}</p>}
+              {state?.errors?.accountNumber && <p className="text-red-500 text-xs mt-1">{state.errors.accountNumber}</p>}
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">

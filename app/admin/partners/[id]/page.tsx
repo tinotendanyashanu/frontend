@@ -20,6 +20,8 @@ import {
     Lock
 } from 'lucide-react';
 import AdminPasswordResetButton from '@/components/admin/AdminPasswordResetButton';
+import { IDeal } from '@/models/Deal';
+import { IPayout } from '@/models/Payout';
 import DataTable from '@/components/admin/DataTable';
 
 async function getPartnerData(id: string) {
@@ -247,8 +249,9 @@ export default async function AdminPartnerDetailsPage(props: { params: Promise<{
                                 </thead>
                                 <tbody className="divide-y divide-slate-100">
                                     {deals.length > 0 ? (
-                                        deals.slice(0, 5).map((deal: any) => (
-                                            <tr key={deal._id} className="hover:bg-slate-50 transition-colors">
+                                        deals.slice(0, 5).map((deal: IDeal) => (
+                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                            <tr key={(deal._id as any).toString()} className="hover:bg-slate-50 transition-colors">
                                                 <td className="px-6 py-4 font-medium text-slate-900">
                                                     <Link href={`/admin/deals/${deal._id}`} className="hover:text-purple-600 transition-colors group flex items-center">
                                                         {deal.clientName}
@@ -299,8 +302,9 @@ export default async function AdminPartnerDetailsPage(props: { params: Promise<{
                                 </thead>
                                 <tbody className="divide-y divide-slate-100">
                                     {payouts.length > 0 ? (
-                                        payouts.slice(0, 5).map((payout: any) => (
-                                            <tr key={payout._id} className="hover:bg-slate-50 transition-colors">
+                                        payouts.slice(0, 5).map((payout: IPayout) => (
+                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                            <tr key={(payout._id as any).toString()} className="hover:bg-slate-50 transition-colors">
                                                 <td className="px-6 py-4 font-mono text-xs text-slate-500 bg-slate-50 rounded px-2 w-fit">{payout.reference || 'N/A'}</td>
                                                 <td className="px-6 py-4 font-bold text-emerald-700">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(payout.amount)}</td>
                                                 <td className="px-6 py-4">
